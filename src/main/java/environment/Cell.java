@@ -3,11 +3,12 @@ package environment;
 import lifeform.LifeForm;
 
 public class Cell {
-  
+
   LifeForm life1;
-  
+
   /**
    * addLifeForm
+   * 
    * @param entity the lifeform
    * @return boolean
    */
@@ -19,7 +20,6 @@ public class Cell {
     return false;
   }
 
-
   public void removeLifeForm() {
     life1 = null;
   }
@@ -28,4 +28,3 @@ public class Cell {
     return life1;
   }
 }
-

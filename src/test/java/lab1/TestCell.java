@@ -3,8 +3,8 @@ package lab1;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import lifeform.LifeForm;
 import environment.Cell;
+import lifeform.MockLifeForm;
 
 public class TestCell {
 
@@ -16,8 +16,8 @@ public class TestCell {
   
   @Test
   public void testAddLifeForm1() {
-    LifeForm bob = new LifeForm ("Bob", 40);
-    LifeForm fred = new LifeForm("Fred", 40);
+    MockLifeForm bob = new MockLifeForm("Bob", 40);
+    MockLifeForm fred = new MockLifeForm("Fred", 40);
     Cell cell = new Cell();
     boolean success = cell.addLifeForm(bob);
     assertTrue(success);
@@ -28,8 +28,8 @@ public class TestCell {
   
   @Test
   public void testAddLifeForm2() {
-    LifeForm jim = new LifeForm ("Jim", 35);
-    LifeForm fred = new LifeForm("Fred", 35);
+    MockLifeForm jim = new MockLifeForm("Jim", 35);
+    MockLifeForm fred = new MockLifeForm("Fred", 35);
     Cell cell = new Cell();
     boolean success = cell.addLifeForm(jim);
     assertTrue(success);
@@ -41,8 +41,8 @@ public class TestCell {
   @Test
   public void testCantAdd() {
     Cell c = new Cell();
-    LifeForm entity1 = new LifeForm("Jim", 34);
-    LifeForm entity2 = new LifeForm("Bob", 16);
+    MockLifeForm entity1 = new MockLifeForm("Jim", 34);
+    MockLifeForm entity2 = new MockLifeForm("Bob", 16);
     
     c.addLifeForm(entity1);
     assertFalse(c.addLifeForm(entity2));
@@ -52,7 +52,7 @@ public class TestCell {
   @Test
   public void testCanRemove() {
     Cell c = new Cell();
-    LifeForm entity1 = new LifeForm("Jim", 34);
+    MockLifeForm entity1 = new MockLifeForm("Jim", 34);
     c.addLifeForm(entity1);
     c.removeLifeForm();
     assertNull(c.getLifeForm());
