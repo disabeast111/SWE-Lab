@@ -37,4 +37,40 @@ public class TestHuman {
     assertEquals(0, entity.getArmorPoints());
   }
   
+  @Test
+  public void testDefault() {
+    Human entityB = new Human("Bob", 40, 0);
+    assertEquals(5, entityB.getAttackStrength());
+  }
+  
+  @Test
+  public void testArmorMore() {
+    Human entityB = new Human("Bob", 40, 10);
+    entityB.takeHit(5);
+    assertEquals(40, entityB.getCurrentLifePoints());
+  }
+  
+  @Test
+  public void testArmorLess() {
+    Human entityB = new Human("Bob", 40, 5);
+    entityB.takeHit(10);
+    assertEquals(35, entityB.getCurrentLifePoints());
+  }
+  
+  @Test
+  public void testArmorEqual() {
+    Human entityB = new Human("Bob", 40, 10);
+    entityB.takeHit(10);
+    assertEquals(40, entityB.getCurrentLifePoints());
+  }
+  
+  @Test
+  public void testAttack() {
+    Human entityB = new Human("Baba", 40, 0);
+    Human entityA = new Human("Annella", 40, 10);
+    entityB.attackStrength = 20;
+    assertEquals(20, entityB.getAttackStrength());
+    entityB.attack(entityA);
+    assertEquals(30, entityA.getCurrentLifePoints());
+  }
 }

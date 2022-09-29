@@ -5,6 +5,7 @@ public class Human extends LifeForm {
 
   /**
    * Human constructor
+   * 
    * @param name
    * @param life
    * @param armor
@@ -20,14 +21,28 @@ public class Human extends LifeForm {
 
   /**
    * getArmorPoints
+   * 
    * @return armorPoints
    */
   public int getArmorPoints() {
     return armorPoints;
   }
 
+  @Override
+  public void takeHit(int damage) {
+    damage -= armorPoints;
+    if (damage < 0) {
+      damage = 0;
+    }
+    currentLifePoints -= damage;
+    if (currentLifePoints < 0) {
+      currentLifePoints = 0;
+    }
+  }
+
   /**
    * setArmorPoints
+   * 
    * @param armor
    */
   public void setArmorPoints(int armor) {

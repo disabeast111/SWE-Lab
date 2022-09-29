@@ -8,21 +8,21 @@ public class RecoveryLinear implements RecoveryBehavior {
   }
 
   /**
-   *calculateRecovery (calculates heal)
-   *@currentLife
-   *@maxLife
-   *@return new current life
+   * calculateRecovery (calculates heal)
+   * 
+   * @currentLife
+   * @maxLife
+   * @return new current life
    */
   public int calculateRecovery(int currentLife, int maxLife) {
-    int currentLifeInst = currentLife;
-    if (currentLifeInst > 0) {
-      currentLifeInst += step;
+    if (currentLife > 0) {
+      currentLife += step;
     }
 
-    if (currentLifeInst > maxLife) {
-      currentLifeInst = maxLife;
+    if (currentLife > maxLife) {
+      currentLife = maxLife;
     }
 
-    return currentLifeInst;
+    return currentLife;
   }
 }

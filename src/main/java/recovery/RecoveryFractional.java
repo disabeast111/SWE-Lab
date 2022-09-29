@@ -9,20 +9,20 @@ public class RecoveryFractional implements RecoveryBehavior {
 
   /**
    * calculateRecovery (calculates heal)
-   *@currentLife
-   *@maxLife
-   *@return new current life
+   * 
+   * @currentLife
+   * @maxLife
+   * @return new current life
    */
   public int calculateRecovery(int currentLife, int maxLife) {
-    int currentLifeInst = currentLife;
-    if (currentLifeInst > 0) {
-      currentLifeInst += Math.ceil(currentLifeInst * fraction);
+    if (currentLife > 0) {
+      currentLife += Math.ceil(currentLife * fraction);
     }
 
-    if (currentLifeInst > maxLife) {
-      currentLifeInst = maxLife;
+    if (currentLife > maxLife) {
+      currentLife = maxLife;
     }
 
-    return currentLifeInst;
+    return currentLife;
   }
 }
