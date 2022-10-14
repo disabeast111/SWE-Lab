@@ -1,9 +1,13 @@
 package lifeform;
 
+import weapon.Weapon;
+
 public abstract class LifeForm extends java.lang.Object {
   private String myName;
   protected int currentLifePoints;
   protected int attackStrength;
+  protected Weapon weapon;
+  
 
   /**
    * @param name
@@ -56,10 +60,15 @@ public abstract class LifeForm extends java.lang.Object {
    * attack
    * @param opponent (type LifeForm)
    */
-  public void attack(LifeForm opponent) {
+  public void attack(LifeForm opponent, int distance) {
     if (getCurrentLifePoints() > 0) {
       opponent.takeHit(getAttackStrength());
     }
-
   }
+  
+  public Weapon dropWeapon() {return weapon;/*implement*/}
+  public boolean hasWeapon() {return false; /*implement*/}
+  public boolean pickUpWeapon(Weapon weapon) {return false; /*implement*/}
+  
+  
 }

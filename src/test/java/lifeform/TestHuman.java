@@ -70,7 +70,7 @@ public class TestHuman {
     Human entityA = new Human("Annella", 40, 10);
     entityB.attackStrength = 20;
     assertEquals(20, entityB.getAttackStrength());
-    entityB.attack(entityA);
+    entityB.attack(entityA,0);
     assertEquals(30, entityA.getCurrentLifePoints());
   }
 }

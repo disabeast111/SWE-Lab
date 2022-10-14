@@ -51,7 +51,7 @@ public class TestLifeForm {
   MockLifeForm entityJ = new MockLifeForm("Jim", 30, 10);
   MockLifeForm entityB = new MockLifeForm("Bob", 30, 10);
   assertEquals(10, entityB.getAttackStrength());
-  entityB.attack(entityJ);
+  entityB.attack(entityJ,0);
   assertEquals(20, entityJ.getCurrentLifePoints());
   }
   
@@ -60,7 +60,7 @@ public class TestLifeForm {
   MockLifeForm entityJ = new MockLifeForm("Jim", 30, 10);
   MockLifeForm entityB = new MockLifeForm("Bob", 0, 10);
   assertEquals(10, entityB.getAttackStrength());
-  entityB.attack(entityJ);
+  entityB.attack(entityJ,0);
   assertEquals(30, entityJ.getCurrentLifePoints());
   }
 }

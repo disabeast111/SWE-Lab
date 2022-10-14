@@ -1,7 +1,6 @@
 package lifeform;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -97,6 +96,7 @@ public class TestAlien {
     boolean caught = false;
     try {
     Alien entity = new Alien("Bob", 100, new RecoveryLinear(1), -5);
+    entity.takeHit(50);
     }
     catch (RecoveryRateException e) {
       caught = true;
