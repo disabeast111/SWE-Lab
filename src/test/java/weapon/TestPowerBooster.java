@@ -13,7 +13,7 @@ public class TestPowerBooster {
   public void testChainGunPowB() throws AttachmentException, WeaponException {
     Weapon chainGunTest = new Weapon();
     PowerBooster powBooster = new PowerBooster(chainGunTest);
-    assertEquals(10, powBooster.fire(10));
+    assertEquals(10, powBooster.getBaseDamage());
   }
   
   @Test
