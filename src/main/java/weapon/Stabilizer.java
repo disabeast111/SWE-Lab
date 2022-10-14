@@ -7,9 +7,10 @@ public class Stabilizer extends Attachment {
 
   public Stabilizer(Weapon baseWeapon) throws AttachmentException {
     
+    //auto reloads if ammo is at 0 after firing. Also increases damage by 25%
   }
   
-  public int fire(int distance) throws WeaponException {
+  public int fire(int distance) {
     
     return 0;
   }
