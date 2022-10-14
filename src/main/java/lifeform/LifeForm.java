@@ -30,7 +30,6 @@ public abstract class LifeForm extends java.lang.Object {
     if (attack >= 0) {
       attackStrength = attack;
     }
-
   }
 
   public String getName() {
@@ -65,7 +64,22 @@ public abstract class LifeForm extends java.lang.Object {
     }
   }
   
-  public Weapon dropWeapon() {return weapon;/*implement*/}
-  public boolean hasWeapon() {return false; /*implement*/}
-  public boolean pickUpWeapon(Weapon weapon) {return false; /*implement*/}
+  public Weapon dropWeapon() {
+    Weapon temp = weapon;
+    weapon = null;
+    return temp;
+    }
+  
+  public boolean hasWeapon() {
+    if (weapon != null) return true;
+    return false;
+  }
+  
+  public boolean pickUpWeapon(Weapon newWeapon) {
+    if (weapon == null) {
+      weapon = newWeapon;
+      return true;
+    }
+    return false;
+  }
 }
