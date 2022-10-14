@@ -1,7 +1,6 @@
 package weapon;
 
 import exceptions.AttachmentException;
-import exceptions.WeaponException;
 
 public class Scope extends Attachment {
   
