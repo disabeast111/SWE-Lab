@@ -1,9 +1,11 @@
 package weapon;
 
+
+import exceptions.WeaponException;
 import gameplay.TimerObserver;
 
 public interface Weapon extends TimerObserver {
-  public int fire(int distance);
+  public int fire(int distance) throws WeaponException;
   public int getBaseDamage();
   public int getCurrentAmmo();
   public int getMaxAmmo();
@@ -14,3 +16,4 @@ public interface Weapon extends TimerObserver {
   public void reload();
   public String toString();
 }
+

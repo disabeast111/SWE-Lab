@@ -7,7 +7,6 @@ public abstract class LifeForm extends java.lang.Object {
   protected int currentLifePoints;
   protected int attackStrength;
   protected Weapon weapon;
-  
 
   /**
    * @param name
@@ -69,6 +68,4 @@ public abstract class LifeForm extends java.lang.Object {
   public Weapon dropWeapon() {return weapon;/*implement*/}
   public boolean hasWeapon() {return false; /*implement*/}
   public boolean pickUpWeapon(Weapon weapon) {return false; /*implement*/}
-  
-  
 }
