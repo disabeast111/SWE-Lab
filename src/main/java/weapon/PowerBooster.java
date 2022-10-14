@@ -6,10 +6,11 @@ import exceptions.WeaponException;
 public class PowerBooster extends Attachment {
   
   public PowerBooster(Weapon baseWeapon) throws AttachmentException {
-    int base = baseWeapon.getBaseDamage();
+    //makes damage = damage * (1+ (current ammo/max ammo)
+     
   }
   
-  public int fire(int distance) throws WeaponException {
+  public int fire(int distance) {
     
     return 0;
   }
