@@ -4,10 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import exceptions.WeaponException;
+
 public class TestWeapon {
   
   @Test
-  public void testWeaponInitialization() {
+  public void testWeaponInitialization() throws WeaponException {
     Pistol p = new Pistol();
     assertEquals(10, p.getBaseDamage());
     assertEquals(50, p.getMaxRange());
