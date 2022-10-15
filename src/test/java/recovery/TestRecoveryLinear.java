@@ -1,4 +1,4 @@
-package Recovery;
+package recovery;
 
 import static org.junit.Assert.assertEquals;
 
