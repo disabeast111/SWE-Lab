@@ -3,7 +3,7 @@ package weapon;
 import exceptions.WeaponException;
 
 public abstract class GenericWeapon implements Weapon {
-  protected int basedDamage;
+  protected int baseDamage;
   protected int currentAmmo;
   protected int maxAmmo;
   protected int maxRange;
@@ -16,7 +16,7 @@ public abstract class GenericWeapon implements Weapon {
   public abstract int fire(int distance) throws WeaponException;
 
   public int getBaseDamage() {
-    return basedDamage;
+    return baseDamage;
   }
 
   public int getCurrentAmmo() {
