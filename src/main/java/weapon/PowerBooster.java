@@ -4,7 +4,8 @@ import exceptions.AttachmentException;
 
 public class PowerBooster extends Attachment {
   
-  public double damage = 0;
+  private double damage = 0;
+  private int damageInt = 0;
   
   public PowerBooster(Weapon baseWeapon) throws AttachmentException {
     //makes damage = damage * (1+ (current ammo/max ammo)
@@ -18,13 +19,12 @@ public class PowerBooster extends Attachment {
   }
   
   public int fire(int distance) {
-    int damageInt = 0;
     damageInt = Double.valueOf(Math.floor(damage)).intValue();
     return damageInt;
   }
+
   
   public String toString() {
-    
     return base.toString() + " +PowerBooster";
   }
 }

@@ -35,7 +35,7 @@ public class Scope extends Attachment {
       return 0;
     }
   }
-
+  
   public int getMaxRange() {
     return base.getMaxRange() + 10;
   }
