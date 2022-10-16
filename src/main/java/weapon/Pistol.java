@@ -25,7 +25,10 @@ public class Pistol extends GenericWeapon {
       throw new WeaponException("Cannot be a negative distance");
     }
     int damage = 0;
-    if(currentAmmo == 0 || distance > maxRange) {
+    if(currentAmmo == 0) {
+      return damage;
+    }
+    if (distance > maxRange) {
       currentAmmo = currentAmmo - 1;
       return damage;
     }
@@ -41,7 +44,6 @@ public class Pistol extends GenericWeapon {
 
   @Override
   public String toString() {
-    // TODO Auto-generated method stub
     return "Pistol";
   }
   
