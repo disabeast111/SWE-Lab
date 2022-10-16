@@ -4,7 +4,7 @@ import exceptions.WeaponException;
 import gameplay.TimerObserver;
 
 public abstract class GenericWeapon implements Weapon {
-  protected int basedDamage;
+  protected int baseDamage;
   protected int currentAmmo; // ammo in clip
   protected int maxAmmo;     // max capacity of clip
   protected int maxRange;
@@ -17,7 +17,7 @@ public abstract class GenericWeapon implements Weapon {
   public abstract int fire(int distance) throws WeaponException;
 
   public int getBaseDamage() {
-    return basedDamage;
+    return baseDamage;
   }
 
   public int getCurrentAmmo() {
