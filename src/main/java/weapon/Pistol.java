@@ -4,11 +4,12 @@ import exceptions.WeaponException;
 
 public class Pistol extends GenericWeapon {
 
-  public Pistol() {
+  public Pistol() throws WeaponException {
     baseDamage = 10;
     maxRange = 50;
     rateOfFire = 2;
     maxAmmo = 10;
+    currentAmmo = 10;
     
   }
 
@@ -20,14 +21,28 @@ public class Pistol extends GenericWeapon {
 
   @Override
   public int fire(int distance) throws WeaponException {
-    // TODO Auto-generated method stub
-    return 0;
+    if(distance < 0) {
+      throw new WeaponException("Cannot be a negative distance");
+    }
+    int damage = 0;
+    if(currentAmmo == 0 || distance > maxRange) {
+      currentAmmo = currentAmmo - 1;
+      return damage;
+    }
+    double bd = baseDamage;
+    double mr = maxRange;
+    double dis = distance;
+    double doubleDamage = 0;
+    doubleDamage = bd*((mr-dis+10)/mr);
+    damage = Double.valueOf(Math.floor(doubleDamage)).intValue();
+    currentAmmo = currentAmmo - 1;
+    return damage;
   }
 
   @Override
   public String toString() {
     // TODO Auto-generated method stub
-    return null;
+    return "Pistol";
   }
   
 }
