@@ -7,6 +7,7 @@ public class Scope extends Attachment {
   public double damage = 0;
   public double maxRange = 0;
   public double targetDistance = 0;
+
   
   public Scope(Weapon baseWeapon) throws AttachmentException {
     //increases max range of a weapon by 10 *done*
@@ -15,7 +16,7 @@ public class Scope extends Attachment {
     //base damage at max range 
     base = baseWeapon;
     damage = baseWeapon.getBaseDamage();
-    
+    maxRange = getMaxRange();
     
   }
   
@@ -25,7 +26,7 @@ public class Scope extends Attachment {
     } else if(distance < base.getMaxRange()) {
         int damageInt = 0;
         targetDistance = distance;
-        maxRange = base.getMaxRange();
+       
         damage *= 1 + ((maxRange - targetDistance) / maxRange);
         damageInt = Double.valueOf(Math.floor(damage)).intValue();
         damage = base.getBaseDamage();
