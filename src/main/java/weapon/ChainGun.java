@@ -20,6 +20,9 @@ public class ChainGun extends GenericWeapon {
 
   @Override
   public int fire(int distance) throws WeaponException {
+    if(distance < 0) {
+      throw new WeaponException("Cannot be a negative distance");
+    }
     int damage = 0;
     if(currentAmmo == 0) {
       return damage;
