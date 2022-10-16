@@ -1,5 +1,6 @@
 package lifeform;
 
+import exceptions.WeaponException;
 import weapon.Weapon;
 
 public abstract class LifeForm extends java.lang.Object {
@@ -57,10 +58,16 @@ public abstract class LifeForm extends java.lang.Object {
   /**
    * attack
    * @param opponent (type LifeForm)
+   * @throws WeaponException 
    */
-  public void attack(LifeForm opponent, int distance) {
+  public void attack(LifeForm opponent, int distance) throws WeaponException {        //test
     if (getCurrentLifePoints() > 0) {
-      opponent.takeHit(getAttackStrength());
+      if (hasWeapon()&& weapon.getCurrentAmmo() > 0) {
+        opponent.takeHit(weapon.fire(distance));
+      }
+      else if (distance < 5) {
+        opponent.takeHit(getAttackStrength());
+      }
     }
   }
   

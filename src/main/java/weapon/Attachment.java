@@ -4,6 +4,7 @@ import exceptions.WeaponException;
 
 public abstract class Attachment implements Weapon {
   protected Weapon base;
+  protected int shotsThisRound = 0;
 
   public Attachment() {
 
@@ -40,10 +41,10 @@ public abstract class Attachment implements Weapon {
   }
 
   public void reload() {
-
+    base.reload();
   }
 
-  public void updateTime(int Time) {
-
+  public void updateTime(int time) {
+    shotsThisRound = 0;
   }
 }
