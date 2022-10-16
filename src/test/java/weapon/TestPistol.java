@@ -64,7 +64,7 @@ public class TestPistol {
     boolean caught = false;
     try {
     Pistol p = new Pistol();
-    p.fire(51);
+    p.fire(-1);
     }
     catch (WeaponException e) {
       caught = true;
