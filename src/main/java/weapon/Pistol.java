@@ -35,10 +35,12 @@ public class Pistol extends GenericWeapon {
     double mr = maxRange;
     double dis = distance;
     double doubleDamage = 0;
+    int damageInt = 0;
     doubleDamage = bd*((mr-dis+10)/mr);
-    baseDamage = Double.valueOf(Math.floor(doubleDamage)).intValue();
+    damageInt = Double.valueOf(Math.floor(doubleDamage)).intValue();
     currentAmmo = currentAmmo - 1;
-    return baseDamage;
+    
+    return damageInt;
   }
 
   
