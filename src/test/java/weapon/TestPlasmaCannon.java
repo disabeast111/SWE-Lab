@@ -52,4 +52,18 @@ public class TestPlasmaCannon {
     assertEquals(4, pc.getCurrentAmmo());
   }
   
+  @Test
+  public void testRateException() throws WeaponException {
+    boolean caught = false;
+    try {
+    PlasmaCannon pc = new PlasmaCannon();
+    pc.fire(-1);
+    }
+    catch (WeaponException e) {
+      caught = true;
+    }
+    assertTrue(caught);
+  }
+
+  
 }

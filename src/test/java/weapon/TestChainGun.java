@@ -48,4 +48,18 @@ public class TestChainGun {
     assertEquals(40, c.getCurrentAmmo());
   }
   
+  @Test
+  public void testRateException() throws WeaponException {
+    boolean caught = false;
+    try {
+    ChainGun c = new ChainGun();
+    c.fire(-1);
+    }
+    catch (WeaponException e) {
+      caught = true;
+    }
+    assertTrue(caught);
+  }
+
+  
 }
