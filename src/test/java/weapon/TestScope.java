@@ -21,6 +21,8 @@ public class TestScope {
     assertEquals(16, s.fire(20));
     assertEquals(15, s.fire(25));
     assertEquals(15, s.fire(30));
+    assertEquals(14, s.fire(35));
+    assertEquals(13, s.fire(40));
     assertEquals(12, s.fire(45));
     assertEquals(15, s.fire(55));
     assertEquals(15, s.fire(60));
@@ -30,13 +32,19 @@ public class TestScope {
   @Test
   public void testPistolDoubleScope() throws WeaponException, AttachmentException {
     Weapon pistolTest = new Pistol(); 
-    Weapon s = new Scope(new Scope(pistolTest));
-    assertEquals(40, s.fire(0));
-    assertEquals(38, s.fire(5));
-    assertEquals(31, s.fire(30));
-    assertEquals(15, s.fire(55));
-    assertEquals(15, s.fire(60));
-    assertEquals(0, s.fire(61));
+    Scope s = new Scope(new Scope(pistolTest));
+    assertEquals(20, s.fire(0));
+    assertEquals(19, s.fire(5));
+    assertEquals(17, s.fire(15));
+    assertEquals(17, s.fire(20));
+    assertEquals(16, s.fire(25));
+    assertEquals(15, s.fire(30));
+    assertEquals(15, s.fire(35));
+    assertEquals(14, s.fire(40));
+    assertEquals(13, s.fire(45));
+    assertEquals(15, s.fire(65));
+    assertEquals(15, s.fire(70));
+    assertEquals(0, s.fire(71));
   }
   
   @Test
