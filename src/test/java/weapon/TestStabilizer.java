@@ -23,7 +23,11 @@ public class TestStabilizer {
   
   @Test
   public void testPistolScopeStabil() {
-    
+//    assertEquals(x, s.fire(0));
+//    assertEquals(x, s.fire(5));
+//    assertEquals(x, s.fire(30));
+//    assertEquals(x, s.fire(55));
+//    assertEquals(x, s.fire(60));  
   }
   
   @Test

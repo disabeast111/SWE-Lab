@@ -5,6 +5,8 @@ import exceptions.AttachmentException;
 public class Scope extends Attachment {
   
   public double damage = 0;
+  public double maxRange = 0;
+  public double targetDistance = 0;
   
   public Scope(Weapon baseWeapon) throws AttachmentException {
     //increases max range of a weapon by 10 *done*
@@ -13,14 +15,18 @@ public class Scope extends Attachment {
     //base damage at max range 
     base = baseWeapon;
     damage = baseWeapon.getBaseDamage();
+    
+    
   }
   
   public int fire(int distance) {
-    if(base.getMaxRange() < distance || distance <= base.getMaxRange() + 10) {
+    if(base.getMaxRange() < distance && distance <= base.getMaxRange() + 10) {
       return base.getBaseDamage() + 5;
     } else if(distance < base.getMaxRange()) {
         int damageInt = 0;
-        damage *= (base.getMaxRange() - distance) / base.getMaxRange();
+        targetDistance = distance;
+        maxRange = base.getMaxRange();
+        damage = base.getBaseDamage() * (1 + ((maxRange - targetDistance) / maxRange));
         damageInt = Double.valueOf(Math.floor(damage)).intValue();
         return damageInt;
     } else {
