@@ -17,7 +17,14 @@ public class TestScope {
     assertEquals(60, s.getMaxRange());
     assertEquals(20, s.fire(0));
     assertEquals(19, s.fire(5));
+<<<<<<< HEAD
     assertEquals(15, s.fire(30));
+=======
+    assertEquals(17, s.fire(15));
+    assertEquals(16, s.fire(20));
+    assertEquals(15, s.fire(25));
+//    assertEquals(15, s.fire(30));
+>>>>>>> a381542d35ed5b806f25d9ade5b0d0ddca6555a2
     assertEquals(12, s.fire(45));
     assertEquals(15, s.fire(55));
     assertEquals(15, s.fire(60));
