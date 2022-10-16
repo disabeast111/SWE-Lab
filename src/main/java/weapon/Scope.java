@@ -26,8 +26,9 @@ public class Scope extends Attachment {
         int damageInt = 0;
         targetDistance = distance;
         maxRange = base.getMaxRange();
-        damage = base.getBaseDamage() * (1 + ((maxRange - targetDistance) / maxRange));
+        damage *= 1 + ((maxRange - targetDistance) / maxRange);
         damageInt = Double.valueOf(Math.floor(damage)).intValue();
+        damage = base.getBaseDamage();
         return damageInt;
     } else {
       return 0;
