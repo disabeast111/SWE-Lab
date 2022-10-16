@@ -12,7 +12,7 @@ public class TestScope {
   @Test
   public void testPistolScope() throws AttachmentException, WeaponException {
     Weapon pistolTest = new Pistol(); 
-    Scope s = new Scope(pistolTest);
+    Weapon s = new Scope(pistolTest);
     assertEquals(10, s.getBaseDamage());
     assertEquals(60, s.getMaxRange());
     assertEquals(20, s.fire(0));

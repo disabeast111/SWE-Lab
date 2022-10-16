@@ -16,9 +16,9 @@ public class Scope extends Attachment {
     //if old range < target distance <= new range + 10, then damage is 5 + 
     //base damage at max range 
     base = baseWeapon;
+
     damage = baseWeapon.getBaseDamage();
     maxRange = getMaxRange();
-    
   }
   
   public int fire(int distance) throws WeaponException {
@@ -36,11 +36,11 @@ public class Scope extends Attachment {
       return 0;
     }
   }
- 
+
   public int getMaxRange() {
     return base.getMaxRange() + 10;
   }
-  
+
   public String toString() {
     
     return base.toString() + " +Scope";

@@ -40,10 +40,10 @@ public abstract class Attachment implements Weapon {
   }
 
   public void reload() {
-
+    base.reload();
   }
 
-  public void updateTime(int Time) {
-
+  public void updateTime(int time) {
+    //                                      implement
   }
 }

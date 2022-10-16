@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author dawol
+ * @author dawolfe
  *
  */
 public class SimpleTimer extends Thread implements Timer {

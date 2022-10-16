@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import exceptions.RecoveryRateException;
+import exceptions.WeaponException;
 
 public class TestLifeForm {
 
@@ -47,7 +48,7 @@ public class TestLifeForm {
   }
 
   @Test
-  public void testAttack() throws RecoveryRateException{
+  public void testAttack() throws RecoveryRateException, WeaponException{
   MockLifeForm entityJ = new MockLifeForm("Jim", 30, 10);
   MockLifeForm entityB = new MockLifeForm("Bob", 30, 10);
   assertEquals(10, entityB.getAttackStrength());
@@ -56,7 +57,7 @@ public class TestLifeForm {
   }
   
   @Test
-  public void testAttackDead() throws RecoveryRateException{
+  public void testAttackDead() throws RecoveryRateException, WeaponException{
   MockLifeForm entityJ = new MockLifeForm("Jim", 30, 10);
   MockLifeForm entityB = new MockLifeForm("Bob", 0, 10);
   assertEquals(10, entityB.getAttackStrength());

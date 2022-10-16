@@ -3,6 +3,8 @@ package lifeform;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import exceptions.WeaponException;
+
 public class TestHuman {
   
   @Test
@@ -65,7 +67,7 @@ public class TestHuman {
   }
   
   @Test
-  public void testAttack() {
+  public void testAttack() throws WeaponException {
     Human entityB = new Human("Baba", 40, 0);
     Human entityA = new Human("Annella", 40, 10);
     entityB.attackStrength = 20;

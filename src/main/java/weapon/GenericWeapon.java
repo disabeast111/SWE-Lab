@@ -1,14 +1,15 @@
 package weapon;
 
 import exceptions.WeaponException;
+import gameplay.TimerObserver;
 
 public abstract class GenericWeapon implements Weapon {
   protected int baseDamage;
-  protected int currentAmmo;
-  protected int maxAmmo;
+  protected int currentAmmo; // ammo in clip
+  protected int maxAmmo;     // max capacity of clip
   protected int maxRange;
   protected int rateOfFire;
-  protected int shotsLeft;
+  protected int shotsLeft;   // num shots left per round
 
   public GenericWeapon() {
   }
@@ -44,9 +45,8 @@ public abstract class GenericWeapon implements Weapon {
   }
 
   public void reload() {
-    currentAmmo = maxAmmo;                               
+      currentAmmo = maxAmmo;
   }
 
-  @Override
   public abstract String toString();
 }
