@@ -9,7 +9,7 @@ public abstract class GenericWeapon implements Weapon {
   protected int maxAmmo;     // max capacity of clip
   protected int maxRange;
   protected int rateOfFire;
-  protected int shotsLeft;   // total amount of ammo not in clip
+  protected int shotsLeft;   // num shots left per round
 
   public GenericWeapon() {
   }
@@ -45,10 +45,7 @@ public abstract class GenericWeapon implements Weapon {
   }
 
   public void reload() {
-    if (currentAmmo < maxAmmo && shotsLeft > (maxAmmo - currentAmmo)) {
-      shotsLeft -= (maxAmmo - currentAmmo);
       currentAmmo = maxAmmo;
-    }
   }
 
   public abstract String toString();
