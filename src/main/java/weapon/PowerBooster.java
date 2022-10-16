@@ -1,6 +1,7 @@
 package weapon;
 
 import exceptions.AttachmentException;
+import exceptions.WeaponException;
 
 public class PowerBooster extends Attachment {
   
@@ -9,16 +10,17 @@ public class PowerBooster extends Attachment {
   
   public PowerBooster(Weapon baseWeapon) throws AttachmentException {
     //makes damage = damage * (1+ (current ammo/max ammo)
-    if(baseWeapon.getNumAttachments() <= 2) {
-      base = baseWeapon;
-      damage = baseWeapon.getBaseDamage() * (baseWeapon.getCurrentAmmo()
-          / baseWeapon.getMaxAmmo());
-    } else {
-      throw new AttachmentException("Already 2 Attachments!");
-    }
+
+    base = baseWeapon;
+    damage = baseWeapon.getBaseDamage();
+
   }
   
-  public int fire(int distance) {
+
+  public int fire(int distance) throws WeaponException {
+    int damageInt = 0;
+    damage = base.fire(distance) * (base.getCurrentAmmo()
+        / base.getMaxAmmo());
     damageInt = Double.valueOf(Math.floor(damage)).intValue();
     return damageInt;
   }
