@@ -1,6 +1,7 @@
 package weapon;
 
 import exceptions.AttachmentException;
+import exceptions.WeaponException;
 
 public class Scope extends Attachment {
   
@@ -20,22 +21,22 @@ public class Scope extends Attachment {
     
   }
   
-  public int fire(int distance) {
+  public int fire(int distance) throws WeaponException {
     if(base.getMaxRange() < distance && distance <= base.getMaxRange() + 10) {
-      return base.getBaseDamage() + 5;
-    } else if(distance < base.getMaxRange()) {
+      return base.fire(base.getMaxRange()) + 5;
+    } else if(distance <= base.getMaxRange()) {
         int damageInt = 0;
         targetDistance = distance;
-       
+        damage = base.fire(distance);
         damage *= 1 + ((maxRange - targetDistance) / maxRange);
         damageInt = Double.valueOf(Math.floor(damage)).intValue();
-        damage = base.getBaseDamage();
+//        damage = base.fire(distance);
         return damageInt;
     } else {
       return 0;
     }
   }
-  //defg
+ 
   public int getMaxRange() {
     return base.getMaxRange() + 10;
   }
