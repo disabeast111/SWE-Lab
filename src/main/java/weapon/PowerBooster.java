@@ -25,6 +25,6 @@ public class PowerBooster extends Attachment {
   
   public String toString() {
     
-    return "you forgot to replace this filler text!";
+    return base.toString() + " +PowerBooster";
   }
 }

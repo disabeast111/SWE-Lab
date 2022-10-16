@@ -34,7 +34,7 @@ public class Scope extends Attachment {
   
   public String toString() {
     
-    return "filler text";
+    return base.toString() + " +Scope";
   }
 
 }
