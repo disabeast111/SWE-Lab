@@ -42,6 +42,7 @@ public class Pistol extends GenericWeapon {
     return damage;
   }
 
+  
   @Override
   public String toString() {
     return "Pistol";
