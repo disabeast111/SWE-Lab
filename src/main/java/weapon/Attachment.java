@@ -1,12 +1,12 @@
 package weapon;
 
+import exceptions.AttachmentException;
 import exceptions.WeaponException;
 
 public abstract class Attachment implements Weapon {
   protected Weapon base;
 
-  public Attachment() {
-
+  public Attachment() throws AttachmentException {
   }
 
   public abstract int fire(int distance) throws WeaponException;
