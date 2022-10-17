@@ -21,15 +21,15 @@ public class MockWeapon extends GenericWeapon {
     if (currentAmmo == 0) {
       return 0;
     }
-    if (shotsLeft > 0) {
+    //if (shotsLeft > 0) {
       shotsLeft -= 1;
       currentAmmo -= 1;
       if (distance > maxRange) {
         return 0;
       }
       return baseDamage;
-    }
-    return 0;
+    //}
+    //return 0;
   }
 
   @Override

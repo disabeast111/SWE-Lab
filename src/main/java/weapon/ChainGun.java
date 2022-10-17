@@ -13,7 +13,6 @@ public class ChainGun extends GenericWeapon {
     shotsLeft = rateOfFire;
   }
 
-
   @Override
   public int fire(int distance) throws WeaponException {
     if (distance < 0) {

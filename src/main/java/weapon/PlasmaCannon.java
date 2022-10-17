@@ -21,10 +21,10 @@ public class PlasmaCannon extends GenericWeapon {
 
   @Override
   public int fire(int distance) throws WeaponException {
-    if(distance < 0) {
+    if (distance < 0) {
       throw new WeaponException("Cannot be a negative distance");
     }
-    if(currentAmmo == 0) {
+    if (currentAmmo == 0) {
       return 0;
     }
     currentAmmo -= 1;
