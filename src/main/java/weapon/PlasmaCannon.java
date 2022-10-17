@@ -10,13 +10,14 @@ public class PlasmaCannon extends GenericWeapon {
     rateOfFire = 1;
     maxAmmo = 4;
     currentAmmo = 4;
+    shotsLeft = rateOfFire;
 
   }
 
   @Override
   public void updateTime(int time) {
     // TODO Auto-generated method stub
-
+    shotsLeft = rateOfFire;
   }
 
   @Override
@@ -27,6 +28,11 @@ public class PlasmaCannon extends GenericWeapon {
     if(currentAmmo == 0) {
       return 0;
     }
+    if(shotsLeft <= 0) {
+      return 0;
+    }
+    shotsLeft -= 1;
+
     if (distance > maxRange) {
       currentAmmo = currentAmmo - 1;
       return 0;
