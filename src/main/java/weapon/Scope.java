@@ -24,17 +24,15 @@ public class Scope extends Attachment {
   }
   
   public int fire(int distance) throws WeaponException {
-    if(base.getMaxRange() < distance && distance <= base.getMaxRange() + 10) {
+    if(base.getMaxRange() < distance && distance <= maxRange) {
       return base.fire(base.getMaxRange()) + 5;
     } else if(distance <= base.getMaxRange()) {
-        int damageInt = 0;
-        
         targetDistance = distance;
         damage = base.fire(distance);
         
         damage *= 1 + ((maxRange - targetDistance) / maxRange);
-        damageInt = Double.valueOf(Math.floor(damage)).intValue();
-        return damageInt;
+        
+        return Double.valueOf(Math.floor(damage)).intValue();
     } else {
       return 0;
     }
@@ -45,7 +43,6 @@ public class Scope extends Attachment {
   }
 
   public String toString() {
-    
     return base.toString() + " +Scope";
   }
 

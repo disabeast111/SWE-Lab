@@ -46,22 +46,34 @@ public class TestScope {
   }
   
   @Test
-  public void testChainGunPowBScope() {
-//    assertEquals(x, s.fire(0));
-//    assertEquals(x, s.fire(5));
-//    assertEquals(x, s.fire(30));
-//    assertEquals(x, s.fire(55));
-//    assertEquals(x, s.fire(60));
-//    assertEquals(0, s.fire(61));
+  public void testChainGunPowBScope() throws AttachmentException, WeaponException {
+    Weapon cg = new ChainGun();
+    PowerBooster cgpb = new PowerBooster(cg);
+    Scope cgpbsc = new Scope (cgpb);
+    
+    assertEquals(0, cgpbsc.fire(0));
+    assertEquals(1, cgpbsc.fire(5));
+    assertEquals(20, cgpbsc.fire(30));
+    assertEquals(30, cgpbsc.fire(55));
+    assertEquals(32, cgpbsc.fire(60));
+    assertEquals(33, cgpbsc.fire(61));
+    assertEquals(32, cgpbsc.fire(70));
+    assertEquals(0, cgpbsc.fire(71));
   }
   
   @Test
-  public void testPlasmaStabilScope() {
-//    assertEquals(x, s.fire(0));
-//    assertEquals(x, s.fire(5));
-//    assertEquals(x, s.fire(30));
-//    assertEquals(x, s.fire(55));
-//    assertEquals(x, s.fire(60));
+  public void testPlasmaStabilScope() throws AttachmentException, WeaponException {
+    Weapon plasma = new PlasmaCannon();
+    Stabilizer plst = new Stabilizer(plasma);
+    Scope plstsc = new Scope (plst);
+    
+    assertEquals(124, plstsc.fire(0));
+    assertEquals(87, plstsc.fire(5));
+    assertEquals(43, plstsc.fire(30));
+    assertEquals(20, plstsc.fire(50));
+    assertEquals(86, plstsc.fire(30));
+    assertEquals(64, plstsc.fire(30));
+    assertEquals(0, plstsc.fire(51));
   }
   
 

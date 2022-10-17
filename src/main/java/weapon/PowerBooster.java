@@ -15,18 +15,19 @@ public class PowerBooster extends Attachment {
     base = baseWeapon;
     damage = baseWeapon.getBaseDamage();
     maxAmmo = baseWeapon.getMaxAmmo();
+    if (base.getNumAttachments() >= 2) {
+      throw new AttachmentException("Can not have more than 2 attachments.");
+    }
   }
   
 
   public int fire(int distance) throws WeaponException {
-    int damageInt = 0;
-   
     currAmmo = base.getCurrentAmmo();
     damage = base.fire(distance);
     
     damage *= 1 + (currAmmo / maxAmmo);
-    damageInt = Double.valueOf(Math.floor(damage)).intValue();
-    return damageInt;
+    
+    return Double.valueOf(Math.floor(damage)).intValue();
   }
 
   

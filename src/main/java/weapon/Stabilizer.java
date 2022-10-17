@@ -19,18 +19,16 @@ public class Stabilizer extends Attachment {
   
   public int fire(int distance) throws WeaponException {
     
-    damage = Math.floor(base.fire(distance) * 1.25);
+    double weaponDamage = base.fire(distance);
+    damage = Math.floor(weaponDamage * 1.25);
     
     if(base.getCurrentAmmo() == 0) {
       base.reload();
-    }
-    int damageInt = 0;
-    damageInt = Double.valueOf(Math.floor(damage)).intValue();
-    return damageInt;
+    } 
+    return Double.valueOf(Math.floor(damage)).intValue();
   }
   
   public String toString() {
-    
     return base.toString() + " +Stabilizer";
   }
   
