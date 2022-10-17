@@ -26,6 +26,7 @@ public class TestGenericWeapon {
     assertEquals(10,weapon1.fire(9));
     assertEquals(10,weapon1.fire(9));
     assertEquals(0,weapon1.fire(9));
+    assertEquals(5, weapon1.getCurrentAmmo());
   }
   
   @Test
@@ -38,8 +39,10 @@ public class TestGenericWeapon {
     assertEquals(10,weapon1.fire(9));
     assertEquals(10,weapon1.fire(9));
     assertEquals(0,weapon1.fire(9));
+    assertEquals(5, weapon1.getCurrentAmmo());
     weapon1.updateTime(0);
     assertEquals(10,weapon1.fire(9));
+    assertEquals(4, weapon1.getCurrentAmmo());
   }
   
   @Test

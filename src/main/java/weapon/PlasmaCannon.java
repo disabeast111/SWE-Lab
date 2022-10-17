@@ -11,10 +11,6 @@ public class PlasmaCannon extends GenericWeapon {
     maxAmmo = 4;
     currentAmmo = 4;
     shotsLeft = rateOfFire;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://gitlab.engr.ship.edu/swe200-2022f/lab4-team1.git
   }
 
   @Override
@@ -31,17 +27,14 @@ public class PlasmaCannon extends GenericWeapon {
     if (currentAmmo == 0) {
       return 0;
     }
-<<<<<<< HEAD
+    
     if(shotsLeft <= 0) {
       return 0;
     }
     shotsLeft -= 1;
-
-=======
-    currentAmmo -= 1;
-    shotsLeft -= 1;
->>>>>>> branch 'main' of https://gitlab.engr.ship.edu/swe200-2022f/lab4-team1.git
+    
     if (distance > maxRange) {
+      currentAmmo -= 1;
       return 0;
     }
     double bd = baseDamage;
@@ -49,7 +42,9 @@ public class PlasmaCannon extends GenericWeapon {
     double ma = maxAmmo;
     double doubleDamage = 0;
     doubleDamage = bd * (ca / ma);
-    return Double.valueOf(Math.floor(doubleDamage)).intValue();
+    int intDamage = Double.valueOf(Math.floor(doubleDamage)).intValue();
+    currentAmmo -= 1;
+    return intDamage;
   }
 
   @Override
