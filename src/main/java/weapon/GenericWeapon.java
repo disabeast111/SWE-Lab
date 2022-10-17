@@ -49,7 +49,7 @@ public abstract class GenericWeapon implements Weapon, TimerObserver {
   }
   
   public void updateTime(int time) {
-    //                                     implement
+    shotsLeft = getRateOfFire();
   }
 
   public abstract String toString();
