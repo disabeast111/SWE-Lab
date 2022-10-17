@@ -24,12 +24,8 @@ public class MockWeapon extends GenericWeapon {
       currentAmmo = currentAmmo - 1;
       return 0;
     }
-    double bd = baseDamage;
-    double mr = maxRange;
-    double dis = distance;
-    double doubleDamage = bd * ((mr - dis + 10) / mr);
     currentAmmo = currentAmmo - 1;
-    return Double.valueOf(Math.floor(doubleDamage)).intValue();
+    return baseDamage;
   }
 
   @Override
