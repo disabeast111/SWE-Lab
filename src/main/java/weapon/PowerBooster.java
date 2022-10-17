@@ -19,8 +19,8 @@ public class PowerBooster extends Attachment {
 
   public int fire(int distance) throws WeaponException {
     int damageInt = 0;
-    damage = base.fire(distance) * (base.getCurrentAmmo()
-        / base.getMaxAmmo());
+    damage = base.fire(distance) * (1 + (base.getCurrentAmmo()
+        / base.getMaxAmmo()));
     damageInt = Double.valueOf(Math.floor(damage)).intValue();
     return damageInt;
   }

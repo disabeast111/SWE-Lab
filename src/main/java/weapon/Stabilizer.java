@@ -1,6 +1,7 @@
 package weapon;
 
 import exceptions.AttachmentException;
+import exceptions.WeaponException;
 
 public class Stabilizer extends Attachment {
 
@@ -13,9 +14,9 @@ public class Stabilizer extends Attachment {
     damage = baseWeapon.getBaseDamage();
   }
   
-  public int fire(int distance) {
+  public int fire(int distance) throws WeaponException {
     
-    damage = Math.floor(base.getBaseDamage() * 1.25);
+    damage = Math.floor(base.fire(distance) * 1.25);
     
     if(base.getCurrentAmmo() == 0) {
       base.reload();
