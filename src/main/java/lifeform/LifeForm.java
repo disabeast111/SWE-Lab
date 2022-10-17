@@ -19,6 +19,7 @@ public abstract class LifeForm extends java.lang.Object {
 
   /**
    * LifeForm constructor
+   * 
    * @param name
    * @param points
    * @param attack
@@ -57,31 +58,32 @@ public abstract class LifeForm extends java.lang.Object {
 
   /**
    * attack
+   * 
    * @param opponent (type LifeForm)
-   * @throws WeaponException 
+   * @throws WeaponException
    */
-  public void attack(LifeForm opponent, int distance) throws WeaponException {        //test
+  public void attack(LifeForm opponent, int distance) throws WeaponException { // test
     if (getCurrentLifePoints() > 0) {
-      if (hasWeapon()&& weapon.getCurrentAmmo() > 0) {
-        opponent.takeHit(weapon.fire(distance));
-      }
-      else if (distance < 5) {
-        opponent.takeHit(getAttackStrength());
-      }
+        if (hasWeapon() && weapon.getCurrentAmmo() > 0) {
+          opponent.takeHit(weapon.fire(distance));
+        } else if (distance < 5) {
+          opponent.takeHit(getAttackStrength());
+        }
     }
   }
-  
+
   public Weapon dropWeapon() {
     Weapon temp = weapon;
     weapon = null;
     return temp;
-    }
-  
+  }
+
   public boolean hasWeapon() {
-    if (weapon != null) return true;
+    if (weapon != null)
+      return true;
     return false;
   }
-  
+
   public boolean pickUpWeapon(Weapon newWeapon) {
     if (weapon == null) {
       weapon = newWeapon;

@@ -10,7 +10,7 @@ public class PlasmaCannon extends GenericWeapon {
     rateOfFire = 1;
     maxAmmo = 4;
     currentAmmo = 4;
-
+    shotsLeft = rateOfFire;
   }
 
   @Override
@@ -27,19 +27,17 @@ public class PlasmaCannon extends GenericWeapon {
     if(currentAmmo == 0) {
       return 0;
     }
+    currentAmmo -= 1;
+    shotsLeft -= 1;
     if (distance > maxRange) {
-      currentAmmo = currentAmmo - 1;
       return 0;
     }
     double bd = baseDamage;
     double ca = currentAmmo;
     double ma = maxAmmo;
     double doubleDamage = 0;
-    int damageInt = 0;
     doubleDamage = bd * (ca / ma);
-    damageInt = Double.valueOf(Math.floor(doubleDamage)).intValue();
-    currentAmmo = currentAmmo - 1;
-    return damageInt;
+    return Double.valueOf(Math.floor(doubleDamage)).intValue();
   }
 
   @Override
