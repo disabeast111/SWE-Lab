@@ -3,7 +3,7 @@ package weapon;
 import exceptions.WeaponException;
 import gameplay.TimerObserver;
 
-public abstract class GenericWeapon implements Weapon {
+public abstract class GenericWeapon implements Weapon, TimerObserver {
   protected int baseDamage;
   protected int currentAmmo; // ammo in clip
   protected int maxAmmo;     // max capacity of clip
@@ -46,6 +46,10 @@ public abstract class GenericWeapon implements Weapon {
 
   public void reload() {
       currentAmmo = maxAmmo;
+  }
+  
+  public void updateTime(int time) {
+    //                                     implement
   }
 
   public abstract String toString();

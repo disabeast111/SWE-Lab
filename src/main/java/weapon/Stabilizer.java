@@ -12,6 +12,9 @@ public class Stabilizer extends Attachment {
     //auto reloads if ammo is at 0 after firing. Also increases damage by 25%
     base = baseWeapon;
     damage = baseWeapon.getBaseDamage();
+    if (base.getNumAttachments() >= 2) {
+      throw new AttachmentException("Can not have more than 2 attachments.");
+    }
   }
   
   public int fire(int distance) throws WeaponException {

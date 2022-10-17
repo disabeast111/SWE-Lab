@@ -16,9 +16,11 @@ public class Scope extends Attachment {
     //if old range < target distance <= new range + 10, then damage is 5 + 
     //base damage at max range 
     base = baseWeapon;
-
     damage = baseWeapon.getBaseDamage();
     maxRange = getMaxRange();
+    if (base.getNumAttachments() >= 2) {
+      throw new AttachmentException("Can not have more than 2 attachments.");
+    }
   }
   
   public int fire(int distance) throws WeaponException {
