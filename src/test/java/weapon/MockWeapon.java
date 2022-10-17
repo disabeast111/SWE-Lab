@@ -2,20 +2,14 @@ package weapon;
 
 import exceptions.WeaponException;
 
-public class Pistol extends GenericWeapon {
+public class MockWeapon extends GenericWeapon {
 
-  public Pistol() throws WeaponException {
+  public MockWeapon() throws WeaponException {
     baseDamage = 10;
-    maxRange = 50;
-    rateOfFire = 2;
+    maxRange = 10;
+    rateOfFire = 10;
     maxAmmo = 10;
     currentAmmo = 10;
-  }
-
-  @Override
-  public void updateTime(int time) {
-    // TODO Auto-generated method stub
-
   }
 
   @Override
@@ -30,17 +24,13 @@ public class Pistol extends GenericWeapon {
       currentAmmo = currentAmmo - 1;
       return 0;
     }
-    double bd = baseDamage;
-    double mr = maxRange;
-    double dis = distance;
-    double doubleDamage = bd * ((mr - dis + 10) / mr);
     currentAmmo = currentAmmo - 1;
-    return Double.valueOf(Math.floor(doubleDamage)).intValue();
+    return baseDamage;
   }
 
   @Override
   public String toString() {
-    return "Pistol";
+    return "MockWeapon";
   }
 
 }

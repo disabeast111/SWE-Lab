@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import exceptions.RecoveryRateException;
 import exceptions.WeaponException;
+import weapon.Pistol;
+import weapon.Weapon;
 
 public class TestLifeForm {
 
@@ -63,5 +65,82 @@ public class TestLifeForm {
   assertEquals(10, entityB.getAttackStrength());
   entityB.attack(entityJ,0);
   assertEquals(30, entityJ.getCurrentLifePoints());
+  }
+  
+  
+  // WEAPON SECTION
+  
+  
+  @Test
+  public void pickUpWeapon() throws WeaponException {
+    MockLifeForm entity = new MockLifeForm("Jim", 40, 10);
+    Weapon pistol1 = new Pistol();
+    assertTrue(entity.pickUpWeapon(pistol1));
+    assertTrue(entity.hasWeapon());
+  }
+  
+  @Test
+  public void onlyOneWeapon() throws WeaponException {
+    MockLifeForm entity = new MockLifeForm("Jim", 40, 10);
+    Weapon pistol1 = new Pistol();
+    Weapon pistol2 = new Pistol();
+    assertTrue(entity.pickUpWeapon(pistol1));
+    assertTrue(entity.hasWeapon());
+    assertFalse(entity.pickUpWeapon(pistol2));
+  }
+  
+  @Test
+  public void canDropWeapon() throws WeaponException {
+    MockLifeForm entity = new MockLifeForm("Jim", 40, 10);
+    Weapon pistol1 = new Pistol();
+    assertTrue(entity.pickUpWeapon(pistol1));
+    assertTrue(entity.hasWeapon());
+    assertEquals(pistol1, entity.dropWeapon());
+    assertFalse(entity.hasWeapon());
+  }
+  
+  @Test
+  public void useWeaponWAmmoAIRange() throws WeaponException {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
+    Weapon pistol = new Pistol();
+    assertTrue(entity1.pickUpWeapon(pistol));
+    entity1.attack(entity2, 10);
+    assertEquals(30,entity2.getCurrentLifePoints());
+  }
+  
+  @Test
+  public void useMeleeInRange() throws WeaponException {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
+    Weapon pistol = new Pistol();
+    assertTrue(entity1.pickUpWeapon(pistol));
+    while(pistol.getCurrentAmmo()>0) { pistol.fire(100); }
+    assertEquals(0, pistol.getCurrentAmmo());
+    entity1.attack(entity2, 2);
+    assertEquals(39,entity2.getCurrentLifePoints());
+  }
+  
+  @Test
+  public void useMeleeOutRange() throws WeaponException {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
+    Weapon pistol = new Pistol();
+    assertTrue(entity1.pickUpWeapon(pistol));
+    while(pistol.getCurrentAmmo()>0) { pistol.fire(100); }
+    assertEquals(0, pistol.getCurrentAmmo());
+    entity1.attack(entity2, 6);
+    assertEquals(40,entity2.getCurrentLifePoints());
+  }
+  
+  @Test
+  public void testReload() throws WeaponException {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    Weapon pistol = new Pistol();
+    assertTrue(entity1.pickUpWeapon(pistol));
+    while(pistol.getCurrentAmmo()>0) { pistol.fire(100); }
+    assertEquals(0, pistol.getCurrentAmmo());
+    entity1.weapon.reload();
+    assertEquals(10, pistol.getCurrentAmmo());
   }
 }
