@@ -28,11 +28,12 @@ public class Scope extends Attachment {
       return base.fire(base.getMaxRange()) + 5;
     } else if(distance <= base.getMaxRange()) {
         int damageInt = 0;
+        
         targetDistance = distance;
         damage = base.fire(distance);
+        
         damage *= 1 + ((maxRange - targetDistance) / maxRange);
         damageInt = Double.valueOf(Math.floor(damage)).intValue();
-//        damage = base.fire(distance);
         return damageInt;
     } else {
       return 0;

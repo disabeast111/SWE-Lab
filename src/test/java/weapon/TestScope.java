@@ -15,17 +15,18 @@ public class TestScope {
     Weapon s = new Scope(pistolTest);
     assertEquals(10, s.getBaseDamage());
     assertEquals(60, s.getMaxRange());
-    assertEquals(20, s.fire(0));
-//    assertEquals(19, s.fire(5));
-    assertEquals(17, s.fire(15));
-    assertEquals(16, s.fire(20));
-    assertEquals(15, s.fire(25));
-    assertEquals(15, s.fire(30));
-    assertEquals(14, s.fire(35));
-    assertEquals(13, s.fire(40));
-    assertEquals(12, s.fire(45));
-    assertEquals(15, s.fire(55));
-    assertEquals(15, s.fire(60));
+    assertEquals(24, s.fire(0));
+    assertEquals(21, s.fire(5));
+    assertEquals(18, s.fire(10));
+    assertEquals(15, s.fire(15));
+    assertEquals(13, s.fire(20));
+    assertEquals(11, s.fire(25));
+    assertEquals(9, s.fire(30));
+    assertEquals(7, s.fire(35));
+    assertEquals(5, s.fire(40));
+    assertEquals(3, s.fire(45));
+    assertEquals(0, s.fire(50));
+    assertEquals(5, s.fire(60));
     assertEquals(0, s.fire(61));
   }
   
@@ -33,18 +34,15 @@ public class TestScope {
   public void testPistolDoubleScope() throws WeaponException, AttachmentException {
     Weapon pistolTest = new Pistol(); 
     Scope s = new Scope(new Scope(pistolTest));
-    assertEquals(20, s.fire(0));
-    assertEquals(19, s.fire(5));
-    assertEquals(17, s.fire(15));
-    assertEquals(17, s.fire(20));
-    assertEquals(16, s.fire(25));
-    assertEquals(15, s.fire(30));
-    assertEquals(15, s.fire(35));
-    assertEquals(14, s.fire(40));
-    assertEquals(13, s.fire(45));
-    assertEquals(15, s.fire(65));
-    assertEquals(15, s.fire(70));
+    assertEquals(48, s.fire(0));
+    assertEquals(40, s.fire(5));
+    assertEquals(14, s.fire(30));
+    assertEquals(4, s.fire(45));
+    assertEquals(2, s.fire(50));
+    assertEquals(12, s.fire(61));
+    assertEquals(12, s.fire(70));
     assertEquals(0, s.fire(71));
+    
   }
   
   @Test
@@ -54,6 +52,7 @@ public class TestScope {
 //    assertEquals(x, s.fire(30));
 //    assertEquals(x, s.fire(55));
 //    assertEquals(x, s.fire(60));
+//    assertEquals(0, s.fire(61));
   }
   
   @Test
