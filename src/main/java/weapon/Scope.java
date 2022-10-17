@@ -26,6 +26,8 @@ public class Scope extends Attachment {
   public int fire(int distance) throws WeaponException {
     if(base.getMaxRange() < distance && distance <= maxRange) {
       return base.fire(base.getMaxRange()) + 5;
+      
+      //cannot fire with no shots left
     } else if(distance <= base.getMaxRange()) {
         targetDistance = distance;
         damage = base.fire(distance);
