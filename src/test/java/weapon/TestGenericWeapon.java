@@ -17,9 +17,29 @@ public class TestGenericWeapon {
   }
   
   @Test
-  public void testRateOfFire() throws WeaponException {
+  public void testRateOfFire1() throws WeaponException {
     MockWeapon weapon1 = new MockWeapon();
-    //                                                implement
+    assertEquals(10, weapon1.getCurrentAmmo());
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(0,weapon1.fire(9));
+  }
+  
+  @Test
+  public void testRateOfFire2() throws WeaponException {
+    MockWeapon weapon1 = new MockWeapon();
+    assertEquals(10, weapon1.getCurrentAmmo());
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(10,weapon1.fire(9));
+    assertEquals(0,weapon1.fire(9));
+    weapon1.updateTime(0);
+    assertEquals(10,weapon1.fire(9));
   }
   
   @Test
@@ -38,7 +58,10 @@ public class TestGenericWeapon {
   public void testNoDamageNoAmmo() throws WeaponException {
     MockWeapon weapon1 = new MockWeapon();
     assertEquals(10, weapon1.getCurrentAmmo());
-    while(weapon1.getCurrentAmmo()>0) { weapon1.fire(100); }
+    while(weapon1.getCurrentAmmo()>0) { 
+      weapon1.fire(100);
+      weapon1.updateTime(0);
+    }
     assertEquals(0, weapon1.getCurrentAmmo());
     assertEquals(0,weapon1.fire(5));
   }

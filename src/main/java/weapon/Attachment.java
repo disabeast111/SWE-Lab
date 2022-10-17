@@ -44,6 +44,6 @@ public abstract class Attachment implements Weapon {
   }
 
   public void updateTime(int time) {
-    //                                      implement
+    base.updateTime(time);
   }
 }

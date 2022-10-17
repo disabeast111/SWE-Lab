@@ -7,9 +7,10 @@ public class MockWeapon extends GenericWeapon {
   public MockWeapon() throws WeaponException {
     baseDamage = 10;
     maxRange = 10;
-    rateOfFire = 10;
+    rateOfFire = 5;
     maxAmmo = 10;
     currentAmmo = 10;
+    shotsLeft = rateOfFire;
   }
 
   @Override
@@ -20,12 +21,15 @@ public class MockWeapon extends GenericWeapon {
     if (currentAmmo == 0) {
       return 0;
     }
-    if (distance > maxRange) {
-      currentAmmo = currentAmmo - 1;
-      return 0;
+    if (shotsLeft > 0) {
+      shotsLeft -= 1;
+      currentAmmo -= 1;
+      if (distance > maxRange) {
+        return 0;
+      }
+      return baseDamage;
     }
-    currentAmmo = currentAmmo - 1;
-    return baseDamage;
+    return 0;
   }
 
   @Override
