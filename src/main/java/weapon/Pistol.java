@@ -11,6 +11,14 @@ public class Pistol extends GenericWeapon {
     maxAmmo = 10;
     currentAmmo = 10;
     shotsLeft = rateOfFire;
+
+  }
+
+  @Override
+  public void updateTime(int time) {
+    // TODO Auto-generated method stub
+    shotsLeft = rateOfFire;
+
   }
 
   @Override
@@ -21,8 +29,13 @@ public class Pistol extends GenericWeapon {
     if (currentAmmo == 0) {
       return 0;
     }
-    currentAmmo -= 1;
+
+    if(shotsLeft <= 0) {
+      return 0;
+    }
     shotsLeft -= 1;
+    currentAmmo -= 1;
+
     if (distance > maxRange) {
       return 0;
     }
