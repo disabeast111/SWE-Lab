@@ -20,7 +20,7 @@ public class Stabilizer extends Attachment {
   public int fire(int distance) throws WeaponException {
     
     double weaponDamage = base.fire(distance);
-    damage = Math.floor(weaponDamage * 1.25);
+    damage = weaponDamage * 1.25;
     
     if(base.getCurrentAmmo() == 0) {
       base.reload();
