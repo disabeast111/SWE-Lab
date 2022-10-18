@@ -23,6 +23,7 @@ public class TestPistol {
     assertEquals(10, p.getCurrentAmmo());
     assertEquals(7, p.fire(25));
     assertEquals(9, p.getCurrentAmmo());
+    assertEquals(10, p.fire(10));
   }
   
   @Test

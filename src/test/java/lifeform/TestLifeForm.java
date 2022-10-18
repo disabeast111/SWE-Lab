@@ -72,7 +72,7 @@ public class TestLifeForm {
   
   
   @Test
-  public void pickUpWeapon() throws WeaponException {
+  public void testPickUpWeapon() throws WeaponException {
     MockLifeForm entity = new MockLifeForm("Jim", 40, 10);
     Weapon pistol1 = new Pistol();
     assertTrue(entity.pickUpWeapon(pistol1));
@@ -80,7 +80,7 @@ public class TestLifeForm {
   }
   
   @Test
-  public void onlyOneWeapon() throws WeaponException {
+  public void testOnlyOneWeapon() throws WeaponException {
     MockLifeForm entity = new MockLifeForm("Jim", 40, 10);
     Weapon pistol1 = new Pistol();
     Weapon pistol2 = new Pistol();
@@ -90,7 +90,7 @@ public class TestLifeForm {
   }
   
   @Test
-  public void canDropWeapon() throws WeaponException {
+  public void testCanDropWeapon() throws WeaponException {
     MockLifeForm entity = new MockLifeForm("Jim", 40, 10);
     Weapon pistol1 = new Pistol();
     assertTrue(entity.pickUpWeapon(pistol1));
@@ -100,7 +100,7 @@ public class TestLifeForm {
   }
   
   @Test
-  public void useWeaponWAmmoAIRange() throws WeaponException {
+  public void testUseWeaponWAmmoInRange() throws WeaponException {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
     Weapon pistol = new Pistol();
@@ -110,7 +110,7 @@ public class TestLifeForm {
   }
   
   @Test
-  public void useMeleeInRange() throws WeaponException {
+  public void testUseMeleeInRange() throws WeaponException {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
     Weapon pistol = new Pistol();
@@ -122,7 +122,7 @@ public class TestLifeForm {
   }
   
   @Test
-  public void useMeleeOutRange() throws WeaponException {
+  public void testUseMeleeOutRange() throws WeaponException {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
     Weapon pistol = new Pistol();

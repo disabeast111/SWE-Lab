@@ -9,7 +9,7 @@ import exceptions.WeaponException;
 public class TestGenericWeapon {
   
   @Test
-  public void fireUsesAmmo() throws WeaponException {
+  public void testFireUsesAmmo() throws WeaponException {
     MockWeapon weapon1 = new MockWeapon();
     assertEquals(10, weapon1.getCurrentAmmo());
     weapon1.fire(10);
@@ -58,7 +58,7 @@ public class TestGenericWeapon {
   }
   
   @Test
-  public void testNoDamageNoAmmo() throws WeaponException {
+  public void testNoAmmoNoDamage() throws WeaponException {
     MockWeapon weapon1 = new MockWeapon();
     assertEquals(10, weapon1.getCurrentAmmo());
     while(weapon1.getCurrentAmmo()>0) { 
