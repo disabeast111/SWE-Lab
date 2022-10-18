@@ -4,6 +4,9 @@ package environment;
 
 import lifeform.LifeForm;
 
+/**
+ * @author David W
+ */
 public class Environment {
   Cell[][] cells;
 

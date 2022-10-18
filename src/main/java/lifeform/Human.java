@@ -1,7 +1,8 @@
-// author: David W
-
 package lifeform;
 
+/**
+ * @author David W
+ */
 public class Human extends LifeForm {
   private int armorPoints;
 
