@@ -18,12 +18,10 @@ public class ChainGun extends GenericWeapon {
     if (distance < 0) {
       throw new WeaponException("Cannot be a negative distance");
     }
-    if (currentAmmo == 0) {
+    if (currentAmmo == 0 || shotsLeft <= 0) {
       return 0;
     }
-    if (shotsLeft <= 0) {
-      return 0;
-    }
+
     shotsLeft -= 1;
 
     if (distance > maxRange) {
@@ -42,7 +40,6 @@ public class ChainGun extends GenericWeapon {
 
   @Override
   public String toString() {
-    // TODO Auto-generated method stub
     return "ChainGun";
   }
 
