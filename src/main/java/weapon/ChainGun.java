@@ -1,9 +1,10 @@
-// author: Ethan J
-
 package weapon;
 
 import exceptions.WeaponException;
 
+/**
+ * @author Ethan J
+ */
 public class ChainGun extends GenericWeapon {
   /**
    * Constructor that initializes a ChainGun Sets base stats
