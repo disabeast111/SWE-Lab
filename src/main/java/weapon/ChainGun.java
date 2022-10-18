@@ -21,6 +21,7 @@ public class ChainGun extends GenericWeapon {
    * Method to fire a ChainGun
    * 
    * @param distance is how far to fire the weapon
+   * @return damage after calculation
    */
   @Override
   public int fire(int distance) throws WeaponException {
@@ -48,7 +49,8 @@ public class ChainGun extends GenericWeapon {
   }
 
   /**
-   * Method to return a description of weapon
+   * Method to return a String description of weapon
+   * @return ChainGun
    */
   @Override
   public String toString() {
