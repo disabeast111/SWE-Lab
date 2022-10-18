@@ -5,7 +5,7 @@ import exceptions.WeaponException;
 
 public class Stabilizer extends Attachment {
 
-  public double damage = 0;
+  private double damage = 0;
   
   public Stabilizer(Weapon baseWeapon) throws AttachmentException {
     

@@ -45,18 +45,16 @@ public class TestStabilizer {
   
   @Test
   public void testStabilScopePistol() throws WeaponException, AttachmentException {
-    Weapon p = new Pistol();
-    Stabilizer s = new Stabilizer(p);
-    Scope sc = new Scope(s);
+    Weapon sc = new Scope(new Stabilizer(new Pistol()));
     assertEquals(10, sc.getBaseDamage());
     assertEquals(60, sc.getMaxRange());
     assertEquals(30, sc.fire(0));
     sc.updateTime(0);
-    assertEquals(26, sc.fire(5));
+    assertEquals(24, sc.fire(5));
     sc.updateTime(0);
     assertEquals(22, sc.fire(10));
     sc.updateTime(0);
-    assertEquals(18, sc.fire(15));
+    assertEquals(19, sc.fire(15));
     sc.updateTime(0);
     assertEquals(16, sc.fire(20));
     sc.updateTime(0);
@@ -67,8 +65,13 @@ public class TestStabilizer {
     assertEquals(8, sc.fire(35));
     sc.updateTime(0);
     assertEquals(6, sc.fire(40));
+    assertEquals(6, sc.fire(41));
     sc.updateTime(0);
-    assertEquals(3, sc.fire(45));
+    assertEquals(5, sc.fire(42));
+    assertEquals(6, sc.fire(43));
+    sc.updateTime(0);
+    assertEquals(5, sc.fire(44));
+    assertEquals(4, sc.fire(45));
     sc.updateTime(0);
     assertEquals(8, sc.fire(55));
     sc.updateTime(0);
@@ -85,6 +88,7 @@ public class TestStabilizer {
     assertEquals(1, s.fire(5));
     assertEquals(15, s.fire(30));
     assertEquals(25, s.fire(45));
+    s.updateTime(0);
     assertEquals(28, s.fire(50));
     assertEquals(0, s.fire(61));
    }
