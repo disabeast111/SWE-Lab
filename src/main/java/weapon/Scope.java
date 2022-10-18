@@ -36,6 +36,7 @@ public class Scope extends Attachment {
         
         return Double.valueOf(Math.floor(damage)).intValue();
     } else {
+      base.fire(distance);
       return 0;
     }
   }
