@@ -26,13 +26,13 @@ public class Scope extends Attachment {
     if (base.getMaxRange() < distance && distance <= maxRange) {
       return base.fire(base.getMaxRange()) + 5;
 
-    } else if(distance <= base.getMaxRange()) {
-        targetDistance = distance;
-        damage = base.fire(distance);
-        
-        damage *= 1 + ((maxRange - targetDistance) / maxRange);
-        
-        return Double.valueOf(Math.floor(damage)).intValue();
+    } else if (distance <= base.getMaxRange()) {
+      targetDistance = distance;
+      damage = base.fire(distance);
+
+      damage *= 1 + ((maxRange - targetDistance) / maxRange);
+
+      return Double.valueOf(Math.floor(damage)).intValue();
     } else {
       base.fire(distance);
       return 0;

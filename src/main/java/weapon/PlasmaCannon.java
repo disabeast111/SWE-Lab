@@ -21,12 +21,12 @@ public class PlasmaCannon extends GenericWeapon {
     if (currentAmmo == 0) {
       return 0;
     }
-    
-    if(shotsLeft <= 0) {
+
+    if (shotsLeft <= 0) {
       return 0;
     }
     shotsLeft -= 1;
-    
+
     if (distance > maxRange) {
       currentAmmo -= 1;
       return 0;

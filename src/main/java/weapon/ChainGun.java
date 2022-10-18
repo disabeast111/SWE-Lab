@@ -21,8 +21,7 @@ public class ChainGun extends GenericWeapon {
     if (currentAmmo == 0) {
       return 0;
     }
-
-    if(shotsLeft <= 0) {
+    if (shotsLeft <= 0) {
       return 0;
     }
     shotsLeft -= 1;

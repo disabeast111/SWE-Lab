@@ -22,7 +22,7 @@ public class Pistol extends GenericWeapon {
       return 0;
     }
 
-    if(shotsLeft <= 0) {
+    if (shotsLeft <= 0) {
       return 0;
     }
     shotsLeft -= 1;

@@ -6,10 +6,10 @@ import gameplay.TimerObserver;
 public abstract class GenericWeapon implements Weapon, TimerObserver {
   protected int baseDamage;
   protected int currentAmmo; // ammo in clip
-  protected int maxAmmo;     // max capacity of clip
+  protected int maxAmmo; // max capacity of clip
   protected int maxRange;
   protected int rateOfFire;
-  protected int shotsLeft;   // num shots left per round
+  protected int shotsLeft; // num shots left per round
 
   public GenericWeapon() {
   }
@@ -47,7 +47,7 @@ public abstract class GenericWeapon implements Weapon, TimerObserver {
   public void reload() {
     currentAmmo = maxAmmo;
   }
-  
+
   public void updateTime(int time) {
     shotsLeft = getRateOfFire();
   }
