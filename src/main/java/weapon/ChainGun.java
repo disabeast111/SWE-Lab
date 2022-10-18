@@ -1,9 +1,13 @@
+// author: Ethan J
+
 package weapon;
 
 import exceptions.WeaponException;
 
 public class ChainGun extends GenericWeapon {
-
+  /**
+   * Constructor that initializes a ChainGun Sets base stats
+   */
   public ChainGun() {
     baseDamage = 15;
     maxRange = 60;
@@ -13,6 +17,11 @@ public class ChainGun extends GenericWeapon {
     shotsLeft = rateOfFire;
   }
 
+  /**
+   * Method to fire a ChainGun
+   * 
+   * @param distance is how far to fire the weapon
+   */
   @Override
   public int fire(int distance) throws WeaponException {
     if (distance < 0) {
@@ -38,6 +47,9 @@ public class ChainGun extends GenericWeapon {
     return intDamage;
   }
 
+  /**
+   * Method to return a description of weapon
+   */
   @Override
   public String toString() {
     return "ChainGun";

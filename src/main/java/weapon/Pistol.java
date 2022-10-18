@@ -1,10 +1,14 @@
+//author: Ethan J
+
 package weapon;
 
 import exceptions.WeaponException;
 
 public class Pistol extends GenericWeapon {
-
-  public Pistol() throws WeaponException {
+  /**
+   * Constructor that initializes a Pistol Sets base stats
+   */
+  public Pistol() {
     baseDamage = 10;
     maxRange = 50;
     rateOfFire = 2;
@@ -13,6 +17,11 @@ public class Pistol extends GenericWeapon {
     shotsLeft = rateOfFire;
   }
 
+  /**
+   * Method to fire a Pistol
+   * 
+   * @param distance is how far to fire the weapon
+   */
   @Override
   public int fire(int distance) throws WeaponException {
     if (distance < 0) {
@@ -21,7 +30,7 @@ public class Pistol extends GenericWeapon {
     if (currentAmmo == 0 || shotsLeft <= 0) {
       return 0;
     }
-    
+
     shotsLeft -= 1;
 
     if (distance > maxRange) {
@@ -37,6 +46,9 @@ public class Pistol extends GenericWeapon {
     return intDamage;
   }
 
+  /**
+   * Method to return a description of weapon
+   */
   @Override
   public String toString() {
     return "Pistol";

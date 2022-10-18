@@ -1,9 +1,14 @@
+// author: Ethan J
+
 package weapon;
 
 import exceptions.WeaponException;
 
 public class PlasmaCannon extends GenericWeapon {
-
+  /**
+   * Constructor that initializes a PlasmaCannon
+   * Sets base stats
+   */
   public PlasmaCannon() {
     baseDamage = 50;
     maxRange = 40;
@@ -13,6 +18,10 @@ public class PlasmaCannon extends GenericWeapon {
     shotsLeft = rateOfFire;
   }
 
+  /**
+   * Method to fire a PlasmaCannon
+   * @param distance is how far to fire the weapon
+   */
   @Override
   public int fire(int distance) throws WeaponException {
     if (distance < 0) {
@@ -38,6 +47,9 @@ public class PlasmaCannon extends GenericWeapon {
     return intDamage;
   }
 
+  /**
+   * Method to return a description of weapon
+   */
   @Override
   public String toString() {
     return "PlasmaCannon";
