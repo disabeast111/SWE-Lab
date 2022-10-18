@@ -75,12 +75,18 @@ public abstract class LifeForm extends java.lang.Object {
     }
   }
 
+  /**
+   * @return current weapon
+   */
   public Weapon dropWeapon() {
     Weapon temp = weapon;
     weapon = null;
     return temp;
   }
 
+  /**
+   * @return bool if has weapon
+   */
   public boolean hasWeapon() {
     if (weapon != null) {
       return true;
@@ -88,6 +94,10 @@ public abstract class LifeForm extends java.lang.Object {
     return false;
   }
 
+  /**
+   * @param newWeapon
+   * @return bool if pickup successful
+   */
   public boolean pickUpWeapon(Weapon newWeapon) {
     if (weapon == null) {
       weapon = newWeapon;
