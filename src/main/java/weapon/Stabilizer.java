@@ -25,6 +25,7 @@ public class Stabilizer extends Attachment {
       throw new AttachmentException("Can not have more than 2 attachments.");
     }
   }
+  
   /**
    * Fires the weapon, dealing the increased amount of damage.
    * 
