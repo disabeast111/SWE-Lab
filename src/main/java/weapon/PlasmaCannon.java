@@ -1,4 +1,5 @@
 // author: Ethan J
+
 package weapon;
 
 import exceptions.WeaponException;

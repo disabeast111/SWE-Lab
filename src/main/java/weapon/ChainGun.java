@@ -1,12 +1,12 @@
 // author: Ethan J
+
 package weapon;
 
 import exceptions.WeaponException;
 
 public class ChainGun extends GenericWeapon {
   /**
-   * Constructor that initializes a ChainGun
-   * Sets base stats
+   * Constructor that initializes a ChainGun Sets base stats
    */
   public ChainGun() {
     baseDamage = 15;
@@ -19,6 +19,7 @@ public class ChainGun extends GenericWeapon {
 
   /**
    * Method to fire a ChainGun
+   * 
    * @param distance is how far to fire the weapon
    */
   @Override

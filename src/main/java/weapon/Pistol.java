@@ -1,12 +1,12 @@
-// author: Ethan J
+//author: Ethan J
+
 package weapon;
 
 import exceptions.WeaponException;
 
 public class Pistol extends GenericWeapon {
   /**
-   * Constructor that initializes a Pistol
-   * Sets base stats
+   * Constructor that initializes a Pistol Sets base stats
    */
   public Pistol() {
     baseDamage = 10;
@@ -19,6 +19,7 @@ public class Pistol extends GenericWeapon {
 
   /**
    * Method to fire a Pistol
+   * 
    * @param distance is how far to fire the weapon
    */
   @Override
