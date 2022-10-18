@@ -1,9 +1,10 @@
-// author: Ethan J
-
 package weapon;
 
 import exceptions.WeaponException;
 
+/**
+ * @author Ethan J
+ */
 public class PlasmaCannon extends GenericWeapon {
   /**
    * Constructor that initializes a PlasmaCannon
@@ -21,6 +22,7 @@ public class PlasmaCannon extends GenericWeapon {
   /**
    * Method to fire a PlasmaCannon
    * @param distance is how far to fire the weapon
+   * @return damage after calculation
    */
   @Override
   public int fire(int distance) throws WeaponException {
@@ -48,7 +50,8 @@ public class PlasmaCannon extends GenericWeapon {
   }
 
   /**
-   * Method to return a description of weapon
+   * Method to return a String description of weapon
+   * @return PlasmaCannon
    */
   @Override
   public String toString() {
