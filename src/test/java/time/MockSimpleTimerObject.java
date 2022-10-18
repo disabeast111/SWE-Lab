@@ -1,3 +1,4 @@
+// author: David W
 package time;
 
 import gameplay.TimerObserver;

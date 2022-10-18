@@ -1,3 +1,4 @@
+// author: David W
 package lifeform;
 
 import static org.junit.Assert.assertEquals;

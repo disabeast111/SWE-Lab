@@ -1,3 +1,4 @@
+// author: David W
 package exceptions;
 
 public class RecoveryRateException extends Exception {

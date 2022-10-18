@@ -1,3 +1,4 @@
+// author: David W
 package lifeform;
 
 public class MockLifeForm extends LifeForm {

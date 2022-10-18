@@ -1,3 +1,4 @@
+// author: David W
 package exceptions;
 
 public class WeaponException extends Exception {

@@ -1,9 +1,9 @@
+// author: David W
 package recovery;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import recovery.*;
 
 public class TestRecoveryFractional {
   @Test

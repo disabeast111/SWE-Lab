@@ -1,3 +1,4 @@
+// author: David W
 package lab1;
 
 import static org.junit.Assert.assertEquals;

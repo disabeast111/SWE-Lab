@@ -1,3 +1,4 @@
+// author: David W
 package time;
 
 import static org.junit.Assert.assertEquals;
