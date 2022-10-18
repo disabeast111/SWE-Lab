@@ -1,13 +1,10 @@
-// author: David W
-
 package gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author dawolfe
- *
+ * @author David W
  */
 public class SimpleTimer extends Thread implements Timer {
   private List<TimerObserver> theObservers;

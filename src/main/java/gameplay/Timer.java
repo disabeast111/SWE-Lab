@@ -1,7 +1,8 @@
-// author: David W
-
 package gameplay;
 
+/**
+ * @author David W
+ */
 public interface Timer {
   public void addTimeObserver(TimerObserver o);
 

@@ -1,7 +1,8 @@
-// author: David W
-
 package recovery;
 
+/**
+ * @author David W
+ */
 public class RecoveryFractional implements RecoveryBehavior {
   double fraction;
 

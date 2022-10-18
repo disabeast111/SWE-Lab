@@ -1,10 +1,11 @@
-// author: David W
-
 package weapon;
 
 import exceptions.WeaponException;
 import gameplay.TimerObserver;
 
+/**
+ * @author David W
+ */
 public abstract class GenericWeapon implements Weapon, TimerObserver {
   protected int baseDamage;
   protected int currentAmmo; // ammo in clip

@@ -1,5 +1,3 @@
-// author: David W
-
 package lifeform;
 
 import exceptions.RecoveryRateException;
@@ -7,6 +5,9 @@ import recovery.RecoveryBehavior;
 import recovery.RecoveryNone;
 import gameplay.TimerObserver;
 
+/**
+ * @author David W
+ */
 public class Alien extends LifeForm implements TimerObserver {
   private RecoveryBehavior recoveryBehavior;
   private int maxLifePoints;

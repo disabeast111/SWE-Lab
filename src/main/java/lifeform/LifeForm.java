@@ -1,10 +1,11 @@
-// author: David W
-
 package lifeform;
 
 import exceptions.WeaponException;
 import weapon.Weapon;
 
+/**
+ * @author David W
+ */
 public abstract class LifeForm extends java.lang.Object {
   private String myName;
   protected int currentLifePoints;

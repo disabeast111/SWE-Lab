@@ -1,10 +1,11 @@
-// author: David W
-
 package weapon;
 
 import exceptions.AttachmentException;
 import exceptions.WeaponException;
 
+/**
+ * @author David W
+ */
 public abstract class Attachment implements Weapon {
   protected Weapon base;
 
