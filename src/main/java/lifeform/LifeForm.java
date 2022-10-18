@@ -64,11 +64,11 @@ public abstract class LifeForm extends java.lang.Object {
    */
   public void attack(LifeForm opponent, int distance) throws WeaponException { // test
     if (getCurrentLifePoints() > 0) {
-        if (hasWeapon() && weapon.getCurrentAmmo() > 0) {
-          opponent.takeHit(weapon.fire(distance));
-        } else if (distance < 5) {
-          opponent.takeHit(getAttackStrength());
-        }
+      if (hasWeapon() && weapon.getCurrentAmmo() > 0) {
+        opponent.takeHit(weapon.fire(distance));
+      } else if (distance < 5) {
+        opponent.takeHit(getAttackStrength());
+      }
     }
   }
 
@@ -79,8 +79,9 @@ public abstract class LifeForm extends java.lang.Object {
   }
 
   public boolean hasWeapon() {
-    if (weapon != null)
+    if (weapon != null) {
       return true;
+    }
     return false;
   }
 
