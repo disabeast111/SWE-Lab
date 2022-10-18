@@ -30,14 +30,19 @@ public class TestPistol {
     Pistol p = new Pistol();
     assertEquals(0, p.fire(51));
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     assertEquals(0, p.fire(25));
   }
   
@@ -46,12 +51,16 @@ public class TestPistol {
     Pistol p = new Pistol();
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
+    p.updateTime(0);
     p.fire(25);
     p.fire(25);
     assertEquals(0, p.getCurrentAmmo());

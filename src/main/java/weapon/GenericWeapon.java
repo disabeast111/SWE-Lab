@@ -45,7 +45,7 @@ public abstract class GenericWeapon implements Weapon, TimerObserver {
   }
 
   public void reload() {
-      currentAmmo = maxAmmo;
+    currentAmmo = maxAmmo;
   }
   
   public void updateTime(int time) {

@@ -18,18 +18,15 @@ public class MockWeapon extends GenericWeapon {
     if (distance < 0) {
       throw new WeaponException("Cannot be a negative distance");
     }
-    if (currentAmmo == 0) {
+    if (currentAmmo == 0 || shotsLeft <= 0) {
       return 0;
     }
-    if (shotsLeft > 0) {
-      shotsLeft -= 1;
-      currentAmmo -= 1;
-      if (distance > maxRange) {
-        return 0;
-      }
-      return baseDamage;
+    shotsLeft -= 1;
+    currentAmmo -= 1;
+    if (distance > maxRange) {
+      return 0;
     }
-    return 0;
+    return baseDamage;
   }
 
   @Override

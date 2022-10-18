@@ -13,7 +13,6 @@ public class ChainGun extends GenericWeapon {
     shotsLeft = rateOfFire;
   }
 
-
   @Override
   public void updateTime(int time) {
     // TODO Auto-generated method stub
@@ -33,9 +32,9 @@ public class ChainGun extends GenericWeapon {
       return 0;
     }
     shotsLeft -= 1;
-    currentAmmo -= 1;
 
     if (distance > maxRange) {
+      currentAmmo -= 1;
       return 0;
     }
     double bd = baseDamage;
@@ -43,7 +42,9 @@ public class ChainGun extends GenericWeapon {
     double dis = distance;
     double doubleDamage = 0;
     doubleDamage = bd * (dis / mr);
-    return Double.valueOf(Math.floor(doubleDamage)).intValue();
+    int intDamage = Double.valueOf(Math.floor(doubleDamage)).intValue();
+    currentAmmo -= 1;
+    return intDamage;
   }
 
   @Override
