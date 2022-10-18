@@ -14,12 +14,6 @@ public class ChainGun extends GenericWeapon {
   }
 
   @Override
-  public void updateTime(int time) {
-    // TODO Auto-generated method stub
-    shotsLeft = rateOfFire;
-  }
-
-  @Override
   public int fire(int distance) throws WeaponException {
     if (distance < 0) {
       throw new WeaponException("Cannot be a negative distance");
