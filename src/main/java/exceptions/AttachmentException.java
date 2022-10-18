@@ -1,3 +1,5 @@
+// author: David W
+
 package exceptions;
 
 public class AttachmentException extends Exception {

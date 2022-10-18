@@ -1,4 +1,5 @@
 // author: David W
+
 package recovery;
 
 public class RecoveryFractional implements RecoveryBehavior {

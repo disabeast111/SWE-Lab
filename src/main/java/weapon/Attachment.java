@@ -1,4 +1,5 @@
 // author: David W
+
 package weapon;
 
 import exceptions.AttachmentException;
