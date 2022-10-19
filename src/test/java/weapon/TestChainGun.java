@@ -33,6 +33,7 @@ public class TestChainGun {
     assertEquals(0, c.fire(61));
     while(c.currentAmmo != 0) {
     c.fire(25);
+    c.updateTime(0);
     }
     assertEquals(0, c.fire(25));
   }
@@ -42,6 +43,7 @@ public class TestChainGun {
     ChainGun c = new ChainGun();
     while(c.currentAmmo != 0) {
       c.fire(25);
+      c.updateTime(0);
       }
     assertEquals(0, c.getCurrentAmmo());
     c.reload();
