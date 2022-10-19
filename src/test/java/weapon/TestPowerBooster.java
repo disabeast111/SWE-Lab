@@ -68,7 +68,7 @@ public class TestPowerBooster {
     assertEquals(43, pb.fire(0));
     assertEquals(15, pb.fire(30));
   }
-    
+   
   @Test
   public void testPlasmaStabilPB() throws AttachmentException, WeaponException {
     Weapon plasmaTest = new PlasmaCannon(); 
