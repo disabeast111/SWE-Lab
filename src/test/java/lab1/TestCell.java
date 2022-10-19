@@ -1,4 +1,3 @@
-// author: David W
 package lab1;
 
 import static org.junit.Assert.*;
@@ -7,6 +6,9 @@ import org.junit.Test;
 import environment.Cell;
 import lifeform.MockLifeForm;
 
+/**
+ * @author David W
+ */
 public class TestCell {
 
   @Test

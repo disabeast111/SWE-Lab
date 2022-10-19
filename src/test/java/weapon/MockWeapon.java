@@ -1,8 +1,10 @@
-// author: David W
 package weapon;
 
 import exceptions.WeaponException;
 
+/**
+ * @author David W
+ */
 public class MockWeapon extends GenericWeapon {
 
   public MockWeapon() throws WeaponException {

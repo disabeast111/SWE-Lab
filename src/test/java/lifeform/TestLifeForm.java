@@ -1,4 +1,3 @@
-// author: David W
 package lifeform;
 
 import static org.junit.Assert.*;
@@ -9,6 +8,9 @@ import exceptions.WeaponException;
 import weapon.Pistol;
 import weapon.Weapon;
 
+/**
+ * @author David W
+ */
 public class TestLifeForm {
 
   @Test
