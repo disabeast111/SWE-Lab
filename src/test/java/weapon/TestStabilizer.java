@@ -7,91 +7,75 @@ import org.junit.Test;
 import exceptions.AttachmentException;
 import exceptions.WeaponException;
 
+/**
+ * @author Spencer H
+ */
 public class TestStabilizer {
 
   @Test
   public void testPlasmaStabil() throws AttachmentException, WeaponException {
     Weapon pc = new PlasmaCannon();
     Stabilizer p = new Stabilizer(pc);
-    assertEquals(50, p.getBaseDamage());
+    //Testing Range
     assertEquals(40, p.getMaxRange());
-    assertEquals(62, p.fire(0));
+    assertEquals(62, p.fire(p.getMaxRange()));
     p.updateTime(0);
-    assertEquals(46, p.fire(5));
+    assertEquals(0, p.fire(p.getMaxRange() + 1));
     p.updateTime(0);
-    assertEquals(31, p.fire(10));
+    //Testing Damage
+    assertEquals(31, p.fire(0));
     p.updateTime(0);
-    assertEquals(15, p.fire(15));
-    p.updateTime(0);
-    assertEquals(62, p.fire(20));
+    assertEquals(15, p.fire(30));
   }
   
   @Test
   public void testPlasmaDoubleStabil() throws WeaponException, AttachmentException {
     Weapon pc = new PlasmaCannon();
     Stabilizer p = new Stabilizer(new Stabilizer(pc));
-    assertEquals(50, p.getBaseDamage());
+    //Testing Range
     assertEquals(40, p.getMaxRange());
-    assertEquals(77, p.fire(0));
+    assertEquals(77, p.fire(p.getMaxRange()));
     p.updateTime(0);
-    assertEquals(57, p.fire(5));
+    assertEquals(0, p.fire(p.getMaxRange() + 1));
     p.updateTime(0);
-    assertEquals(38, p.fire(10));
+    //Testing Damage
+    assertEquals(38, p.fire(0));
     p.updateTime(0);
-    assertEquals(18, p.fire(15));
-    p.updateTime(0);
-    assertEquals(77, p.fire(20));
+    assertEquals(18, p.fire(30));
   }
   
   @Test
   public void testStabilScopePistol() throws WeaponException, AttachmentException {
-    Weapon sc = new Scope(new Stabilizer(new Pistol()));
-    assertEquals(10, sc.getBaseDamage());
-    assertEquals(60, sc.getMaxRange());
-    assertEquals(30, sc.fire(0));
-    sc.updateTime(0);
-    assertEquals(24, sc.fire(5));
-    sc.updateTime(0);
-    assertEquals(22, sc.fire(10));
-    sc.updateTime(0);
-    assertEquals(19, sc.fire(15));
-    sc.updateTime(0);
-    assertEquals(16, sc.fire(20));
-    sc.updateTime(0);
-    assertEquals(13, sc.fire(25));
-    sc.updateTime(0);
-    assertEquals(11, sc.fire(30));
-    sc.updateTime(0);
-    assertEquals(8, sc.fire(35));
-    sc.updateTime(0);
-    assertEquals(6, sc.fire(40));
-    assertEquals(6, sc.fire(41));
-    sc.updateTime(0);
-    assertEquals(5, sc.fire(42));
-    assertEquals(6, sc.fire(43));
-    sc.updateTime(0);
-    assertEquals(5, sc.fire(44));
-    assertEquals(4, sc.fire(45));
-    sc.updateTime(0);
-    assertEquals(8, sc.fire(55));
-    sc.updateTime(0);
-    assertEquals(8, sc.fire(60));
-    sc.updateTime(0);
-    assertEquals(0, sc.fire(61));
+    Weapon p = new Scope(new Stabilizer(new Pistol()));
+    assertEquals(10, p.getBaseDamage());
+    assertEquals(60, p.getMaxRange());
+    //Testing Range
+    assertEquals(60, p.getMaxRange());
+    assertEquals(7, p.fire(p.getMaxRange()));
+    assertEquals(0, p.fire(p.getMaxRange() + 1));
+    p.updateTime(0);
+    //Testing Damage
+    assertEquals(30, p.fire(0));
+    assertEquals(10, p.fire(30));
   }
   
   @Test
   public void testChainGunPowBStabil() throws AttachmentException, WeaponException {
     Weapon c = new ChainGun(); 
-    Weapon s = new PowerBooster(new Stabilizer(c));
-    assertEquals(0, s.fire(0));
-    assertEquals(1, s.fire(5));
-    assertEquals(15, s.fire(30));
-    assertEquals(25, s.fire(45));
-    s.updateTime(0);
-    assertEquals(28, s.fire(50));
-    assertEquals(0, s.fire(61));
+    Weapon pb = new PowerBooster(new Stabilizer(c));
+    for(int i = 0; i < 5; i++) {
+      pb.fire(i);
+      pb.fire(i);
+      pb.fire(i);
+      pb.fire(i);
+      pb.updateTime(0);
+    }
+    //Testing Range
+    assertEquals(60, pb.getMaxRange());
+    assertEquals(27, pb.fire(pb.getMaxRange()));
+    assertEquals(0, pb.fire(pb.getMaxRange() + 1));
+    //Testing Damage
+    assertEquals(0, pb.fire(0));
+    assertEquals(11, pb.fire(30));
    }
-  
-
 }
