@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import exceptions.WeaponException;
 
+/**
+ * @author Ethan J
+ */
 public class TestPlasmaCannon {
   
   @Test

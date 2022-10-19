@@ -1,4 +1,3 @@
-// author: David W
 package lifeform;
 
 import static org.junit.Assert.assertEquals;
@@ -11,6 +10,9 @@ import recovery.RecoveryFractional;
 import recovery.RecoveryLinear;
 import gameplay.SimpleTimer;
 
+/**
+ * @author David W
+ */
 public class TestAlien {
   
   @Test

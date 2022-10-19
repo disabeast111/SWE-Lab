@@ -1,11 +1,12 @@
-// author: David W
 package recovery;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-
+/**
+ * @author David W
+ */
 public class TestRecoveryNone {
   @Test
   public void testRNatMax() {

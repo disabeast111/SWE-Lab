@@ -1,6 +1,8 @@
-// author: David W
 package time;
 
+/**
+ * @author David W
+ */
 import gameplay.TimerObserver;
 
 class MockSimpleTimerObserver implements TimerObserver {

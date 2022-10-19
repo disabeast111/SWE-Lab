@@ -1,4 +1,3 @@
-// author: David W
 package time;
 
 import static org.junit.Assert.assertEquals;
@@ -9,6 +8,9 @@ import org.junit.Test;
 import gameplay.SimpleTimer;
 import gameplay.Timer;
 
+/**
+ * @author David W
+ */
 public class SimpleTimerTest {
   @Test
   public void testInitialization() {

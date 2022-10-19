@@ -1,4 +1,3 @@
-// author: David W
 package lab1;
 
 import static org.junit.Assert.assertEquals;
@@ -12,6 +11,9 @@ import environment.Environment;
 
 import lifeform.MockLifeForm;
 
+/**
+ * @author David W
+ */
 public class TestEnvironment {
 
   @Test
