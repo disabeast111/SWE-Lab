@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import exceptions.WeaponException;
 
-
+/**
+ * @author Ethan J
+ */
 public class TestPistol {
   @Test
   public void testPistolInitialization() throws WeaponException {
