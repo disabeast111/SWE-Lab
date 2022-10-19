@@ -116,7 +116,10 @@ public class TestLifeForm {
     MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
     Weapon pistol = new Pistol();
     assertTrue(entity1.pickUpWeapon(pistol));
-    while(pistol.getCurrentAmmo()>0) { pistol.fire(100); }
+    while(pistol.getCurrentAmmo()>0) {
+      pistol.fire(100);
+      pistol.updateTime(0);
+      }
     assertEquals(0, pistol.getCurrentAmmo());
     entity1.attack(entity2, 2);
     assertEquals(39,entity2.getCurrentLifePoints());
@@ -128,7 +131,10 @@ public class TestLifeForm {
     MockLifeForm entity2 = new MockLifeForm("Bob", 40, 1);
     Weapon pistol = new Pistol();
     assertTrue(entity1.pickUpWeapon(pistol));
-    while(pistol.getCurrentAmmo()>0) { pistol.fire(100); }
+    while(pistol.getCurrentAmmo()>0) {
+      pistol.fire(100);
+      pistol.updateTime(0);
+      }
     assertEquals(0, pistol.getCurrentAmmo());
     entity1.attack(entity2, 6);
     assertEquals(40,entity2.getCurrentLifePoints());
@@ -139,7 +145,10 @@ public class TestLifeForm {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     Weapon pistol = new Pistol();
     assertTrue(entity1.pickUpWeapon(pistol));
-    while(pistol.getCurrentAmmo()>0) { pistol.fire(100); }
+    while(pistol.getCurrentAmmo()>0) {
+      pistol.fire(100);
+      pistol.updateTime(0);
+      }
     assertEquals(0, pistol.getCurrentAmmo());
     entity1.weapon.reload();
     assertEquals(10, pistol.getCurrentAmmo());
