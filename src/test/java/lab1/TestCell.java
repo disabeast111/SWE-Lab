@@ -4,13 +4,94 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import environment.Cell;
+import exceptions.RecoveryRateException;
+import lifeform.Alien;
+import lifeform.LifeForm;
 import lifeform.MockLifeForm;
+import weapon.Pistol;
+import weapon.PlasmaCannon;
+import weapon.Weapon;
 
 /**
- * @author David W
+ * @author David W, Spencer H
  */
 public class TestCell {
 
+  @Test
+  public void testInitialization5() throws RecoveryRateException {
+    Cell c = new Cell();
+    LifeForm l = new Alien("Bob", 1);
+    
+    assertTrue(c.addLifeForm(l));
+    assertEquals(l, c.getLifeForm());
+    assertEquals(0, c.getWeaponsCount());
+    assertNull(c.getWeapon1());
+    assertNull(c.getWeapon2());
+  }
+  
+  @Test
+  public void testAddWeapons() throws RecoveryRateException {
+    Cell c = new Cell();
+    Weapon p = new Pistol();
+    Weapon pc = new PlasmaCannon();
+    
+    assertTrue(c.addWeapon(p));
+    assertTrue(c.addWeapon(pc));
+    assertEquals(2, c.getWeaponsCount());
+    assertFalse(c.addWeapon(p));
+    assertEquals(2, c.getWeaponsCount());
+    assertEquals(p, c.getWeapon1());
+    assertEquals(pc, c.getWeapon2());
+  }
+  
+  @Test 
+  public void removeWeapons() {
+    Cell c = new Cell();
+    Weapon p = new Pistol();
+    Weapon pc = new PlasmaCannon();
+    
+    c.addWeapon(p);
+    c.addWeapon(pc);
+    assertEquals(2, c.getWeaponsCount());
+    
+    assertEquals(p, c.removeWeapon(p));
+    assertEquals(pc, c.removeWeapon(pc));
+    assertEquals(null, c.removeWeapon(p));
+    assertEquals(0, c.getWeaponsCount());
+  }
+   
+  @Test
+  public void testFullCellNoNewWeap() throws RecoveryRateException {
+    Cell c = new Cell();
+    Weapon p = new Pistol();
+    Weapon pc = new PlasmaCannon();
+    
+    assertTrue(c.addWeapon(p));
+    assertTrue(c.addWeapon(pc));
+    assertFalse(c.addWeapon(p));
+  }
+  
+  @Test 
+  public void remove1AndAdd() {
+    Cell c = new Cell();
+    Weapon p = new Pistol();
+    Weapon pc = new PlasmaCannon();
+    
+    c.addWeapon(p);
+    c.addWeapon(pc);
+    assertEquals(2, c.getWeaponsCount());
+    //remove one
+    assertEquals(p, c.removeWeapon(p));
+    assertEquals(null, c.removeWeapon(p));
+    assertEquals(1, c.getWeaponsCount());
+    //then add
+    assertTrue(c.addWeapon(p));
+    
+  }
+  
+  
+  
+  //Begin Previous Tests
   @Test
   public void testInitialization() {
     Cell cell = new Cell();
