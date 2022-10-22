@@ -53,9 +53,18 @@ public class Environment {
       }
     }
     return false;
+    
+//    try {
+//      if (getLifeForm(row, col) == null) {
+//        cells[row][col].addLifeForm(entity);
+//        return true;
+//      }
+//    } catch (ArrayIndexOutOfBoundsException e) {
+//      return false;
+//    }
   }
 
-  public Weapon[] getWeapon(int r, int c) {
+  public Weapon[] getWeapons(int r, int c) {
     Weapon[] w = { cells[r][c].getWeapon1(), cells[r][c].getWeapon2() };
     return w;
   }
