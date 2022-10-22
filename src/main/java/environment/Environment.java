@@ -1,14 +1,14 @@
-// author: David W
-
 package environment;
 
 import lifeform.LifeForm;
+import weapon.Weapon;
 
 /**
  * @author David W
  */
 public class Environment {
   Cell[][] cells;
+  private static Environment theEnv;
 
   /**
    * Environment
@@ -16,13 +16,20 @@ public class Environment {
    * @param rows number of rows in environment
    * @param cols number of columns in environment
    */
-  public Environment(int rows, int cols) {
+  private Environment(int rows, int cols) {
     cells = new Cell[rows][cols];
     for (int r = 0; r < rows; r++) {
       for (int c = 0; c < cols; c++) {
         cells[r][c] = new Cell();
       }
     }
+  }
+
+  public static Environment getEnvironment(int rows, int cols) {
+    if (theEnv == null) {
+      theEnv = new Environment(rows, cols);
+    }
+    return theEnv;
   }
 
   /**
@@ -41,6 +48,60 @@ public class Environment {
           return true;
         }
       }
+    }
+    return false;
+  }
+
+  public Weapon[] getWeapon(int r, int c) {
+    Weapon[] w = { cells[r][c].getWeapon1(), cells[r][c].getWeapon2() };
+    return w;
+  }
+
+  public int getRows() {
+    return cells.length;
+  }
+
+  public int getCols() {
+    return cells[0].length;
+  }
+
+  public void clearBoard() {
+    for (int r = 0; r < getRows(); r++) {
+      for (int c = 0; c < getCols(); c++) {
+        removeLifeForm(r, c);
+        cells[r][c].removeWeapon(cells[r][c].getWeapon1());
+        cells[r][c].removeWeapon(cells[r][c].getWeapon2());
+      }
+    }
+  }
+
+  public Weapon removeWeapon(Weapon w, int r, int c) {
+    if (inRange(r, c)) {
+      return cells[r][c].removeWeapon(w);
+    }
+    return null;
+  }
+  
+  public double getDistance(int r1, int r2, int c1, int c2){
+    double a = Math.abs(r1-r2);
+    double b = Math.abs(c1-c2);
+    return Math.sqrt(a*a + b*b);
+  }
+  
+  public double getDistance(LifeForm lf1, LifeForm lf2) {
+    return 0;
+  }
+
+  private boolean inRange(int r, int c) {
+    if (0 < r && r < getRows() && 0 < c && c < getCols()) {
+      return true;
+    }
+    return false;
+  }
+
+  public boolean addWeapon(Weapon w, int r, int c) {
+    if (inRange(r, c) && (cells[r][c].getWeapon1() == w || cells[r][c].getWeapon2() == w)) {
+      return cells[r][c].addWeapon(w);
     }
     return false;
   }
