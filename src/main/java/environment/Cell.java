@@ -1,8 +1,7 @@
-// author: David W
-
 package environment;
 
 import lifeform.LifeForm;
+
 import weapon.Weapon;
 
 /**
