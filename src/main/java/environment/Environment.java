@@ -5,6 +5,8 @@ import lifeform.LifeForm;
 import weapon.Weapon;
 import java.util.*;
 
+import exceptions.EnvironmentException;
+
 /**
  * @author David W
  * @author Kyle S
@@ -53,15 +55,6 @@ public class Environment {
       }
     }
     return false;
-    
-//    try {
-//      if (getLifeForm(row, col) == null) {
-//        cells[row][col].addLifeForm(entity);
-//        return true;
-//      }
-//    } catch (ArrayIndexOutOfBoundsException e) {
-//      return false;
-//    }
   }
 
   public Weapon[] getWeapons(int r, int c) {
@@ -69,17 +62,17 @@ public class Environment {
     return w;
   }
 
-  public int getRows() {
+  public int getNumRows() {
     return cells.length;
   }
 
-  public int getCols() {
+  public int getNumCols() {
     return cells[0].length;
   }
 
   public void clearBoard() {
-    for (int r = 0; r < getRows(); r++) {
-      for (int c = 0; c < getCols(); c++) {
+    for (int r = 0; r < getNumRows(); r++) {
+      for (int c = 0; c < getNumCols(); c++) {
         removeLifeForm(r, c);
         cells[r][c].removeWeapon(cells[r][c].getWeapon1());
         cells[r][c].removeWeapon(cells[r][c].getWeapon2());
@@ -88,9 +81,6 @@ public class Environment {
   }
 
   public Weapon removeWeapon(Weapon w, int r, int c) {
-//    if (inRange(r, c)) {
-//      return cells[r][c].removeWeapon(w);
-//    } 
     try {
       return cells[r][c].removeWeapon(w);
     } catch (ArrayIndexOutOfBoundsException e) {
@@ -98,28 +88,22 @@ public class Environment {
     }
   }
 
-  public double getDistance(int r1, int r2, int c1, int c2) {
-    double a = Math.abs(r1 - r2);
-    double b = Math.abs(c1 - c2);
-    return Math.sqrt(a * a + b * b);
+  public double getDistance(int r1, int c1, int r2, int c2) throws EnvironmentException {
+    if (r1 < getNumRows() && r2 < getNumRows()
+        && c1 < getNumCols() && c2 < getNumCols()) {
+      double a = Math.abs(r1 - r2);
+      double b = Math.abs(c1 - c2);
+      return Math.sqrt(a * a + b * b);
+    } else {
+      throw new EnvironmentException("Invalid coordinates");
+    }
   }
 
   public double getDistance(LifeForm lf1, LifeForm lf2) {
     return 0;
   }
 
-//  private boolean inRange(int r, int c) {
-//    if (0 < r && r < getRows() && 0 < c && c < getCols()) {
-//      return true;
-//    }
-//    return false;
-//  }
-
   public boolean addWeapon(Weapon w, int r, int c) {
-//    if (inRange(r, c) && (cells[r][c].getWeapon1() == w || cells[r][c].getWeapon2() == w)) {
-//      return cells[r][c].addWeapon(w);
-//    }
-//    return false;
     try {
       if (w != cells[r][c].getWeapon1() && w != cells[r][c].getWeapon2()) {
         return cells[r][c].addWeapon(w);

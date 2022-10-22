@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import environment.Environment;
 import exceptions.AttachmentException;
-import lifeform.MockLifeForm;
+import exceptions.EnvironmentException;
+import exceptions.RecoveryRateException;
+import lifeform.*;
 import weapon.*;
 
 /**
@@ -26,8 +28,8 @@ public class TestEnvironment {
   public void testEnvironmentInit() {
     Environment e2 = Environment.getEnvironment(69, 420);
     assertEquals(e, e2);
-    assertEquals(5, e2.getRows());
-    assertEquals(5, e2.getCols());
+    assertEquals(5, e2.getNumRows());
+    assertEquals(5, e2.getNumCols());
 
   }
 
@@ -76,19 +78,29 @@ public class TestEnvironment {
 
   // Get Distance Along Same Row
   @Test
-  public void testDistanceHorizontal() {
-    // TODO
+  public void testDistanceHorizontal() throws EnvironmentException {
+    e.clearBoard();
+    MockLifeForm player = new MockLifeForm("Walter White", 10);
+    MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
+    e.addLifeForm(player, 0, 0);
+    e.addLifeForm(enemy, 0, 4);
+    
+    // Return distance using literal coordinates
+    assertEquals(5, e.getDistance(0, 0, 0, 4), 0.001);
+    
+    // Return distance using LifeForms
+    assertEquals(5, e.getDistance(player, enemy), 0.001);
   }
 
   // Get Distance Along Same Column
   @Test
-  public void testDistanceVertical() {
+  public void testDistanceVertical() throws EnvironmentException {
     // TODO
   }
 
   // Get Distance Diagonally
   @Test
-  public void testDistanceDiagonal() {
+  public void testDistanceDiagonal() throws EnvironmentException {
     // TODO
   }
 
