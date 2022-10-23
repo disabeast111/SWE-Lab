@@ -2,6 +2,7 @@ package environment;
 
 import lifeform.LifeForm;
 import weapon.Weapon;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 /**
  * @author David W
@@ -76,10 +77,11 @@ public class Environment {
   }
 
   public Weapon removeWeapon(Weapon w, int r, int c) {
-    if (inRange(r, c)) {
+    try {
       return cells[r][c].removeWeapon(w);
+    } catch (Exception e) {
+      return null;
     }
-    return null;
   }
   
   public double getDistance(int r1, int r2, int c1, int c2){
@@ -89,19 +91,33 @@ public class Environment {
   }
   
   public double getDistance(LifeForm lf1, LifeForm lf2) {
-    return 0;
-  }
-
-  private boolean inRange(int r, int c) {
-    if (0 < r && r < getRows() && 0 < c && c < getCols()) {
-      return true;
+    int r1 = 0;
+    int c1 = 0;
+    int r2 = 0;
+    int c2 = 0;
+    while (getLifeForm(r1, c1) != lf1) {
+      r1++;
+      while (getLifeForm(r1, c1) != lf1) {
+        c1++;
+      }
     }
-    return false;
+    while (getLifeForm(r2, c2) != lf1) {
+      r2++;
+      while (getLifeForm(r2, c2) != lf1) {
+        c2++;
+      }
+    }
+    return getDistance(r1, r2, c1, c2);
   }
 
   public boolean addWeapon(Weapon w, int r, int c) {
-    if (inRange(r, c) && (cells[r][c].getWeapon1() == w || cells[r][c].getWeapon2() == w)) {
-      return cells[r][c].addWeapon(w);
+    try {
+      if (cells[r][c].getWeapon1() == w || cells[r][c].getWeapon2() == w) {
+        return cells[r][c].addWeapon(w);
+      }
+      throw new ArrayIndexOutOfBoundsException();
+    } catch(Exception e) {
+      return false;
     }
     return false;
   }
