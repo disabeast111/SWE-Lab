@@ -5,7 +5,10 @@ import lifeform.LifeForm;
 import weapon.Weapon;
 
 /**
- * @author David W, Spencer H
+ * Lab 4
+ * @author David W
+ * Lab 5
+ * @author Spencer H
  */
 public class Cell {
 
