@@ -7,7 +7,9 @@ import weapon.Weapon;
 import exceptions.EnvironmentException;
 
 /**
+ * Labs 4 and 5
  * @author David W
+ * Lab 5
  * @author Kyle S
  */
 public class Environment {
