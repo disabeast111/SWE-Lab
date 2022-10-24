@@ -29,6 +29,13 @@ public class Environment {
     }
   }
 
+  /**
+   * getEnvironment
+   * 
+   * @param rows number of rows
+   * @param cols number of columns
+   * @return the Singleton instance
+   */
   public static Environment getEnvironment(int rows, int cols) {
     if (theEnv == null) {
       theEnv = new Environment(rows, cols);
@@ -57,19 +64,39 @@ public class Environment {
     return false;
   }
 
+  /**
+   * getWeapons
+   * 
+   * @param r target row
+   * @param c target column
+   * @return array of the weapons
+   */
   public Weapon[] getWeapons(int r, int c) {
     Weapon[] w = { cells[r][c].getWeapon1(), cells[r][c].getWeapon2() };
     return w;
   }
 
+  /**
+   * getNumRows
+   * 
+   * @return the number of rows
+   */
   public int getNumRows() {
     return cells.length;
   }
 
+  /**
+   * getNumCols
+   * 
+   * @return the number of columns
+   */
   public int getNumCols() {
     return cells[0].length;
   }
 
+  /**
+   * clearBoard
+   */
   public void clearBoard() {
     for (int r = 0; r < getNumRows(); r++) {
       for (int c = 0; c < getNumCols(); c++) {
@@ -80,6 +107,14 @@ public class Environment {
     }
   }
 
+  /**
+   * removeWeapon
+   * 
+   * @param w target weapon
+   * @param r target row
+   * @param c target column
+   * @return
+   */
   public Weapon removeWeapon(Weapon w, int r, int c) {
     try {
       return cells[r][c].removeWeapon(w);
@@ -89,6 +124,16 @@ public class Environment {
     }
   }
 
+  /**
+   * getDistance
+   * 
+   * @param r1 row for first location
+   * @param c1 column for first location
+   * @param r2 row for second location
+   * @param c2 column for second location
+   * @return decimal distance in feet
+   * @throws EnvironmentException
+   */
   public double getDistance(int r1, int c1, int r2, int c2) throws EnvironmentException {
     if (r1 < getNumRows() && r2 < getNumRows() && c1 < getNumCols() && c2 < getNumCols()) {
       if (r1 == -1 || r2 == -1) {
@@ -102,6 +147,14 @@ public class Environment {
     }
   }
 
+  /**
+   * getDistance
+   * 
+   * @param lf1 first target lifeform
+   * @param lf2 second target lifeform
+   * @return distance between lifeforms in feet
+   * @throws EnvironmentException
+   */
   public double getDistance(LifeForm lf1, LifeForm lf2) throws EnvironmentException {
     int r1 = lf1.getRow();
     int c1 = lf1.getCol();
@@ -111,10 +164,18 @@ public class Environment {
     if (r1 == -1 || r2 == -1) {
       throw new EnvironmentException("LifeForm(s) not in Environment");
     } else {
-    return getDistance(r1, c1, r2, c2);
+      return getDistance(r1, c1, r2, c2);
     }
   }
 
+  /**
+   * addWeapon
+   * 
+   * @param w weapon to add
+   * @param r target row
+   * @param c target column
+   * @return status of the operation
+   */
   public boolean addWeapon(Weapon w, int r, int c) {
     try {
       if (w != cells[r][c].getWeapon1() && w != cells[r][c].getWeapon2()) {
@@ -126,10 +187,23 @@ public class Environment {
     return false;
   }
 
+  /**
+   * removeLifeForm
+   * 
+   * @param row target row
+   * @param col target column
+   */
   public void removeLifeForm(int row, int col) {
     cells[row][col].removeLifeForm();
   }
 
+  /**
+   * getLifeForm
+   * 
+   * @param row row of the lifeform
+   * @param col column of the lifeform
+   * @return the target lifeform
+   */
   public LifeForm getLifeForm(int row, int col) {
     return cells[row][col].getLifeForm();
   }
