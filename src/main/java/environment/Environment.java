@@ -101,38 +101,17 @@ public class Environment {
     }
   }
 
-// TODO LifeForm getRow and getCol
   public double getDistance(LifeForm lf1, LifeForm lf2) throws EnvironmentException {
-//    int r1 = lf1.getRow();
-//    int c1 = lf1.getCol();
-//    int r2 = lf2.getRow();
-//    int c2 = lf2.getCol();
-    int r1 = -1;
-    int c1 = -1;
-    int r2 = -1;
-    int c2 = -1;
-//    
-//    if (r1 == -1 || r2 == -1) {
-//      throw new EnvironmentException("LifeForm(s) not in Environment");
-//    }
-    for (int r = 0; r < getNumRows(); r++) {
-      for (int c = 0; c < getNumRows(); c++) {
-        if (getLifeForm(r, c) == lf1) {
-          r1 = r;
-          c1 = c;
-        }
-      }
-    }
-    for (int r = 0; r < getNumRows(); r++) {
-      for (int c = 0; c < getNumRows(); c++) {
-        if (getLifeForm(r, c) == lf2) {
-          r2 = r;
-          c2 = c;
-        }
-      }
-    }
-//    
+    int r1 = lf1.getRow();
+    int c1 = lf1.getCol();
+    int r2 = lf2.getRow();
+    int c2 = lf2.getCol();
+
+    if (r1 == -1 || r2 == -1) {
+      throw new EnvironmentException("LifeForm(s) not in Environment");
+    } else {
     return getDistance(r1, c1, r2, c2);
+    }
   }
 
   public boolean addWeapon(Weapon w, int r, int c) {
