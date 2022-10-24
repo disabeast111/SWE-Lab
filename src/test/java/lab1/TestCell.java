@@ -33,15 +33,14 @@ public class TestCell {
   public void testAddWeapons() throws RecoveryRateException {
     Cell c = new Cell();
     Weapon p = new Pistol();
-    Weapon pc = new PlasmaCannon();
     
     assertTrue(c.addWeapon(p));
-    assertTrue(c.addWeapon(pc));
+    assertTrue(c.addWeapon(p));
     assertEquals(2, c.getWeaponsCount());
     assertFalse(c.addWeapon(p));
     assertEquals(2, c.getWeaponsCount());
     assertEquals(p, c.getWeapon1());
-    assertEquals(pc, c.getWeapon2());
+    assertEquals(p, c.getWeapon2());
   }
   
   @Test 
@@ -83,6 +82,8 @@ public class TestCell {
     //remove one
     assertEquals(p, c.removeWeapon(p));
     assertEquals(null, c.removeWeapon(p));
+    assertEquals(null, c.getWeapon1());
+    assertEquals(pc, c.getWeapon2());
     assertEquals(1, c.getWeaponsCount());
     //then add
     assertTrue(c.addWeapon(p));

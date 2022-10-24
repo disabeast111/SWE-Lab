@@ -10,8 +10,8 @@ import weapon.Weapon;
 public class Cell {
 
   LifeForm life1;
-  Weapon weapon1;
-  Weapon weapon2;
+  Weapon weapon1 = null;
+  Weapon weapon2 = null;
   int count = 0;
 
   /**
