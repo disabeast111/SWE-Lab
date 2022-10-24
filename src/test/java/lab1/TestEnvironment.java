@@ -30,7 +30,6 @@ public class TestEnvironment {
     assertEquals(e, e2);
     assertEquals(5, e2.getNumRows());
     assertEquals(5, e2.getNumCols());
-
   }
 
   // Add Weapon to a Location
@@ -89,7 +88,7 @@ public class TestEnvironment {
     assertEquals(20, e.getDistance(0, 0, 0, 4), 0.001);
     
     // Return distance using LifeForms
-    // assertEquals(4, e.getDistance(player, enemy), 0.001);
+     assertEquals(20, e.getDistance(player, enemy), 0.001);
   }
 
   // Get Distance Along Same Column
@@ -122,6 +121,7 @@ public class TestEnvironment {
     assertEquals(25, e.getDistance(0, 0, 4, 3), 0.001);
     assertEquals(25, e.getDistance(3, 4, 0, 0), 0.001);
     assertEquals(25, e.getDistance(4, 3, 0, 0), 0.001);
+    
     // Return distance using LifeForms
     assertEquals(25, e.getDistance(player, enemy), 0.001);
   }
@@ -143,31 +143,32 @@ public class TestEnvironment {
 //    MockLifeForm entity1 = new MockLifeForm("Jim", 34);
 //    assertTrue(e2.addLifeForm(entity1, 0, 0));
 //  }
-//
+  
   @Test
   public void testAddLifeForm() {
+    e.clearBoard();
     MockLifeForm bob = new MockLifeForm("Bob", 40);
     MockLifeForm fred = new MockLifeForm("Fred", 40);
-    boolean success = e.addLifeForm(bob, 2, 1);
-    assertTrue(success);
-    success = e.addLifeForm(fred, 2, 1);
-    assertFalse(success);
+    assertTrue(e.addLifeForm(bob, 2, 1));
+    assertFalse(e.addLifeForm(fred, 2, 1));
     assertEquals(bob, e.getLifeForm(2, 1));
+    assertEquals(2, bob.getRow());
+    assertEquals(1, bob.getCol());
   }
-//
+
   @Test
   public void testCheckBorder1() {
     MockLifeForm bob = new MockLifeForm("Bob", 40);
     assertFalse(e.addLifeForm(bob, 5, 1));
   }
-//
+
   @Test
   public void testCheckBorder2() {
     MockLifeForm bob = new MockLifeForm("Bob", 40);
     Environment e = Environment.getEnvironment(3, 2);
     assertFalse(e.addLifeForm(bob, 1, 5));
   }
-//
+
   @Test
   public void testCanRemove() {
     MockLifeForm entity1 = new MockLifeForm("Jim", 34);
@@ -175,4 +176,4 @@ public class TestEnvironment {
     e.removeLifeForm(0, 0);
     assertNull(e.getLifeForm(0, 0));
   }
-} // DO NOT REMOVE OR COMMENT OUT
+}

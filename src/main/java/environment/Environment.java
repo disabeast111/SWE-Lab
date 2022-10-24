@@ -49,6 +49,7 @@ public class Environment {
       if (0 <= col && col < cells[0].length) {
         if (getLifeForm(row, col) == null) {
           cells[row][col].addLifeForm(entity);
+          entity.setLocation(row, col);
           return true;
         }
       }
