@@ -86,7 +86,7 @@ public class TestEnvironment {
     e.addLifeForm(enemy, 0, 4);
     
     // Return distance using literal coordinates
-    assertEquals(4, e.getDistance(0, 0, 0, 4), 0.001);
+    assertEquals(20, e.getDistance(0, 0, 0, 4), 0.001);
     
     // Return distance using LifeForms
     // assertEquals(4, e.getDistance(player, enemy), 0.001);
@@ -102,7 +102,7 @@ public class TestEnvironment {
     e.addLifeForm(enemy, 4, 0);
     
     // Return distance using literal coordinates
-    assertEquals(4, e.getDistance(0, 0, 4, 0), 0.001);
+    assertEquals(20, e.getDistance(0, 0, 4, 0), 0.001);
     
     // Return distance using LifeForms
 //    assertEquals(4, e.getDistance(player, enemy), 0.001);
@@ -118,10 +118,10 @@ public class TestEnvironment {
     e.addLifeForm(enemy, 0, 4);
     
     // Return distance using literal coordinates
-    assertEquals(5, e.getDistance(0, 0, 3, 4), 0.001);
-    assertEquals(5, e.getDistance(0, 0, 4, 3), 0.001);
-    assertEquals(5, e.getDistance(3, 4, 0, 0), 0.001);
-    assertEquals(5, e.getDistance(4, 3, 0, 0), 0.001);
+    assertEquals(25, e.getDistance(0, 0, 3, 4), 0.001);
+    assertEquals(25, e.getDistance(0, 0, 4, 3), 0.001);
+    assertEquals(25, e.getDistance(3, 4, 0, 0), 0.001);
+    assertEquals(25, e.getDistance(4, 3, 0, 0), 0.001);
     // Return distance using LifeForms
 //    assertEquals(5, e.getDistance(player, enemy), 0.001);
   }
