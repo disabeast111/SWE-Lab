@@ -6,7 +6,6 @@ import weapon.Weapon;
 
 import exceptions.EnvironmentException;
 
-
 /**
  * @author David W
  * @author Kyle S
@@ -90,8 +89,10 @@ public class Environment {
   }
 
   public double getDistance(int r1, int c1, int r2, int c2) throws EnvironmentException {
-    if (r1 < getNumRows() && r2 < getNumRows()
-        && c1 < getNumCols() && c2 < getNumCols()) {
+    if (r1 < getNumRows() && r2 < getNumRows() && c1 < getNumCols() && c2 < getNumCols()) {
+      if (r1 == -1 || r2 == -1) {
+        throw new EnvironmentException("LifeForm(s) not in Environment");
+      }
       double a = Math.abs(r1 - r2) * 5;
       double b = Math.abs(c1 - c2) * 5;
       return Math.sqrt(a * a + b * b);
@@ -101,18 +102,38 @@ public class Environment {
   }
 
 // TODO LifeForm getRow and getCol
-//  public double getDistance(LifeForm lf1, LifeForm lf2) throws EnvironmentException {
+  public double getDistance(LifeForm lf1, LifeForm lf2) throws EnvironmentException {
 //    int r1 = lf1.getRow();
 //    int c1 = lf1.getCol();
 //    int r2 = lf2.getRow();
 //    int c2 = lf2.getCol();
+    int r1 = -1;
+    int c1 = -1;
+    int r2 = -1;
+    int c2 = -1;
 //    
 //    if (r1 == -1 || r2 == -1) {
 //      throw new EnvironmentException("LifeForm(s) not in Environment");
 //    }
+    for (int r = 0; r < getNumRows(); r++) {
+      for (int c = 0; c < getNumRows(); c++) {
+        if (getLifeForm(r, c) == lf1) {
+          r1 = r;
+          c1 = c;
+        }
+      }
+    }
+    for (int r = 0; r < getNumRows(); r++) {
+      for (int c = 0; c < getNumRows(); c++) {
+        if (getLifeForm(r, c) == lf2) {
+          r2 = r;
+          c2 = c;
+        }
+      }
+    }
 //    
-//    return getDistance(r1, c1, r2, c2);
-//  }
+    return getDistance(r1, c1, r2, c2);
+  }
 
   public boolean addWeapon(Weapon w, int r, int c) {
     try {

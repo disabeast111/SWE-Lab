@@ -105,7 +105,7 @@ public class TestEnvironment {
     assertEquals(20, e.getDistance(0, 0, 4, 0), 0.001);
     
     // Return distance using LifeForms
-//    assertEquals(4, e.getDistance(player, enemy), 0.001);
+    assertEquals(20, e.getDistance(player, enemy), 0.001);
   }
 
   // Get Distance Diagonally
@@ -115,7 +115,7 @@ public class TestEnvironment {
     MockLifeForm player = new MockLifeForm("Walter White", 10);
     MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
     e.addLifeForm(player, 0, 3);
-    e.addLifeForm(enemy, 0, 4);
+    e.addLifeForm(enemy, 4, 0);
     
     // Return distance using literal coordinates
     assertEquals(25, e.getDistance(0, 0, 3, 4), 0.001);
@@ -123,7 +123,7 @@ public class TestEnvironment {
     assertEquals(25, e.getDistance(3, 4, 0, 0), 0.001);
     assertEquals(25, e.getDistance(4, 3, 0, 0), 0.001);
     // Return distance using LifeForms
-//    assertEquals(5, e.getDistance(player, enemy), 0.001);
+    assertEquals(25, e.getDistance(player, enemy), 0.001);
   }
 
   /*
@@ -144,38 +144,35 @@ public class TestEnvironment {
 //    assertTrue(e2.addLifeForm(entity1, 0, 0));
 //  }
 //
-//  @Test
-//  public void testAddLifeForm() {
-//    MockLifeForm bob = new MockLifeForm("Bob", 40);
-//    MockLifeForm fred = new MockLifeForm("Fred", 40);
-//    Environment e1 = Environment.getEnvironment(3, 2);
-//    boolean success = e1.addLifeForm(bob, 2, 1);
-//    assertTrue(success);
-//    success = e1.addLifeForm(fred, 2, 1);
-//    assertFalse(success);
-//    assertEquals(bob, e1.getLifeForm(2, 1));
-//  }
+  @Test
+  public void testAddLifeForm() {
+    MockLifeForm bob = new MockLifeForm("Bob", 40);
+    MockLifeForm fred = new MockLifeForm("Fred", 40);
+    boolean success = e.addLifeForm(bob, 2, 1);
+    assertTrue(success);
+    success = e.addLifeForm(fred, 2, 1);
+    assertFalse(success);
+    assertEquals(bob, e.getLifeForm(2, 1));
+  }
 //
-//  @Test
-//  public void testCheckBorder1() {
-//    MockLifeForm bob = new MockLifeForm("Bob", 40);
-//    Environment e1 = Environment.getEnvironment(3, 2);
-//    assertFalse(e1.addLifeForm(bob, 5, 1));
-//  }
+  @Test
+  public void testCheckBorder1() {
+    MockLifeForm bob = new MockLifeForm("Bob", 40);
+    assertFalse(e.addLifeForm(bob, 5, 1));
+  }
 //
-//  @Test
-//  public void testCheckBorder2() {
-//    MockLifeForm bob = new MockLifeForm("Bob", 40);
-//    Environment e1 = Environment.getEnvironment(3, 2);
-//    assertFalse(e1.addLifeForm(bob, 1, 5));
-//  }
+  @Test
+  public void testCheckBorder2() {
+    MockLifeForm bob = new MockLifeForm("Bob", 40);
+    Environment e = Environment.getEnvironment(3, 2);
+    assertFalse(e.addLifeForm(bob, 1, 5));
+  }
 //
-//  @Test
-//  public void testCanRemove() {
-//    Environment e1 = Environment.getEnvironment(1, 1);
-//    MockLifeForm entity1 = new MockLifeForm("Jim", 34);
-//    e1.addLifeForm(entity1, 0, 0);
-//    e1.removeLifeForm(0, 0);
-//    assertNull(e1.getLifeForm(0, 0));
-//  }
+  @Test
+  public void testCanRemove() {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 34);
+    e.addLifeForm(entity1, 0, 0);
+    e.removeLifeForm(0, 0);
+    assertNull(e.getLifeForm(0, 0));
+  }
 } // DO NOT REMOVE OR COMMENT OUT
