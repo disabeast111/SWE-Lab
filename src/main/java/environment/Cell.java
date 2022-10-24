@@ -34,16 +34,16 @@ public class Cell {
    * @return true for a weapon added, else false
    */
   public boolean addWeapon(Weapon weapon) {
-    if(weapon1 == null && weapon2 != weapon) {
+    if (weapon1 == null && weapon2 != weapon) {
       weapon1 = weapon;
       count += 1;
       return true;
-    } else if(weapon2 == null && weapon1 != weapon) {
+    } else if (weapon2 == null && weapon1 != weapon) {
       weapon2 = weapon;
       count += 1;
       return true;
     }
-      return false;
+    return false;
   }
   
   /**
@@ -93,19 +93,19 @@ public class Cell {
    */
   public Weapon removeWeapon(Weapon weapon) {
     Weapon removed;
-    if(getWeaponsCount() > 0) { 
-      if(weapon1 == weapon) {
+    if (getWeaponsCount() > 0) { 
+      if (weapon1 == weapon) {
         removed = weapon1;
         weapon1 = null;
         count -= 1;
         return removed;
-      } else if(weapon2 == weapon) {
+      } else if (weapon2 == weapon) {
         removed = weapon2;
         weapon2 = null;
         count -= 1;
         return removed;
       }
     }
-  return null;
+    return null;
   }
 }
