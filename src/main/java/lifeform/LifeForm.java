@@ -109,7 +109,7 @@ public abstract class LifeForm extends java.lang.Object {
   }
   
   public void setLocation(int r, int c) {
-    if(r >= -1 || c >= -1) {
+    if(r >= -1 && c >= -1) {
       row = r;
       col = c;
     }
