@@ -34,11 +34,11 @@ public class Cell {
    * @return true for a weapon added, else false
    */
   public boolean addWeapon(Weapon weapon) {
-    if(weapon1 == null) {
+    if(weapon1 == null && weapon2 != weapon) {
       weapon1 = weapon;
       count += 1;
       return true;
-    } else if(weapon2 == null) {
+    } else if(weapon2 == null && weapon1 != weapon) {
       weapon2 = weapon;
       count += 1;
       return true;
