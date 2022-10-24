@@ -107,18 +107,32 @@ public abstract class LifeForm extends java.lang.Object {
     }
     return false;
   }
-  
+
+  /**
+   * Setter for LifeForm location
+   * 
+   * @param r is row
+   * @param c is column
+   */
   public void setLocation(int r, int c) {
-    if(r >= -1 && c >= -1) {
-      row = r;
-      col = c;
-    }
+    row = r;
+    col = c;
   }
-  
+
+  /**
+   * Getter for LifeForm column
+   * 
+   * @return column
+   */
   public int getCol() {
     return col;
   }
-  
+
+  /**
+   * Getter for LifeForm row
+   * 
+   * @return row
+   */
   public int getRow() {
     return row;
   }
