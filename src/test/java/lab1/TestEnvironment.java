@@ -13,6 +13,7 @@ import weapon.*;
 
 /**
  * @author David W
+ * @author Kyle S
  */
 public class TestEnvironment {
   /*
@@ -85,22 +86,44 @@ public class TestEnvironment {
     e.addLifeForm(enemy, 0, 4);
     
     // Return distance using literal coordinates
-    assertEquals(5, e.getDistance(0, 0, 0, 4), 0.001);
+    assertEquals(4, e.getDistance(0, 0, 0, 4), 0.001);
     
     // Return distance using LifeForms
-    assertEquals(5, e.getDistance(player, enemy), 0.001);
+    // assertEquals(4, e.getDistance(player, enemy), 0.001);
   }
 
   // Get Distance Along Same Column
   @Test
   public void testDistanceVertical() throws EnvironmentException {
-    // TODO
+    e.clearBoard();
+    MockLifeForm player = new MockLifeForm("Walter White", 10);
+    MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
+    e.addLifeForm(player, 0, 0);
+    e.addLifeForm(enemy, 4, 0);
+    
+    // Return distance using literal coordinates
+    assertEquals(4, e.getDistance(0, 0, 4, 0), 0.001);
+    
+    // Return distance using LifeForms
+//    assertEquals(4, e.getDistance(player, enemy), 0.001);
   }
 
   // Get Distance Diagonally
   @Test
   public void testDistanceDiagonal() throws EnvironmentException {
-    // TODO
+    e.clearBoard();
+    MockLifeForm player = new MockLifeForm("Walter White", 10);
+    MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
+    e.addLifeForm(player, 0, 3);
+    e.addLifeForm(enemy, 0, 4);
+    
+    // Return distance using literal coordinates
+    assertEquals(5, e.getDistance(0, 0, 3, 4), 0.001);
+    assertEquals(5, e.getDistance(0, 0, 4, 3), 0.001);
+    assertEquals(5, e.getDistance(3, 4, 0, 0), 0.001);
+    assertEquals(5, e.getDistance(4, 3, 0, 0), 0.001);
+    // Return distance using LifeForms
+//    assertEquals(5, e.getDistance(player, enemy), 0.001);
   }
 
   /*

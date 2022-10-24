@@ -5,6 +5,8 @@ import lifeform.LifeForm;
 import weapon.Weapon;
 import java.util.*;
 
+import exceptions.EnvironmentException;
+
 
 /**
  * @author David W
@@ -83,7 +85,7 @@ public class Environment {
     try {
       return cells[r][c].removeWeapon(w);
 
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (Exception e) {
       return null;
     }
   }
@@ -99,32 +101,16 @@ public class Environment {
     }
   }
 
-  public double getDistance(LifeForm lf1, LifeForm lf2) {
-    int r1 = 0;
-    int c1 = 0;
-    int r2 = 0;
-    int c2 = 0;
-    while (getLifeForm(r1, c1) != lf1) {
-      r1++;
-      while (getLifeForm(r1, c1) != lf1) {
-        c1++;
-      }
-    }
-    while (getLifeForm(r2, c2) != lf1) {
-      r2++;
-      while (getLifeForm(r2, c2) != lf1) {
-        c2++;
-      }
-    }
-    return getDistance(r1, r2, c1, c2);
-  }
+//  public double getDistance(LifeForm lf1, LifeForm lf2) throws EnvironmentException {
+//    return getDistance(lf1.getRow(), lf1.getCol(), lf2.getRow(), lf2.getCol());
+//  }
 
   public boolean addWeapon(Weapon w, int r, int c) {
     try {
       if (w != cells[r][c].getWeapon1() && w != cells[r][c].getWeapon2()) {
         return cells[r][c].addWeapon(w);
       }
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (Exception e) {
       return false;
     }
     return false;
