@@ -5,8 +5,8 @@ import weapon.Weapon;
 
 /**
  * Lab 4
- * @author David W
- * Lab 5
+ * 
+ * @author David W Lab 5
  * @author Ethan J
  */
 public abstract class LifeForm extends java.lang.Object {
@@ -118,8 +118,10 @@ public abstract class LifeForm extends java.lang.Object {
    * @param c is column
    */
   public void setLocation(int r, int c) {
-    row = r;
-    col = c;
+    if (r >= 0 && c >= 0) {
+      row = r;
+      col = c;
+    }
   }
 
   /**
