@@ -13,7 +13,10 @@ import weapon.PlasmaCannon;
 import weapon.Weapon;
 
 /**
- * @author David W, Spencer H
+ * Lab 4
+ * @author David W
+ * Lab 5
+ * @author Spencer H
  */
 public class TestCell {
 
@@ -61,7 +64,7 @@ public class TestCell {
   }
    
   @Test
-  public void testFullCellNoNewWeap() throws RecoveryRateException {
+  public void testFullCellNoNewWeap() {
     Cell c = new Cell();
     Weapon p = new Pistol();
     Weapon pc = new PlasmaCannon();
