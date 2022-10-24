@@ -3,7 +3,6 @@ package environment;
 import lifeform.LifeForm;
 
 import weapon.Weapon;
-import java.util.*;
 
 import exceptions.EnvironmentException;
 
@@ -93,8 +92,8 @@ public class Environment {
   public double getDistance(int r1, int c1, int r2, int c2) throws EnvironmentException {
     if (r1 < getNumRows() && r2 < getNumRows()
         && c1 < getNumCols() && c2 < getNumCols()) {
-      double a = Math.abs(r1 - r2);
-      double b = Math.abs(c1 - c2);
+      double a = Math.abs(r1 - r2) * 5;
+      double b = Math.abs(c1 - c2) * 5;
       return Math.sqrt(a * a + b * b);
     } else {
       throw new EnvironmentException("Invalid coordinates");
