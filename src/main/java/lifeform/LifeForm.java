@@ -11,6 +11,8 @@ public abstract class LifeForm extends java.lang.Object {
   protected int currentLifePoints;
   protected int attackStrength;
   protected Weapon weapon;
+  protected int col = -1;
+  protected int row = -1;
 
   /**
    * @param name
@@ -104,5 +106,20 @@ public abstract class LifeForm extends java.lang.Object {
       return true;
     }
     return false;
+  }
+  
+  public void setLocation(int r, int c) {
+    if(r >= -1 || c >= -1) {
+      row = r;
+      col = c;
+    }
+  }
+  
+  public int getCol() {
+    return col;
+  }
+  
+  public int getRow() {
+    return row;
   }
 }

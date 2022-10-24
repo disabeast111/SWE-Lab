@@ -3,6 +3,7 @@ package lifeform;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import environment.Environment;
 import exceptions.RecoveryRateException;
 import exceptions.WeaponException;
 import weapon.Pistol;
@@ -154,5 +155,22 @@ public class TestLifeForm {
     assertEquals(0, pistol.getCurrentAmmo());
     entity1.weapon.reload();
     assertEquals(10, pistol.getCurrentAmmo());
+  }
+  
+  @Test
+  public void testLocationNoEnvironment() {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    assertEquals(-1, entity1.getCol());
+    assertEquals(-1, entity1.getRow());
+  }
+  
+  @Test
+  public void testLocation() {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    Environment e2 = Environment.getEnvironment(2, 3);
+    e2.addLifeForm(entity1, 1, 01);
+    entity1.setLocation(1, 1);
+    assertEquals(1, entity1.getCol());
+    assertEquals(1, entity1.getRow());
   }
 }
