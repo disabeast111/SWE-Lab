@@ -4,7 +4,10 @@ import exceptions.WeaponException;
 import weapon.Weapon;
 
 /**
+ * Lab 4
  * @author David W
+ * Lab 5
+ * @author Ethan J
  */
 public abstract class LifeForm extends java.lang.Object {
   private String myName;
