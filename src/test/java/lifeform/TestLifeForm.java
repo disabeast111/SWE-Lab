@@ -173,4 +173,14 @@ public class TestLifeForm {
     assertEquals(1, entity1.getCol());
     assertEquals(1, entity1.getRow());
   }
+  
+  @Test
+  public void testRowColNegOneSetLocation() {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    Environment e2 = Environment.getEnvironment(2, 3);
+    e2.addLifeForm(entity1, 1, 1);
+    entity1.setLocation(-1, 1);
+    assertEquals(-1, entity1.getCol());
+    assertEquals(-1, entity1.getRow());
+  }
 }
