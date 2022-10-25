@@ -1,6 +1,6 @@
-# Lab 4 Description
+# Lab 5 Description
 
-Lab 4 implements weapons and attachments to modifify them. These new weapon are able to be picked up and used by lifeforms via the existing attack method.
+Lab 5 added functionality to LifeForm, Environment, and Cell, allowing us to place LifeForms in specific Cells within the Environment and determine the distance between LifeForms, as well as add up to 2 different weapons to those Cells.
 
 # Team Contract
 
@@ -39,10 +39,5 @@ after the certain lab is finished.)
 
 Answer: We will use a Google Doc to track tasks, progress, and deadlines. We will also include the in-class meetings and the out of class ones.
 
-Link to Google Doc: https://docs.google.com/document/d/1wlEKOTzCqEVpTH9jjg3PzXCm0iDlF_545Q572T4S0H0/edit?usp=sharing_eil_se_dm&ts=6335b83e
-
-
-# Team Meeting Log
-
-Link to Google Doc: https://docs.google.com/document/d/1wlEKOTzCqEVpTH9jjg3PzXCm0iDlF_545Q572T4S0H0/edit?usp=sharing_eil_se_dm&ts=6335b83e
+# Team Meeting Log Google Doc: https://docs.google.com/document/d/1mfBhHEyZcC71aVnraedn7Oj7yW9jtB4kZQOMVPniHdI/edit
 
