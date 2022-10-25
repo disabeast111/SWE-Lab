@@ -39,5 +39,7 @@ after the certain lab is finished.)
 
 Answer: We will use a Google Doc to track tasks, progress, and deadlines. We will also include the in-class meetings and the out of class ones.
 
-# Team Meeting Log Google Doc: https://docs.google.com/document/d/1mfBhHEyZcC71aVnraedn7Oj7yW9jtB4kZQOMVPniHdI/edit
+# Team Meeting Log Google Doc: 
+
+https://docs.google.com/document/d/1mfBhHEyZcC71aVnraedn7Oj7yW9jtB4kZQOMVPniHdI/edit
 
