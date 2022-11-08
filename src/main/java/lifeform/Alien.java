@@ -33,6 +33,8 @@ public class Alien extends LifeForm implements TimerObserver {
     maxLifePoints = life;
     attackStrength = 10;
     recoveryBehavior = rb;
+    maxSpeed = 2;
+    movesLeft = maxSpeed;
     if (rate < 0) {
       throw new RecoveryRateException("Rate value can not be negative");
     }

@@ -7,13 +7,14 @@ import weapon.Weapon;
 import exceptions.EnvironmentException;
 
 /**
- * Labs 4 and 5
+ * Labs 4, 5, 6  
  * @author David W
  * Lab 5
  * @author Kyle S
  */
 public class Environment {
   Cell[][] cells;
+  
   private static Environment theEnv;
 
   /**
@@ -208,5 +209,62 @@ public class Environment {
    */
   public LifeForm getLifeForm(int row, int col) {
     return cells[row][col].getLifeForm();
+  }
+  
+  public int move(LifeForm lf) {
+    int i = lf.getMovesLeft();
+    int oRow = lf.getRow();
+    int oCol = lf.getCol();
+    
+    if (lf.getMovesLeft() > 0) {
+      if (lf.getCurrentDirection() == 0) { // N
+        while (addLifeForm(lf, oRow - i, oCol) == false) {
+          i--;
+          if (i == 0) {
+            return 0; // out of bounds or no free spot
+          }
+        }
+        removeLifeForm(oRow, oCol);
+        lf.setMovesLeft(lf.getMovesLeft()-i);
+        return i;
+      }
+      
+      else if (lf.getCurrentDirection() == 1) { // E
+        while (addLifeForm(lf, oRow, oCol + i) == false) {
+         i--;
+          if (i == 0) {
+            return 0; // out of bounds or no free spots
+          }
+        }
+        removeLifeForm(oRow, oCol);
+        lf.setMovesLeft(lf.getMovesLeft()-i);
+        return i;
+      }
+      
+      else if (lf.getCurrentDirection() == 2) { // S
+        while (addLifeForm(lf, oRow + i, oCol) == false) {
+          i--;
+          if (i == 0) {
+            return 0; // out of bounds or no free spot
+          }
+        }
+        removeLifeForm(oRow, oCol);
+        lf.setMovesLeft(lf.getMovesLeft()-i);
+        return i;
+      }
+      
+      else if (lf.getCurrentDirection() == 3) { // W
+        while (addLifeForm(lf, oRow, oCol - i) == false) {
+          i--;
+          if (i == 0) {
+            return 0; // out of bounds or no free spot
+          }
+        }
+        removeLifeForm(oRow, oCol);
+        lf.setMovesLeft(lf.getMovesLeft()-i);
+        return i;
+      }
+    }
+    return 0; // out of moves this round
   }
 }

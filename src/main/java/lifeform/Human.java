@@ -20,6 +20,8 @@ public class Human extends LifeForm {
     }
     armorPoints = armor;
     attackStrength = 5;
+    maxSpeed = 3;
+    movesLeft = maxSpeed;
   }
 
   /**

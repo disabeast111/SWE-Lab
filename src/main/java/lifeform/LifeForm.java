@@ -1,21 +1,25 @@
 package lifeform;
 
 import exceptions.WeaponException;
+import gameplay.TimerObserver;
 import weapon.Weapon;
 
 /**
- * Lab 4
- * 
- * @author David W Lab 5
+ * Lab 4, 6
+ * @author David W 
+ * Lab 5
  * @author Ethan J
  */
-public abstract class LifeForm extends java.lang.Object {
+public abstract class LifeForm extends java.lang.Object implements TimerObserver{
   private String myName;
   protected int currentLifePoints;
   protected int attackStrength;
   protected Weapon weapon;
   protected int col = -1;
   protected int row = -1;
+  private int currentDirection = 0;
+  protected int maxSpeed = 0;
+  protected int movesLeft = 0;
 
   /**
    * @param name
@@ -140,5 +144,57 @@ public abstract class LifeForm extends java.lang.Object {
    */
   public int getRow() {
     return row;
+  }
+  
+  /**
+   * Getter for currentDirection
+   * 
+   * @return currentDirection
+   */
+  public int getCurrentDirection() {
+    return currentDirection;
+  }
+  
+  /**
+   * Getter for maxSpeed
+   * 
+   * @return maxSpeed
+   */
+  public int getMaxSpeed() {
+    return maxSpeed;
+  }
+  
+  /**
+   * Getter for movesLeft
+   * 
+   * @return movesLeft
+   */
+  public int getMovesLeft() {
+    return movesLeft;
+  }
+  
+  /**
+   * Sets movesLeft to input param
+   * 
+   * @param movesLeft
+   */
+  public void setMovesLeft(int mL) {
+    movesLeft = mL;
+  }
+  
+  /**
+   * Sets direction to input param
+   * 
+   * @param direction
+   */
+  public void setDirection(int dir) {
+    if (dir >= 0 && dir <= 3) {
+      currentDirection = dir;
+    }
+  }
+
+  @Override
+  public void updateTime(int time) {
+    movesLeft = maxSpeed;
   }
 }

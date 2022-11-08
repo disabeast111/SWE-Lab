@@ -7,23 +7,93 @@ import org.junit.Test;
 import environment.Environment;
 import exceptions.AttachmentException;
 import exceptions.EnvironmentException;
-import exceptions.RecoveryRateException;
 import lifeform.*;
 import weapon.*;
 
 /**
- * Labs 4 and 5
- * @author David W
- * Lab 5
+ * Labs 4, 5, 6
+ * 
+ * @author David W Lab 5
  * @author Kyle S
  */
 public class TestEnvironment {
-  /*
-   * LAB 5
-   */
 
   // Singleton Environment Instance
   Environment e = Environment.getEnvironment(5, 5);
+
+  /*
+   * LAB 6
+   */
+
+  // test move with boarders
+  @Test
+  public void moveTurnWBoarders() {
+    Human entity = new Human("Bob", 40, 0);
+    entity.setLocation(2, 2);
+    assertEquals(2, entity.getRow());
+    assertEquals(2, entity.getCol());
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(0, entity.getRow());
+    assertEquals(2, entity.getCol());
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(0, entity.getRow());
+    assertEquals(2, entity.getCol());
+    entity.setDirection(1);
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(0, entity.getRow());
+    assertEquals(4, entity.getCol());
+    entity.setDirection(2);
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(3, entity.getRow());
+    assertEquals(4, entity.getCol());
+    entity.setDirection(2);
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(4, entity.getRow());
+    assertEquals(4, entity.getCol());
+    entity.setDirection(3);
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(4, entity.getRow());
+    assertEquals(1, entity.getCol());
+    e.move(entity);
+    entity.updateTime(0);
+    assertEquals(4, entity.getRow());
+    assertEquals(0, entity.getCol());
+  }
+
+  //test moveSpeed
+  @Test
+  public void testMovesPerRound() {
+    Human entity = new Human("Bob", 40, 0);
+    entity.setLocation(1, 1);
+    assertEquals(1, entity.getRow());
+    assertEquals(1, entity.getCol());
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(1, entity.getCol());
+    assertEquals(2, entity.getMovesLeft());
+    entity.setDirection(3);
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(0, entity.getCol());
+    assertEquals(1, entity.getMovesLeft());
+    entity.setDirection(1);
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(1, entity.getCol());
+    assertEquals(0, entity.getMovesLeft());
+    
+    
+  }
+
+  /*
+   * LAB 5
+   */
 
   // Environment Singleton Initialization
   @Test
@@ -39,22 +109,22 @@ public class TestEnvironment {
   public void testAddWeapon() throws AttachmentException {
     Weapon blaster = new PowerBooster(new Stabilizer(new PlasmaCannon()));
     Weapon handgun = new Stabilizer(new Pistol());
-    
+
     // Fail to add out of bounds
-    assertFalse(e.addWeapon(blaster, -5,-5));
+    assertFalse(e.addWeapon(blaster, -5, -5));
     assertFalse(e.addWeapon(blaster, 7, 7));
-    
+
     // Add one to empty cell
     assertTrue(e.addWeapon(blaster, 0, 0));
     assertEquals(blaster, e.getWeapons(0, 0)[0]);
-    
+
     // Fail to add same existing weapon to same cell
     assertFalse(e.addWeapon(blaster, 0, 0));
-    
+
     // Add one to cell with one weapon
-    assertTrue(e.addWeapon(handgun, 0,0));
+    assertTrue(e.addWeapon(handgun, 0, 0));
     assertEquals(handgun, e.getWeapons(0, 0)[1]);
-    
+
     // Fail to add to full cell
     assertFalse(e.addWeapon(new ChainGun(), 0, 0));
   }
@@ -65,13 +135,13 @@ public class TestEnvironment {
     e.clearBoard();
     Weapon cannon = new PlasmaCannon();
     e.addWeapon(cannon, 0, 0);
-    
+
     // Return null for out of range
     assertNull(e.removeWeapon(cannon, -1, -1));
-    
+
     // Return null for weapon not in cell
     assertNull(e.removeWeapon(new Pistol(), 0, 0));
-    
+
     // Return weapon removed
     assertEquals(cannon, e.removeWeapon(cannon, 0, 0));
     assertNull(e.getWeapons(0, 0)[0]);
@@ -85,12 +155,12 @@ public class TestEnvironment {
     MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
     e.addLifeForm(player, 0, 0);
     e.addLifeForm(enemy, 0, 4);
-    
+
     // Return distance using literal coordinates
     assertEquals(20, e.getDistance(0, 0, 0, 4), 0.001);
-    
+
     // Return distance using LifeForms
-     assertEquals(20, e.getDistance(player, enemy), 0.001);
+    assertEquals(20, e.getDistance(player, enemy), 0.001);
   }
 
   // Get Distance Along Same Column
@@ -101,10 +171,10 @@ public class TestEnvironment {
     MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
     e.addLifeForm(player, 0, 0);
     e.addLifeForm(enemy, 4, 0);
-    
+
     // Return distance using literal coordinates
     assertEquals(20, e.getDistance(0, 0, 4, 0), 0.001);
-    
+
     // Return distance using LifeForms
     assertEquals(20, e.getDistance(player, enemy), 0.001);
   }
@@ -117,13 +187,13 @@ public class TestEnvironment {
     MockLifeForm enemy = new MockLifeForm("Joe Mama", 10);
     e.addLifeForm(player, 0, 3);
     e.addLifeForm(enemy, 4, 0);
-    
+
     // Return distance using literal coordinates
     assertEquals(25, e.getDistance(0, 0, 3, 4), 0.001);
     assertEquals(25, e.getDistance(0, 0, 4, 3), 0.001);
     assertEquals(25, e.getDistance(3, 4, 0, 0), 0.001);
     assertEquals(25, e.getDistance(4, 3, 0, 0), 0.001);
-    
+
     // Return distance using LifeForms
     assertEquals(25, e.getDistance(player, enemy), 0.001);
   }
@@ -145,7 +215,7 @@ public class TestEnvironment {
 //    MockLifeForm entity1 = new MockLifeForm("Jim", 34);
 //    assertTrue(e2.addLifeForm(entity1, 0, 0));
 //  }
-  
+
   @Test
   public void testAddLifeForm() {
     e.clearBoard();
