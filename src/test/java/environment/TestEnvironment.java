@@ -1,4 +1,4 @@
-package lab1;
+package environment;
 
 import static org.junit.Assert.*;
 
