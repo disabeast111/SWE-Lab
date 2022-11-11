@@ -16,7 +16,7 @@ public class MoveCommand implements Command {
 
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
+    
     speed = lifeForm.getMaxSpeed();
     enviro.move(lifeForm);
     
