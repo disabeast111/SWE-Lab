@@ -3,7 +3,6 @@ package environment;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import environment.Cell;
 import exceptions.RecoveryRateException;
 import lifeform.Alien;
 import lifeform.LifeForm;
