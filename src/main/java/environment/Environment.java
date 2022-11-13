@@ -14,6 +14,8 @@ import exceptions.EnvironmentException;
  */
 public class Environment {
   Cell[][] cells;
+
+  public Cell focusedCell;
   
   private static Environment theEnv;
 
