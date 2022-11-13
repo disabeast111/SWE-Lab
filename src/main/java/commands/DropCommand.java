@@ -1,11 +1,39 @@
 package commands;
 
-public class DropCommand implements Command{
+import environment.Environment;
+import exceptions.WeaponException;
+import lifeform.LifeForm;
+import weapon.Weapon;
 
+public class DropCommand implements Command{
+  LifeForm lifeForm;
+  Environment enviro;
+  Weapon t;
+  int c;
+  int r;
+//Constructor takes in LifeForm being turned and sets instance
+  public DropCommand(LifeForm l, Environment e) {
+    this.lifeForm = l;
+    this.enviro = e;
+    c = lifeForm.getCol();
+    r = lifeForm.getRow();
+  }
+
+//Execute command drops the LifeForm's weapon
   @Override
-  public void execute() {
-    // TODO Auto-generated method stub
-    // lifeform dropWeapon()
+  public void execute() throws WeaponException {
+    Weapon[] temp = enviro.getWeapons(r, c);
+    if(temp[0] == null || temp[1] == null) {
+    t = lifeForm.getCurrentWeapon();
+    lifeForm.dropWeapon();
+    enviro.addWeapon(t, r, c);
+    }
+    else {
+      throw new WeaponException("Cell is full");
+    }
+    
+    
+    
   }
 
 }

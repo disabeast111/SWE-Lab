@@ -3,6 +3,7 @@ package commands;
 import javax.swing.JFrame;
 
 import environment.Cell;
+import exceptions.WeaponException;
 
 public class InvokerBuilder extends JFrame {
   Cell focusedCell;
@@ -12,7 +13,6 @@ public class InvokerBuilder extends JFrame {
     
   }
   
-  
   public static void main (String[] args) {
     Invoker gui = new Invoker();
     int x = 500;
@@ -20,7 +20,7 @@ public class InvokerBuilder extends JFrame {
     gui.setBounds(1000, 200, x, y); 
   }
   
-  public void setCommand(Command c) {
+  public void setCommand(Command c) throws WeaponException {
     
     command = c;
     
