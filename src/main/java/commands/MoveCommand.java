@@ -4,7 +4,7 @@ import environment.Environment;
 import lifeform.LifeForm;
 
 public class MoveCommand implements Command {
-  int speed;
+ // int speed;
   LifeForm lifeForm;
   Environment enviro;
   
@@ -17,7 +17,7 @@ public class MoveCommand implements Command {
   @Override
   public void execute() {
     
-    speed = lifeForm.getMaxSpeed();
+   // speed = lifeForm.getMaxSpeed();
     enviro.move(lifeForm);
     
   }
