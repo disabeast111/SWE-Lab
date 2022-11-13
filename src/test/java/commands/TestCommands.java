@@ -8,7 +8,9 @@ import environment.Environment;
 import exceptions.WeaponException;
 import lifeform.Human;
 import lifeform.MockLifeForm;
+import weapon.ChainGun;
 import weapon.Pistol;
+import weapon.PlasmaCannon;
 import weapon.Weapon;
 
 
@@ -99,6 +101,39 @@ public class TestCommands {
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(4, entity.getCol());
+    
+  }
+  
+  @Test
+  public void testDropCommand() throws WeaponException {
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    Weapon pistol = new Pistol();
+    entity1.pickUpWeapon(pistol);
+    Environment e = Environment.getEnvironment(5, 5);
+    entity1.setLocation(2, 2);
+    assertTrue(entity1.hasWeapon());
+    DropCommand dropCommand = new DropCommand(entity1, e);
+    dropCommand.execute();
+    assertFalse(entity1.hasWeapon());
+    Weapon[] temp = e.getWeapons(2, 2);
+    assertEquals(pistol, temp[0]);
+    
+    Weapon pistol2 = new ChainGun();
+    Weapon pistol3 = new PlasmaCannon();
+    e.addWeapon(pistol2, 2, 2);
+    temp = e.getWeapons(2, 2);
+    //System.out.println(temp[0]);
+    //System.out.println(temp[1]);
+    entity1.pickUpWeapon(pistol3);
+    boolean caught = false;
+    try {
+      dropCommand.execute();
+    }
+    catch(WeaponException f) {
+      caught = true;
+    }
+    assertTrue(caught);
+    
     
   }
 }
