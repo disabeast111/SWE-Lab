@@ -10,11 +10,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameBoard extends JFrame implements ActionListener {
+  private static GameBoard singletonInstance;
   Environment environment = Environment.getEnvironment(10, 10);
   JPanel centerPanel, legendPanel, statsPanel;
 
-  public GameBoard() {
+  private GameBoard() {
 
+  }
+
+  public static GameBoard getInstance() {
+    if (singletonInstance == null) {
+      singletonInstance = new GameBoard();
+    }
+    return singletonInstance;
   }
 
   public void updateCell(int row, int col) {
