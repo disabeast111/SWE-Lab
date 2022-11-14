@@ -270,5 +270,20 @@ public class TestCommands {
     mockGun.updateTime(0);
   }
   
+  @Test
+  public void testAttackCommandNoTarget() throws RecoveryRateException, WeaponException {
+    e.clearBoard();
+    Human entity1 = new Human("Jim", 40, 1);
+    MockWeapon mockGun = new MockWeapon();
+    entity1.pickUpWeapon(mockGun);
+    
+    e.addLifeForm(entity1, 2, 2);
+    
+    AttackCommand attackCommand = new AttackCommand(entity1, e);
+    
+    attackCommand.execute();
+    assertEquals(9, mockGun.getCurrentAmmo());
+  }
+  
   
 }
