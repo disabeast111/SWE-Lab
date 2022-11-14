@@ -213,7 +213,6 @@ public class Environment {
   }
   
   public int move(LifeForm lf) {
-    GameBoard b = GameBoard.getInstance();
     int i = lf.getMovesLeft();
     int oRow = lf.getRow();
     int oCol = lf.getCol();
@@ -228,7 +227,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        b.updateCell(oRow, oCol);
         return i;
       }
       
@@ -241,7 +239,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        b.updateCell(oRow, oCol);
         return i;
       }
       
@@ -254,7 +251,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        b.updateCell(oRow, oCol);
         return i;
       }
       
@@ -267,7 +263,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        b.updateCell(oRow, oCol);
         return i;
       }
     }
