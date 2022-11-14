@@ -14,7 +14,7 @@ import exceptions.EnvironmentException;
  */
 public class Environment {
   Cell[][] cells;
-  GameBoard b;
+  GameBoard b = GameBoard.getInstance();
   public Cell focusedCell;
   
   private static Environment theEnv;
