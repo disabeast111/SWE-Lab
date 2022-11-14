@@ -14,7 +14,6 @@ import exceptions.EnvironmentException;
  */
 public class Environment {
   Cell[][] cells;
-  GameBoard b = GameBoard.getInstance();
   public Cell focusedCell;
   
   private static Environment theEnv;
@@ -214,6 +213,7 @@ public class Environment {
   }
   
   public int move(LifeForm lf) {
+    GameBoard b = GameBoard.getInstance();
     int i = lf.getMovesLeft();
     int oRow = lf.getRow();
     int oCol = lf.getCol();
