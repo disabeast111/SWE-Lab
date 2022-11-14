@@ -1,6 +1,5 @@
 package commands;
 
-import exceptions.WeaponException;
 import lifeform.LifeForm;
 import weapon.Weapon;
 
@@ -15,11 +14,11 @@ public class ReloadCommand implements Command{
   }
 // Execute command reloads the LifeForm's current weapon
   @Override
-  public void execute() throws WeaponException{
-    if(currentWeapon == null) {
-      throw new WeaponException("No weapon to reload");
+  public void execute() {
+    if(currentWeapon != null) {
+      currentWeapon.reload();
     }
-    currentWeapon.reload();
+    
     
   }
 

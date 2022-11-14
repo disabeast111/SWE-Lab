@@ -15,7 +15,7 @@ import weapon.Weapon;
 
 
 public class TestCommands {
-
+  Environment e = Environment.getEnvironment(5, 5);
   /**
    * Test that sets each turn command and executes each
    */
@@ -57,34 +57,20 @@ public class TestCommands {
     ReloadCommand reloadCommand = new ReloadCommand(entity1);
     reloadCommand.execute();
     assertEquals(10, pistol.getCurrentAmmo());
+    
+    entity1.dropWeapon();
+    reloadCommand.execute();
    
   }
   
-  /**
-   * Tests that nothing happens when you try reloading nothing
-   * @throws WeaponException when attempted
-   */
-  @Test
-  public void testNoWeaponReloadCommand() throws WeaponException {
-    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
-    ReloadCommand reloadCommand = new ReloadCommand(entity1);
-    boolean caught = false;
-    try {
-      reloadCommand.execute();
-    }
-    catch(WeaponException e) {
-      caught = true;
-    }
-    assertTrue(caught);
-   
-  }
+
   
   /**
    * Tests that movement command works and correctly moves a LifeForm
    */
   @Test
   public void testMoveCommand() {
-    Environment e = Environment.getEnvironment(5, 5);
+    e.clearBoard();
     Human entity = new Human("Bob", 40, 0);
     entity.setLocation(2, 2);
     assertEquals(2, entity.getRow());
@@ -103,13 +89,20 @@ public class TestCommands {
     assertEquals(4, entity.getCol());
     
   }
-  
+  /**
+   * Tests that a LifeForm can drop a weapon in a cell correctly
+   * Cannot drop if cell is already full
+   * @throws WeaponException if attempted
+   */
   @Test
-  public void testDropCommand() throws WeaponException {
+  public void testDropCommand() {
+    e.clearBoard();
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     Weapon pistol = new Pistol();
+    Weapon chain = new ChainGun();
+    Weapon plasma = new PlasmaCannon();
     entity1.pickUpWeapon(pistol);
-    Environment e = Environment.getEnvironment(5, 5);
+    
     entity1.setLocation(2, 2);
     assertTrue(entity1.hasWeapon());
     DropCommand dropCommand = new DropCommand(entity1, e);
@@ -118,22 +111,64 @@ public class TestCommands {
     Weapon[] temp = e.getWeapons(2, 2);
     assertEquals(pistol, temp[0]);
     
-    Weapon pistol2 = new ChainGun();
-    Weapon pistol3 = new PlasmaCannon();
-    e.addWeapon(pistol2, 2, 2);
+    e.addWeapon(chain, 2, 2);
     temp = e.getWeapons(2, 2);
     //System.out.println(temp[0]);
     //System.out.println(temp[1]);
-    entity1.pickUpWeapon(pistol3);
-    boolean caught = false;
-    try {
-      dropCommand.execute();
-    }
-    catch(WeaponException f) {
-      caught = true;
-    }
-    assertTrue(caught);
+    entity1.pickUpWeapon(plasma);
+    dropCommand.execute();
+    assertEquals(plasma, entity1.getCurrentWeapon());
+    
+
     
     
   }
+  
+  @Test
+  public void testAcquireCommand() throws WeaponException {
+    e.clearBoard();
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    
+    Weapon pistol = new Pistol();
+    Weapon chain = new ChainGun();
+    Weapon plasma = new PlasmaCannon();
+    entity1.setLocation(2, 2);
+    e.addWeapon(pistol, 2, 2);
+    Weapon[] temp = e.getWeapons(2, 2);
+    assertEquals(pistol, temp[0]);
+    
+    AcquireCommand acquireCommand = new AcquireCommand(entity1, e);
+    assertFalse(entity1.hasWeapon());
+    acquireCommand.execute();
+    assertTrue(entity1.hasWeapon());
+    temp = e.getWeapons(2, 2);
+    assertEquals(null, temp[0]);
+    
+    e.addWeapon(chain, 2, 2);
+    acquireCommand.execute();
+    assertEquals(chain, entity1.getCurrentWeapon());
+    temp = e.getWeapons(2, 2);
+    assertEquals(pistol, temp[0]);
+    
+    e.addWeapon(plasma, 2, 2);
+    e.removeWeapon(pistol, 2, 2);
+    acquireCommand.execute();
+    assertEquals(plasma, entity1.getCurrentWeapon());
+    temp = e.getWeapons(2, 2);
+
+    e.addWeapon(pistol, 2, 2);
+    e.removeWeapon(chain, 2, 2);
+    entity1.dropWeapon();
+    acquireCommand.execute();
+    assertEquals(pistol, entity1.getCurrentWeapon());
+
+
+    e.removeWeapon(pistol, 2, 2);
+    entity1.dropWeapon();
+    acquireCommand.execute();
+    assertEquals(null, entity1.getCurrentWeapon());
+
+  }
+  
+  
 }
