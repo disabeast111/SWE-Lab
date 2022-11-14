@@ -174,8 +174,7 @@ public class TestCommands {
   public void testAttackCommand() {
     e.clearBoard();
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
-    
-    Weap
+    Weapon
     
   }
   

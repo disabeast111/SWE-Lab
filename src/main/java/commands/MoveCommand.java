@@ -20,6 +20,7 @@ public class MoveCommand implements Command {
    // speed = lifeForm.getMaxSpeed();
     enviro.move(lifeForm);
     
+    
   }
 
 }
