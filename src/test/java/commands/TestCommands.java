@@ -12,6 +12,7 @@ import lifeform.Human;
 import lifeform.MockLifeForm;
 import weapon.ChainGun;
 import weapon.MockWeapon;
+import weapon.MockWeaponLR;
 import weapon.Pistol;
 import weapon.PlasmaCannon;
 import weapon.Weapon;
@@ -177,7 +178,7 @@ public class TestCommands {
   }
   
   @Test
-  public void testAttackCommand() throws RecoveryRateException, WeaponException {
+  public void testAttackCommandInRange() throws RecoveryRateException, WeaponException {
     e.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
     Alien target1 = new Alien("Zurg", 40);
@@ -224,7 +225,49 @@ public class TestCommands {
     //entity1.updateTime(0);
     pistol.updateTime(0);
     
+  }
+  
+  @Test
+  public void testAttackCommandOutOfRange() throws RecoveryRateException, WeaponException {
+    e.clearBoard();
+    Human entity1 = new Human("Jim", 40, 1);
+    Alien target1 = new Alien("Zurg", 40);
+    Alien target2 = new Alien("ET", 40);
+    Alien target3 = new Alien("Yoda", 40);
+    Alien target4 = new Alien("Grogu", 40);
+    MockWeaponLR mockGun = new MockWeaponLR();
+    entity1.pickUpWeapon(mockGun);
     
+    e.addLifeForm(entity1, 2, 2);
+    e.addLifeForm(target1, 0, 2);
+    e.addLifeForm(target2, 2, 4);
+    e.addLifeForm(target3, 4, 2);
+    e.addLifeForm(target4, 2, 0);
+    
+    AttackCommand attackCommand = new AttackCommand(entity1, e);
+    
+    attackCommand.execute();
+    assertEquals(40, target1.getCurrentLifePoints());
+    //entity1.updateTime(0);
+    mockGun.updateTime(0);
+    
+    entity1.setDirection(1);
+    attackCommand.execute();
+    assertEquals(40, target2.getCurrentLifePoints());
+   //entity1.updateTime(0);
+    mockGun.updateTime(0);
+    
+    entity1.setDirection(2);
+    attackCommand.execute();
+    assertEquals(40, target3.getCurrentLifePoints());
+    //entity1.updateTime(0);
+    mockGun.updateTime(0);
+    
+    entity1.setDirection(3);
+    attackCommand.execute();
+    assertEquals(40, target4.getCurrentLifePoints());
+    //entity1.updateTime(0);
+    mockGun.updateTime(0);
   }
   
   
