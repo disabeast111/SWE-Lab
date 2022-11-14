@@ -110,9 +110,10 @@ public class Invoker extends JFrame implements ActionListener {
       if (event.getSource() == moveButton)
       {
         command = new MoveCommand(env.focusedCell.getLifeForm(), env);
-        int oRow = env.focusedCell.getLifeForm().getRow();
-        int oCol = env.focusedCell.getLifeForm().getRow();
-        GameBoard.getInstance().updateCell(oRow, oCol);
+//        int oRow = env.focusedCell.getLifeForm().getRow();
+//        int oCol = env.focusedCell.getLifeForm().getRow();
+//        GameBoard.getInstance().updateCell(oRow, oCol);
+        //handled in environment for now
       }  else if (event.getSource() == reloadButton) {           
         command = new ReloadCommand(env.focusedCell.getLifeForm());
       }  else if (event.getSource() == attackButton) {
