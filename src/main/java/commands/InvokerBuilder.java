@@ -3,15 +3,16 @@ package commands;
 import javax.swing.JFrame;
 
 import environment.Cell;
-import exceptions.WeaponException;
+import environment.Environment;
+import gameplay.GameBoard;
+
 
 public class InvokerBuilder extends JFrame {
   Cell focusedCell;
   Command command;
-  
-  public InvokerBuilder() {
-    
-  }
+  public Environment e = Environment.getEnvironment(10, 10);
+  GameBoard gb = GameBoard.getInstance();
+ 
   
   public static void main (String[] args) {
     Invoker gui = new Invoker();
@@ -20,17 +21,7 @@ public class InvokerBuilder extends JFrame {
     gui.setBounds(1000, 200, x, y); 
   }
   
-  public void setCommand(Command c) throws WeaponException {
-    
+  public void setCommand(Command c) {
     command = c;
-    
-    
   }
-  
-  public void invoke() {
-    
-  }
-  
-
-
 }
