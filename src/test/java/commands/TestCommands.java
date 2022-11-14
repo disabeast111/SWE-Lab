@@ -74,7 +74,8 @@ public class TestCommands {
   public void testMoveCommand() {
     e.clearBoard();
     Human entity = new Human("Bob", 40, 0);
-    entity.setLocation(2, 2);
+    e.addLifeForm(entity, 2, 2);
+    //entity.setLocation(2, 2);
     assertEquals(2, entity.getRow());
     assertEquals(2, entity.getCol());
     MoveCommand moveCommand = new MoveCommand(entity, e);
@@ -105,7 +106,8 @@ public class TestCommands {
     Weapon plasma = new PlasmaCannon();
     entity1.pickUpWeapon(pistol);
     
-    entity1.setLocation(2, 2);
+    e.addLifeForm(entity1, 2, 2);
+    //entity1.setLocation(2, 2);
     assertTrue(entity1.hasWeapon());
     DropCommand dropCommand = new DropCommand(entity1, e);
     dropCommand.execute();
@@ -134,7 +136,8 @@ public class TestCommands {
     Weapon pistol = new Pistol();
     Weapon chain = new ChainGun();
     Weapon plasma = new PlasmaCannon();
-    entity1.setLocation(2, 2);
+    e.addLifeForm(entity1, 2, 2);
+    //entity1.setLocation(2, 2);
     e.addWeapon(pistol, 2, 2);
     Weapon[] temp = e.getWeapons(2, 2);
     assertEquals(pistol, temp[0]);
