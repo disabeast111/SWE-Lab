@@ -125,7 +125,7 @@ public class TestCommands {
   }
   
   @Test
-  public void testAcquireCommand() throws WeaponException {
+  public void testAcquireCommand() {
     e.clearBoard();
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     
@@ -168,6 +168,15 @@ public class TestCommands {
     acquireCommand.execute();
     assertEquals(null, entity1.getCurrentWeapon());
 
+  }
+  
+  @Test
+  public void testAttackCommand() {
+    e.clearBoard();
+    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
+    
+    Weap
+    
   }
   
   
