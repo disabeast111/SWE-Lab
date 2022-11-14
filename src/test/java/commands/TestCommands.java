@@ -11,6 +11,7 @@ import lifeform.Alien;
 import lifeform.Human;
 import lifeform.MockLifeForm;
 import weapon.ChainGun;
+import weapon.MockWeapon;
 import weapon.Pistol;
 import weapon.PlasmaCannon;
 import weapon.Weapon;
@@ -183,29 +184,45 @@ public class TestCommands {
     Alien target2 = new Alien("ET", 40);
     Alien target3 = new Alien("Yoda", 40);
     Alien target4 = new Alien("Grogu", 40);
-    Weapon pistol = new Pistol();
+    Pistol pistol = new Pistol();
     entity1.pickUpWeapon(pistol);
+    /**
     entity1.setLocation(2, 2);
     target1.setLocation(0, 2);
     target2.setLocation(2, 4);
     target3.setLocation(4, 2);
     target4.setLocation(2, 0);
+    */
+    e.addLifeForm(entity1, 2, 2);
+    e.addLifeForm(target1, 0, 2);
+    e.addLifeForm(target2, 2, 4);
+    e.addLifeForm(target3, 4, 2);
+    e.addLifeForm(target4, 2, 0);
+    
     AttackCommand attackCommand = new AttackCommand(entity1, e);
     
     attackCommand.execute();
-    assertEquals(31, target1.getCurrentLifePoints());
+    assertEquals(30, target1.getCurrentLifePoints());
+    //entity1.updateTime(0);
+    pistol.updateTime(0);
     
     entity1.setDirection(1);
     attackCommand.execute();
-    assertEquals(31, target2.getCurrentLifePoints());
+    assertEquals(30, target2.getCurrentLifePoints());
+   //entity1.updateTime(0);
+    pistol.updateTime(0);
     
     entity1.setDirection(2);
     attackCommand.execute();
-    assertEquals(31, target3.getCurrentLifePoints());
+    assertEquals(30, target3.getCurrentLifePoints());
+    //entity1.updateTime(0);
+    pistol.updateTime(0);
     
     entity1.setDirection(3);
     attackCommand.execute();
-    assertEquals(31, target4.getCurrentLifePoints());
+    assertEquals(30, target4.getCurrentLifePoints());
+    //entity1.updateTime(0);
+    pistol.updateTime(0);
     
     
   }

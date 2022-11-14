@@ -16,24 +16,29 @@ public class AttackCommand implements Command {
   public AttackCommand(LifeForm l, Environment e) {
     this.attacker = l;
     this.enviro = e;
-    r = attacker.getRow();
-    c = attacker.getCol();
-    direction = attacker.getCurrentDirection();
-    distance = 0;
+    //r = attacker.getRow();
+    //c = attacker.getCol();
+    //direction = attacker.getCurrentDirection();
+    //distance = 5;
   }
 
   @Override
   public void execute() throws WeaponException {
+    distance = 5;
+    r = attacker.getRow();
+    c = attacker.getCol();
     int tempR = r + 1;
     int tempC = c + 1;
     int tempRM = r - 1;
     int tempCM = c - 1;
+    direction = attacker.getCurrentDirection();
     if(direction == 0) {
       while(enviro.getLifeForm(tempRM, c) == null && tempRM >= 0) {
         tempRM--;
         distance = distance + 5;
         
       }
+      //tempRM++;
       target = enviro.getLifeForm(tempRM, c);
     }
     else if(direction == 1) {
@@ -42,6 +47,7 @@ public class AttackCommand implements Command {
         distance = distance + 5;
     
       }
+      //tempC--;
       target = enviro.getLifeForm(r, tempC);
     }
     else if(direction == 2) {
@@ -50,6 +56,7 @@ public class AttackCommand implements Command {
         distance = distance + 5;
         
       }
+      //tempR--;
       target = enviro.getLifeForm(tempR, c);
     }
     else if(direction == 3) {
@@ -60,6 +67,7 @@ public class AttackCommand implements Command {
       }
       target = enviro.getLifeForm(r, tempCM);
     }
+    //tempCM++;
     attacker.attack(target, distance);
   }
 
