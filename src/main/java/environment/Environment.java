@@ -3,7 +3,7 @@ package environment;
 import lifeform.LifeForm;
 
 import weapon.Weapon;
-
+import gameplay.GameBoard;
 import exceptions.EnvironmentException;
 
 /**
@@ -14,7 +14,7 @@ import exceptions.EnvironmentException;
  */
 public class Environment {
   Cell[][] cells;
-
+  GameBoard b;
   public Cell focusedCell;
   
   private static Environment theEnv;
@@ -228,6 +228,7 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
+        b.updateCell(oRow, oCol);
         return i;
       }
       
@@ -240,6 +241,7 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
+        b.updateCell(oRow, oCol);
         return i;
       }
       
@@ -252,6 +254,7 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
+        b.updateCell(oRow, oCol);
         return i;
       }
       
@@ -264,6 +267,7 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
+        b.updateCell(oRow, oCol);
         return i;
       }
     }
