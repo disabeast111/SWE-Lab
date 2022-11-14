@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import environment.Environment;
+import exceptions.RecoveryRateException;
 import exceptions.WeaponException;
+import lifeform.Alien;
 import lifeform.Human;
 import lifeform.MockLifeForm;
 import weapon.ChainGun;
@@ -171,10 +173,37 @@ public class TestCommands {
   }
   
   @Test
-  public void testAttackCommand() {
+  public void testAttackCommand() throws RecoveryRateException, WeaponException {
     e.clearBoard();
-    MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
-    Weapon
+    Human entity1 = new Human("Jim", 40, 1);
+    Alien target1 = new Alien("Zurg", 40);
+    Alien target2 = new Alien("ET", 40);
+    Alien target3 = new Alien("Yoda", 40);
+    Alien target4 = new Alien("Grogu", 40);
+    Weapon pistol = new Pistol();
+    entity1.pickUpWeapon(pistol);
+    entity1.setLocation(2, 2);
+    target1.setLocation(0, 2);
+    target2.setLocation(2, 4);
+    target3.setLocation(4, 2);
+    target4.setLocation(2, 0);
+    AttackCommand attackCommand = new AttackCommand(entity1, e);
+    
+    attackCommand.execute();
+    assertEquals(31, target1.getCurrentLifePoints());
+    
+    entity1.setDirection(1);
+    attackCommand.execute();
+    assertEquals(31, target2.getCurrentLifePoints());
+    
+    entity1.setDirection(2);
+    attackCommand.execute();
+    assertEquals(31, target3.getCurrentLifePoints());
+    
+    entity1.setDirection(3);
+    attackCommand.execute();
+    assertEquals(31, target4.getCurrentLifePoints());
+    
     
   }
   

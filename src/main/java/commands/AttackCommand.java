@@ -1,21 +1,66 @@
 package commands;
 
+import environment.Environment;
+import exceptions.WeaponException;
 import lifeform.LifeForm;
-import weapon.GenericWeapon;
 
 public class AttackCommand implements Command {
   LifeForm attacker;
-  GenericWeapon heldWeapon;
+  Environment enviro;
+  int r;
+  int c;
+  int direction;
+  int distance;
+  LifeForm target = null;
   
-  public AttackCommand(LifeForm a, GenericWeapon w) {
-    this.attacker = a;
+  public AttackCommand(LifeForm l, Environment e) {
+    this.attacker = l;
+    this.enviro = e;
+    r = attacker.getRow();
+    c = attacker.getCol();
+    direction = attacker.getCurrentDirection();
+    distance = 0;
   }
 
   @Override
-  public void execute() {
-    // TODO Auto-generated method stub
-   // attacker.attack(attacker, 0);
+  public void execute() throws WeaponException {
+    int tempR = r + 1;
+    int tempC = c + 1;
+    int tempRM = r - 1;
+    int tempCM = c - 1;
+    if(direction == 0) {
+      while(enviro.getLifeForm(tempRM, c) == null && tempRM >= 0) {
+        tempRM--;
+        distance = distance + 5;
+        
+      }
+      target = enviro.getLifeForm(tempRM, c);
+    }
+    else if(direction == 1) {
+      while(enviro.getLifeForm(r, tempC) == null && tempC <= enviro.getNumCols()) {
+        tempC++;
+        distance = distance + 5;
     
+      }
+      target = enviro.getLifeForm(r, tempC);
+    }
+    else if(direction == 2) {
+      while(enviro.getLifeForm(tempR, c) == null && tempR <= enviro.getNumRows()) {
+        tempR++;
+        distance = distance + 5;
+        
+      }
+      target = enviro.getLifeForm(tempR, c);
+    }
+    else if(direction == 3) {
+      while(enviro.getLifeForm(r, tempCM) == null && tempCM >= 0) {
+        tempCM--;
+        distance = distance + 5;
+        
+      }
+      target = enviro.getLifeForm(r, tempCM);
+    }
+    attacker.attack(target, distance);
   }
 
 }
