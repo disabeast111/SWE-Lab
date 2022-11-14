@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import environment.Environment;
 import exceptions.AttachmentException;
 import exceptions.EnvironmentException;
 import lifeform.*;
@@ -86,23 +87,8 @@ public class TestEnvironment {
     assertEquals(0, entity.getRow());
     assertEquals(1, entity.getCol());
     assertEquals(0, entity.getMovesLeft());
-  }
-  
-  @Test
-  public void testMoveFilledSpot() {
-    Human entity1 = new Human("Bob", 40, 0);
-    Human entity2 = new Human("Jim", 40, 0);
-    e.addLifeForm(entity1, 0, 2);
-    e.addLifeForm(entity2, 2, 2);
-    entity1.setLocation(0,2);
-    entity2.setLocation(2, 2);
-    assertEquals(0, entity1.getRow());
-    assertEquals(2, entity1.getCol());
-    assertEquals(2, entity2.getRow());
-    assertEquals(2, entity2.getCol());
-    e.move(entity2);
-    assertEquals(1, entity2.getRow());
-    assertEquals(2, entity2.getCol());
+    
+    
   }
 
   /*

@@ -197,4 +197,8 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public void updateTime(int time) {
     movesLeft = maxSpeed;
   }
+  //Setup this getter to retrieve current weapon in command
+  public Weapon getCurrentWeapon() {
+    return weapon;
+  }
 }

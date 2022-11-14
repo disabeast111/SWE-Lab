@@ -1,11 +1,19 @@
 package commands;
 
-public class TurnWestCommand implements Command{
+import lifeform.LifeForm;
 
+public class TurnWestCommand implements Command {
+  LifeForm lifeForm;
+
+//Constructor takes in LifeForm being turned and sets instance
+  public TurnWestCommand(LifeForm l) {
+    this.lifeForm = l;
+  }
+
+//Execute command changes that LifeForm's direction
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
-    // lifeform setDirection(3)
+    lifeForm.setDirection(3);
   }
 
 }

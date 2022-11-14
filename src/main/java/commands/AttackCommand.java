@@ -14,7 +14,7 @@ public class AttackCommand implements Command {
   @Override
   public void execute() {
     // TODO Auto-generated method stub
-    attacker.attack(attacker, 0);
+   // attacker.attack(attacker, 0);
     
   }
 

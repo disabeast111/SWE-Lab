@@ -1,18 +1,24 @@
 package commands;
 
-import weapon.GenericWeapon;
+import lifeform.LifeForm;
+import weapon.Weapon;
 
 public class ReloadCommand implements Command{
-  GenericWeapon weapon;
-  
-  public ReloadCommand(GenericWeapon w) {
-    this.weapon = w;
+  Weapon currentWeapon;
+  LifeForm lifeForm;
+//Constructor takes in LifeForm that will reload and sets instance
+  public ReloadCommand(LifeForm l) {
+    
+    this.lifeForm = l;
+    this.currentWeapon = lifeForm.getCurrentWeapon();
   }
-
+// Execute command reloads the LifeForm's current weapon
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
-    weapon.reload();
+    if(currentWeapon != null) {
+      currentWeapon.reload();
+    }
+    
     
   }
 
