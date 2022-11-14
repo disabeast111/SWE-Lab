@@ -3,8 +3,6 @@ package environment;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import environment.Environment;
 import exceptions.AttachmentException;
 import exceptions.EnvironmentException;
 import lifeform.*;
