@@ -228,7 +228,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        updateCell(oRow, oCol);
         return i;
       }
       
@@ -241,7 +240,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        updateCell(oRow, oCol);
         return i;
       }
       
@@ -254,7 +252,6 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        updateCell(oRow, oCol);
         return i;
       }
       
@@ -267,11 +264,9 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        updateCell(oRow, oCol);
         return i;
       }
     }
-    updateCell(oRow, oCol);
     return 0; // out of moves this round
   }
 }
