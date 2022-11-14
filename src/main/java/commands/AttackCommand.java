@@ -3,6 +3,7 @@ package commands;
 import environment.Environment;
 import exceptions.WeaponException;
 import lifeform.LifeForm;
+import weapon.Weapon;
 
 public class AttackCommand implements Command {
   LifeForm attacker;
@@ -33,12 +34,15 @@ public class AttackCommand implements Command {
     int tempCM = c - 1;
     direction = attacker.getCurrentDirection();
     if(direction == 0) {
-      while(enviro.getLifeForm(tempRM, c) == null && tempRM >= 0) {
+      while(tempRM >= 0 && enviro.getLifeForm(tempRM, c) == null) {
         tempRM--;
         distance = distance + 5;
         
       }
       //tempRM++;
+      if(tempRM < 0) {
+        tempRM = 0;
+      }
       target = enviro.getLifeForm(tempRM, c);
     }
     else if(direction == 1) {
@@ -68,7 +72,13 @@ public class AttackCommand implements Command {
       target = enviro.getLifeForm(r, tempCM);
     }
     //tempCM++;
-    attacker.attack(target, distance);
+    if(target != null) {
+      attacker.attack(target, distance);
+    }
+    if(target == null) {
+      Weapon w = attacker.getCurrentWeapon();
+      w.fire(1);
+    }
   }
 
 }
