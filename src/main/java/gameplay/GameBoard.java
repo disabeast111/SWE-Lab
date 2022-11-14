@@ -17,7 +17,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
   }
 
-  public void updateCell() {
+  public void updateCell(int row, int col) {
 
   }
 
