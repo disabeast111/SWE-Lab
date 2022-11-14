@@ -8,16 +8,21 @@ import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import environment.Environment;
+import exceptions.WeaponException;
+import gameplay.GameBoard;
 
 public class Invoker extends JFrame implements ActionListener {
   JButton moveButton, northButton, eastButton, southButton, 
-    westButton, acquireButton, dropButton, reloadButton, fireButton;
-  Environment e;
+    westButton, acquireButton, dropButton, reloadButton, attackButton;
+  JLabel errorLabel;
   
   
+  Environment env = Environment.getEnvironment(10, 10);
+  GameBoard gameb = GameBoard.getInstance();
   
   public Invoker() {
     setLayout(new BorderLayout());
@@ -29,9 +34,9 @@ public class Invoker extends JFrame implements ActionListener {
     reloadButton.addActionListener(this);
     weaponPanel.add(reloadButton);
     
-    fireButton = new JButton("Fire");
-    fireButton.addActionListener(this);
-    weaponPanel.add(fireButton);
+    attackButton = new JButton("Fire");
+    attackButton.addActionListener(this);
+    weaponPanel.add(attackButton);
     
     dropButton = new JButton("Drop Weapon");
     dropButton.addActionListener(this);
@@ -100,18 +105,48 @@ public class Invoker extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent event) {
     InvokerBuilder inv = new InvokerBuilder();
     
-    if (e.focusedCell.getLifeForm() != null) {
+    Command command = null;
+    if (env.focusedCell != null && env.focusedCell.getLifeForm() != null) {
       if (event.getSource() == moveButton)
       {
-          moveButton.setText("Pushed");//delete this
-          Command move = new MoveCommand(e.focusedCell.getLifeForm(), e);
-          inv.setCommand(move);
-          
-          
+        command = new MoveCommand(env.focusedCell.getLifeForm(), env);
+        int oRow = env.focusedCell.getLifeForm().getRow();
+        int oCol = env.focusedCell.getLifeForm().getRow();
+        GameBoard.getInstance().updateCell(oRow, oCol);
       }  else if (event.getSource() == reloadButton) {           
-      
+        command = new ReloadCommand(env.focusedCell.getLifeForm());
+      }  else if (event.getSource() == attackButton) {
+        command = new AttackCommand(env.focusedCell.getLifeForm(), null);//null should be env
+      }  else if (event.getSource() == dropButton) {
+        command = new DropCommand(env.focusedCell.getLifeForm(), env);
+      }   else if (event.getSource() == acquireButton) {
+        command = new AcquireCommand(env.focusedCell.getLifeForm(), env);
+      }   else if (event.getSource() == northButton) {
+        command = new TurnNorthCommand(env.focusedCell.getLifeForm());
+      }   else if (event.getSource() == eastButton) {
+        command = new TurnEastCommand(env.focusedCell.getLifeForm());
+      }   else if (event.getSource() == southButton) {
+        command = new TurnSouthCommand(env.focusedCell.getLifeForm());
+      }   else if (event.getSource() == westButton) {
+        command = new TurnWestCommand(env.focusedCell.getLifeForm());
+      } 
+      inv.setCommand(command);
+      try {
+        inv.command.execute();
+      } catch (WeaponException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
       }
+      int row = env.focusedCell.getLifeForm().getRow();
+      int col = env.focusedCell.getLifeForm().getRow();
+      GameBoard.getInstance().updateCell(row, col);  
+
+      
     } else {
+   
+      errorLabel = new JLabel("No LifeForm in this Cell");
+      inv.add("North", errorLabel);//doesnt work
+      System.out.println("Error: No lifeform");
       /*
        * Still needed: each button should set command and execute, show
        * an error if there is no lifeform in the cell.
