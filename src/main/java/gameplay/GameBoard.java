@@ -22,9 +22,7 @@ public class GameBoard extends JFrame implements ActionListener {
   Environment environment = Environment.getEnvironment(10, 10);
   JPanel centerPanel, statsPanel;
   JLabel textLabel, legendLabel;
-  JPanel[] stats;
-  final int location = 0, weaponType = 1, lifeformName = 2, attackStrength = 3, lifePoints = 4, ammo = 5,
-      armorPoints = 6;
+  JLabel[][] statsLabels = new JLabel[8][2];
   JRadioButton[][] grid;
 
   BufferedImage cellImage, alienImage;
@@ -36,21 +34,18 @@ public class GameBoard extends JFrame implements ActionListener {
 
   private GameBoard() {
     setLayout(new BorderLayout());
-
     setupImages();
+    
+    try {
+    environment.focusedCell = environment.getCell(0, 0);
+    } catch (EnvironmentException e) {
+      System.out.println("You screwed it up somehow...");
+    }
+    
+    setupInfo();
 
-    textLabel = new JLabel("MOIST MAKER INVADERS 3");
-    textLabel.setFont(new Font(null, Font.BOLD, 20));
-    textLabel.setHorizontalAlignment(SwingConstants.CENTER);
     add("North", textLabel);
-
-    JPanel cellStats = new JPanel(new GridLayout(2, 3));
-    for (int i = 0; i < 6; i++)
-      cellStats.add(new JLabel("-", SwingConstants.CENTER));
-    add("South", cellStats);
-
-    legendLabel = new JLabel(legend);
-    legendLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+    add("South", statsPanel);
     add("East", legendLabel);
 
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
@@ -115,8 +110,134 @@ public class GameBoard extends JFrame implements ActionListener {
     }
   }
 
-  private void updateStats() {
+  private void setupInfo() {
+    // Title
+    textLabel = new JLabel("PoS: The Game");
+    textLabel.setFont(new Font(null, Font.BOLD, 20));
+    textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+    // Focused Cell Statistics Panel
+    statsPanel = new JPanel(new GridLayout(8, 2));
+    for (int row = 0; row < 8; row++) {
+      for (int col = 0; col < 2; col++) {
+        statsLabels[row][col] = new JLabel();
+      }
+    }
+    updateStats(0,0);
+
+    // Legend
+    legendLabel = new JLabel(legend);
+    legendLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+  }
+
+  public void updateStats(int r, int c) {
     Cell currentCell = environment.focusedCell;
+    // Coordinates
+    statsLabels[0][0].setText("Cell: (" + r + "," + c + ")");
+
+    String text0 = "No LifeForm", text1 = "N/A", text2 = "N/A", text3 = "N/A", text4 = "N/A", text5 = "N/A";
+
+    // LifeForm Type & Name
+    if (currentCell.getLifeForm() != null) {
+      LifeForm lifeForm = currentCell.getLifeForm();
+
+      if (lifeForm instanceof Human) {
+        text0 = "Human: ";
+        Human h = (Human) lifeForm;
+        text2 = "Armor Points: " + h.getArmorPoints();
+
+      } else {
+        text0 = "Alien: ";
+      }
+      text0 += lifeForm.getName();
+      text1 = "Life Points: " + lifeForm.getCurrentLifePoints();
+      text3 = "Attack Strength: " + lifeForm.getAttackStrength();
+
+      if (lifeForm.hasWeapon()) {
+        Weapon w = lifeForm.getCurrentWeapon();
+        text4 = "Weapon: " + w.toString().split(" ")[0];
+        text5 = "Ammo: " + w.getCurrentAmmo() + "/" + w.getMaxAmmo();
+      }
+    }
+
+    // LifeForm Name & Type
+    statsLabels[1][0].setText(text0);
+
+    // Life Points
+    statsLabels[2][0].setText(text1);
+
+    // Armor Points
+    statsLabels[3][0].setText(text2);
+
+    // Attack Strength
+    statsLabels[4][0].setText(text3);
+    statsLabels[5][0].setText("---");
+
+    // Weapon Held by LifeForm
+    statsLabels[6][0].setText(text4);
+
+    // Ammo Held by LifeForm
+    statsLabels[7][0].setText(text5);
+    
+    statsLabels[0][1].setText("Cell Conatins:");
+    
+    text0 = "Weapon 1: ";
+    text1 = "";
+    text2 = "";
+    text3 = "Weapon 2: ";
+    text4 = "";
+    text5 = "";
+    //Weapon 1
+    if (currentCell.getWeapon1() != null) {
+      Weapon w = currentCell.getWeapon1();
+      String[] wString = w.toString().split(" ");
+      text0 += wString[0];
+      switch(wString.length) {
+      case 2:
+        text1 = wString[1];
+        break;
+      case 3:
+        text1 = wString[1];
+        text2 = wString[2];
+      }
+    } else {
+      text0 += "none";
+    }
+    
+  //Weapon 2
+    if (currentCell.getWeapon2() != null) {
+      Weapon w = currentCell.getWeapon2();
+      String[] wString = w.toString().split(" ");
+      text3 += wString[0];
+      switch(wString.length) {
+      case 2:
+        text4 = wString[1];
+        break;
+      case 3:
+        text4 = wString[1];
+        text5 = wString[2];
+      }
+    } else {
+      text0 += "none";
+    }
+    
+    // Weapon 1 Type
+    statsLabels[1][1].setText(text0);
+    
+    //Weapon 1 First Attachment
+    statsLabels[2][1].setText(text1);
+    
+    //Weapon 1 Second Attachment
+    statsLabels[3][1].setText(text2);
+    statsLabels[4][1].setText("---");
+    //Weapon 2 Type
+    statsLabels[5][1].setText(text3);
+    
+    //Weapon 2 First Attachment
+    statsLabels[6][1].setText(text4);
+    
+    //Weapon 2 Second Attachment
+    statsLabels[7][1].setText(text5);
   }
 
   public void updateCell(int row, int col) {
@@ -164,7 +285,7 @@ public class GameBoard extends JFrame implements ActionListener {
           cellDim, null);
     }
 
-    //Add Focused Cell Graphic
+    // Add Focused Cell Graphic
     try {
       if (environment.getCell(row, col) == environment.focusedCell) {
         cellGraphics.drawImage(focus.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
@@ -197,14 +318,4 @@ public class GameBoard extends JFrame implements ActionListener {
       }
     }
   }
-
-//  public static void main(String[] args) throws RecoveryRateException, AttachmentException {
-//    Environment environment = Environment.getEnvironment(10, 10);
-//    LifeForm joe = new Human("Joe", 10, 10);
-//    joe.pickUpWeapon(new Scope(new Pistol()));
-//    LifeForm jane = new Alien("Jane", 10, new RecoveryLinear(5));
-//    environment.addLifeForm(joe, 0, 0);
-//    environment.addLifeForm(jane, 3, 5);
-//    new GameBoard();
-//  }
 }
