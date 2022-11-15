@@ -46,31 +46,31 @@ public class AttackCommand implements Command {
       target = enviro.getLifeForm(tempRM, c);
     }
     else if(direction == 1) {
-      while(tempC < enviro.getNumCols() && enviro.getLifeForm(r, tempC) == null) {
+      while(tempC < enviro.getNumCols() - 1 && enviro.getLifeForm(r, tempC) == null) {
         tempC++;
         distance = distance + 5;
     
       }
       //tempC--;
-      if(tempC > enviro.getNumCols()) {
+      if(tempC > enviro.getNumCols() - 1) {
         tempC = enviro.getNumCols() - 1;
       }
       target = enviro.getLifeForm(r, tempC);
     }
     else if(direction == 2) {
-      while(enviro.getLifeForm(tempR, c) == null && tempR <= enviro.getNumRows()) {
+      while(enviro.getLifeForm(tempR, c) == null && tempR < enviro.getNumRows() - 1) {
         tempR++;
         distance = distance + 5;
         
       }
       //tempR--;
-      if(tempR > enviro.getNumRows()) {
+      if(tempR > enviro.getNumRows() - 1) {
         tempR = enviro.getNumRows() - 1;
       }
       target = enviro.getLifeForm(tempR, c);
     }
     else if(direction == 3) {
-      while(enviro.getLifeForm(r, tempCM) == null && tempCM >= 0) {
+      while(tempCM >= 0 && enviro.getLifeForm(r, tempCM) == null) {
         tempCM--;
         distance = distance + 5;
         
