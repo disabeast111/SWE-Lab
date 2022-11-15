@@ -99,7 +99,8 @@ public class Cell {
     if (getWeaponsCount() > 0) { 
       if (weapon1 == weapon) {
         removed = weapon1;
-        weapon1 = null;
+        weapon1 = weapon2;
+        weapon2 = null;
         count -= 1;
         return removed;
       } else if (weapon2 == weapon) {

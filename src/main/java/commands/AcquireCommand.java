@@ -24,25 +24,23 @@ public class AcquireCommand implements Command {
     t = lifeForm.getCurrentWeapon();
     Weapon[] temp = enviro.getWeapons(r,c);
     if(temp[0] != null && t == null) {
-      lifeForm.pickUpWeapon(temp[0]);
-      enviro.removeWeapon(temp[0], r, c);
+      lifeForm.pickUpWeapon(enviro.removeWeapon(temp[0], r, c));
     }
     else if(temp[0] != null && t != null) {
       lifeForm.dropWeapon();
-      lifeForm.pickUpWeapon(temp[0]);
-      enviro.removeWeapon(temp[0], r, c);
+      lifeForm.pickUpWeapon(enviro.removeWeapon(temp[0], r, c));
       enviro.addWeapon(t, r, c);
     }
-    else if(temp[0] == null && t != null && temp[1] != null) {
-      lifeForm.dropWeapon();
-      lifeForm.pickUpWeapon(temp[1]);
-      enviro.removeWeapon(temp[1], r, c);
-      enviro.addWeapon(t, r, c);
-    }
-    else if(temp[0] == null && t == null && temp[1] != null) {
-      lifeForm.pickUpWeapon(temp[1]);
-      enviro.removeWeapon(temp[1], r, c);
-    }
+//    else if(temp[0] == null && t != null && temp[1] != null) {
+//      lifeForm.dropWeapon();
+//      lifeForm.pickUpWeapon(temp[1]);
+//      enviro.removeWeapon(temp[1], r, c);
+//      enviro.addWeapon(t, r, c);
+//    }
+//    else if(temp[0] == null && t == null && temp[1] != null) {
+//      lifeForm.pickUpWeapon(temp[1]);
+//      enviro.removeWeapon(temp[1], r, c);
+//    }
 
     
   }
