@@ -2,8 +2,11 @@ package gameplay;
 
 import commands.*;
 import environment.*;
+import exceptions.AttachmentException;
 import exceptions.EnvironmentException;
+import exceptions.RecoveryRateException;
 import lifeform.*;
+import recovery.RecoveryLinear;
 import weapon.*;
 
 import javax.imageio.ImageIO;
@@ -181,7 +184,13 @@ public class GameBoard extends JFrame implements ActionListener {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws RecoveryRateException, AttachmentException {
+    Environment environment = Environment.getEnvironment(10, 10);
+    LifeForm joe = new Human("Joe", 10, 10);
+    joe.pickUpWeapon(new Scope(new Pistol()));
+    LifeForm jane = new Alien("Jane", 10, new RecoveryLinear(5));
+    environment.addLifeForm(joe, 0,0);
+    environment.addLifeForm(jane, 3, 5);
     new GameBoard();
   }
 }
