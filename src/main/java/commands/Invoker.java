@@ -128,6 +128,8 @@ public class Invoker extends JFrame implements ActionListener {
         command = new TurnWestCommand(env.focusedCell.getLifeForm());
       } 
       inv.setCommand(command);
+      
+      
       try {
         inv.command.execute();
       } catch (WeaponException e) {
@@ -135,7 +137,7 @@ public class Invoker extends JFrame implements ActionListener {
         e.printStackTrace();
       }
       int row = env.focusedCell.getLifeForm().getRow();
-      int col = env.focusedCell.getLifeForm().getRow();
+      int col = env.focusedCell.getLifeForm().getCol();
       GameBoard.getInstance().updateCell(row, col);  
 
       

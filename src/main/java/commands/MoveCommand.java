@@ -1,6 +1,7 @@
 package commands;
 
 import environment.Environment;
+import exceptions.EnvironmentException;
 import lifeform.LifeForm;
 
 /**
@@ -26,7 +27,13 @@ public class MoveCommand implements Command {
    */
   @Override
   public void execute() {
-    enviro.move(lifeForm);
+    try {
+      enviro.move(lifeForm);
+      lifeForm.updateTime(0);
+    } catch (EnvironmentException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
   }
 

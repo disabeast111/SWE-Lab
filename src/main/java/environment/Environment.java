@@ -243,8 +243,8 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        gb.updateCell(oRow, oCol);
         focusedCell = getCell(oRow - i, oCol);
+        gb.updateCell(oRow, oCol);
         return i;
       }
       
@@ -257,8 +257,8 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        gb.updateCell(oRow, oCol);
         focusedCell = getCell(oRow, oCol + i);
+        gb.updateCell(oRow, oCol);
         return i;
       }
       
@@ -271,8 +271,8 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        gb.updateCell(oRow, oCol);
         focusedCell = getCell(oRow + i, oCol);
+        gb.updateCell(oRow, oCol);
         return i;
       }
       
@@ -285,8 +285,8 @@ public class Environment {
         }
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
-        gb.updateCell(oRow, oCol);
         focusedCell = getCell(oRow, oCol - i);
+        gb.updateCell(oRow, oCol);
         return i;
       }
     }
