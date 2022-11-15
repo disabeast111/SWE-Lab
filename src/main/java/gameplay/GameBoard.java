@@ -20,13 +20,16 @@ import java.io.File;
 public class GameBoard extends JFrame implements ActionListener {
   private static GameBoard singletonInstance;
   Environment environment = Environment.getEnvironment(10, 10);
-  JPanel centerPanel, legendPanel, statsPanel;
-  JLabel textLabel;
+  JPanel centerPanel, statsPanel;
+  JLabel textLabel, legendLabel;
+  JPanel[] stats;
+  final int location = 0, weaponType = 1, lifeformName = 2, attackStrength = 3, lifePoints = 4, ammo = 5,
+      armorPoints = 6;
   JRadioButton[][] grid;
 
   BufferedImage cellImage, alienImage;
   BufferedImage[] humanImages = new BufferedImage[3];
-  ImageIcon cell, focus;
+  ImageIcon cell, focus, legend;
   ImageIcon[][] humans = new ImageIcon[3][4], weapons = new ImageIcon[3][2];
   ImageIcon[] aliens = new ImageIcon[4];
   private int cellDim = 70, prevRow = 0, prevCol = 0;
@@ -36,7 +39,8 @@ public class GameBoard extends JFrame implements ActionListener {
 
     setupImages();
 
-    textLabel = new JLabel("(-,-)");
+    textLabel = new JLabel("MOIST MAKER INVADERS 3");
+    textLabel.setFont(new Font(null, Font.BOLD, 20));
     textLabel.setHorizontalAlignment(SwingConstants.CENTER);
     add("North", textLabel);
 
@@ -45,16 +49,17 @@ public class GameBoard extends JFrame implements ActionListener {
       cellStats.add(new JLabel("-", SwingConstants.CENTER));
     add("South", cellStats);
 
-    legendPanel = new JPanel(new GridLayout(1, 0));
-    legendPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-    add("East", legendPanel);
+    legendLabel = new JLabel(legend);
+    legendLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+    add("East", legendLabel);
+
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
     grid = new JRadioButton[10][10];
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         grid[row][col] = new JRadioButton();
         grid[row][col].setSize(70, 70);
-        updateCell(row,col);
+        updateCell(row, col);
         grid[row][col].addActionListener(this);
         centerPanel.add(grid[row][col]);
       }
@@ -73,18 +78,21 @@ public class GameBoard extends JFrame implements ActionListener {
   }
 
   private void setupImages() {
+    // Load Legend Image
+    legend = new ImageIcon("images/legend.png");
+
     // Load Cell Image
     cell = new ImageIcon(
-        new ImageIcon("bin/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        new ImageIcon("images/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Focused Cell Graphic
     focus = new ImageIcon(
-        new ImageIcon("bin/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        new ImageIcon("images/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Human Images
     for (int weapon = 0; weapon < 3; weapon++) {
       for (int direction = 0; direction < 4; direction++) {
-        String fileName = "bin/human" + weapon + direction + ".png";
+        String fileName = "images/human" + weapon + direction + ".png";
         humans[weapon][direction] = new ImageIcon(
             new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
       }
@@ -92,7 +100,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     // Load Alien Images
     for (int direction = 0; direction < 4; direction++) {
-      String filename = "bin/alien" + 0 + direction + ".png";
+      String filename = "images/alien" + 0 + direction + ".png";
       aliens[direction] = new ImageIcon(
           new ImageIcon(filename).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
     }
@@ -100,11 +108,15 @@ public class GameBoard extends JFrame implements ActionListener {
     // Load Weapon Images
     for (int weapon = 0; weapon < 3; weapon++) {
       for (int direction = 0; direction < 2; direction++) {
-        String fileName = "bin/weapon" + weapon + direction + ".png";
+        String fileName = "images/weapon" + weapon + direction + ".png";
         weapons[weapon][direction] = new ImageIcon(
             new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
       }
     }
+  }
+
+  private void updateStats() {
+    Cell currentCell = environment.focusedCell;
   }
 
   public void updateCell(int row, int col) {
@@ -152,10 +164,12 @@ public class GameBoard extends JFrame implements ActionListener {
           cellDim, null);
     }
 
-    // TODO Add Focused Cell Graphic
+    //Add Focused Cell Graphic
     try {
       if (environment.getCell(row, col) == environment.focusedCell) {
         cellGraphics.drawImage(focus.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
+        prevRow = row;
+        prevCol = col;
       }
     } catch (Exception e) {
       System.out.println("Error occurred; caught environment exception in updateCell().");
@@ -184,13 +198,13 @@ public class GameBoard extends JFrame implements ActionListener {
     }
   }
 
-  public static void main(String[] args) throws RecoveryRateException, AttachmentException {
-    Environment environment = Environment.getEnvironment(10, 10);
-    LifeForm joe = new Human("Joe", 10, 10);
-    joe.pickUpWeapon(new Scope(new Pistol()));
-    LifeForm jane = new Alien("Jane", 10, new RecoveryLinear(5));
-    environment.addLifeForm(joe, 0,0);
-    environment.addLifeForm(jane, 3, 5);
-    new GameBoard();
-  }
+//  public static void main(String[] args) throws RecoveryRateException, AttachmentException {
+//    Environment environment = Environment.getEnvironment(10, 10);
+//    LifeForm joe = new Human("Joe", 10, 10);
+//    joe.pickUpWeapon(new Scope(new Pistol()));
+//    LifeForm jane = new Alien("Jane", 10, new RecoveryLinear(5));
+//    environment.addLifeForm(joe, 0, 0);
+//    environment.addLifeForm(jane, 3, 5);
+//    new GameBoard();
+//  }
 }
