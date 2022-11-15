@@ -239,7 +239,7 @@ public class Environment {
     int orgRow = lf.getRow();
     int orgCol = lf.getCol();
 
-    if (lf.getMovesLeft() > 0) {
+    if (lf.getMovesLeft() > 0 && lf.getCurrentLifePoints() > 0) {
       if (lf.getCurrentDirection() == 0) { // N
         while (addLifeForm(lf, orgRow - i, orgCol) == false) {
           i--;
