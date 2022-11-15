@@ -144,10 +144,11 @@ public class Invoker extends JFrame implements ActionListener {
       int row = env.focusedCell.getLifeForm().getRow();
       int col = env.focusedCell.getLifeForm().getCol();
       GameBoard.getInstance().updateCell(row, col);
-
+      GameBoard.getInstance().updateStats(row, col);
+      
       if (event.getSource() == moveButton) {
         GameBoard.getInstance().updateCell(prevRow, prevCol);
-        // GameBoard.getInstance().updateStats(row, col);
+        
       }
 
     } else {
