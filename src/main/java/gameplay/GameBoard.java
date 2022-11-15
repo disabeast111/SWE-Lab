@@ -48,7 +48,6 @@ public class GameBoard extends JFrame implements ActionListener {
     ImageIcon icon = createImage();
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
     grid = new JRadioButton[10][10];
-    add("Center", centerPanel);
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         grid[row][col] = new JRadioButton(cell);
@@ -57,9 +56,17 @@ public class GameBoard extends JFrame implements ActionListener {
         centerPanel.add(grid[row][col]);
       }
     }
+    add("Center", centerPanel);
     setResizable(false);
     pack();
     setVisible(true);
+    
+    // Intitially Update All Cells in Grid
+    for (int row = 0; row < 10; row++) {
+      for (int col = 0; col < 10; col++) {
+        updateCell(row, col);
+      }
+    }
   }
 
   public static GameBoard getInstance() {
