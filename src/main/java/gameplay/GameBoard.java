@@ -1,43 +1,63 @@
 package gameplay;
 
-import commands.*;
-import environment.*;
-import exceptions.AttachmentException;
-import exceptions.EnvironmentException;
-import exceptions.RecoveryRateException;
-import lifeform.*;
-import recovery.RecoveryLinear;
-import weapon.*;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+
+import environment.Cell;
+import environment.Environment;
+import exceptions.EnvironmentException;
+import lifeform.Alien;
+import lifeform.Human;
+import lifeform.LifeForm;
+import weapon.Weapon;
 
 public class GameBoard extends JFrame implements ActionListener {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
   private static GameBoard singletonInstance;
   Environment environment;
-  JPanel centerPanel, statsPanel;
-  JLabel titleLabel, legendLabel;
+  JPanel centerPanel;
+  JPanel statsPanel;
+  JLabel titleLabel;
+  JLabel legendLabel;
   JLabel[][] statsLabels = new JLabel[8][2];
   JRadioButton[][] grid;
 
-  BufferedImage cellImage, alienImage;
+  BufferedImage cellImage;
+  BufferedImage alienImage;
   BufferedImage[] humanImages = new BufferedImage[3];
-  ImageIcon cell, focus, legend;
-  ImageIcon[][] humans = new ImageIcon[3][4], weapons = new ImageIcon[3][2];
+  ImageIcon cell;
+  ImageIcon focus;
+  ImageIcon legend;
   ImageIcon[] aliens = new ImageIcon[4];
-  private int cellDim = 70, prevRow = 0, prevCol = 0;
+  ImageIcon[][] humans = new ImageIcon[3][4];
+  ImageIcon[][] weapons = new ImageIcon[3][2];
+
+  private int cellDim = 70;
+  private int prevRow = 0;
+  private int prevCol = 0;
 
   private GameBoard() {
     environment = Environment.getEnvironment(10, 10);
     setLayout(new BorderLayout());
-    
+
     setupImages();
 
     try {
@@ -83,7 +103,8 @@ public class GameBoard extends JFrame implements ActionListener {
 
     // Load Cell Image
     cell = new ImageIcon(
-        new ImageIcon("images/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        new ImageIcon("images/cell.png")
+        .getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Focused Cell Graphic
     focus = new ImageIcon(
@@ -146,7 +167,12 @@ public class GameBoard extends JFrame implements ActionListener {
     // Coordinates
     statsLabels[0][0].setText("Cell: (" + r + "," + c + ")");
 
-    String text0 = "No LifeForm", text1 = "N/A", text2 = "N/A", text3 = "N/A", text4 = "N/A", text5 = "N/A";
+    String text0 = "No LifeForm";
+    String text1 = "N/A";
+    String text2 = "N/A";
+    String text3 = "N/A";
+    String text4 = "N/A"; 
+    String text5 = "N/A";
 
     // LifeForm Type & Name
     if (currentCell.getLifeForm() != null) {
@@ -260,13 +286,13 @@ public class GameBoard extends JFrame implements ActionListener {
       Weapon w = environment.getWeapons(row, col)[position];
       if (w != null) {
         String wString = w.toString().split(" ")[0];
-      if (wString.equals("Pistol")) {
-        weapon = 0;
-      } else if (wString.equals("ChainGun")) {
-        weapon = 1;
-      } else {
-        weapon = 2;
-      }
+        if (wString.equals("Pistol")) {
+          weapon = 0;
+        } else if (wString.equals("ChainGun")) {
+          weapon = 1;
+        } else {
+          weapon = 2;
+        }
         cellGraphics.drawImage(weapons[weapon][position].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim,
             null);
       }
