@@ -27,13 +27,17 @@ public class MoveCommand implements Command {
    */
   @Override
   public void execute() {
-    try {
-      enviro.move(lifeForm);
+      
+      try {
+        enviro.move(lifeForm);
+      } catch (EnvironmentException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
       lifeForm.updateTime(0);
-    } catch (EnvironmentException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    
+ 
+    
 
   }
 
