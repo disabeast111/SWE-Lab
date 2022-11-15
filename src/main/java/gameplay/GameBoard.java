@@ -125,7 +125,7 @@ public class GameBoard extends JFrame implements ActionListener {
       }
     }
     statsLabels[5][0].setText("");
-    statsLabels[0][1].setText("Cell Conatins:");
+    statsLabels[0][1].setText("Cell Contains:");
     statsLabels[4][1].setText("");
 
     updateStats(0, 0);
