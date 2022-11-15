@@ -283,6 +283,19 @@ public class TestCommands {
     
     attackCommand.execute();
     assertEquals(9, mockGun.getCurrentAmmo());
+    
+    entity1.setDirection(1);
+    attackCommand.execute();
+    assertEquals(8, mockGun.getCurrentAmmo());
+  
+    entity1.setDirection(2);
+    attackCommand.execute();
+    assertEquals(7, mockGun.getCurrentAmmo());
+    
+    entity1.setDirection(3);
+    attackCommand.execute();
+    assertEquals(6, mockGun.getCurrentAmmo());
+
   }
   
   

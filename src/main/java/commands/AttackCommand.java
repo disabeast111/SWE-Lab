@@ -34,7 +34,7 @@ public class AttackCommand implements Command {
     int tempCM = c - 1;
     direction = attacker.getCurrentDirection();
     if(direction == 0) {
-      while(tempRM >= 0 && enviro.getLifeForm(tempRM, c) == null) {
+      while(tempRM > 0 && enviro.getLifeForm(tempRM, c) == null) {
         tempRM--;
         distance = distance + 5;
         
@@ -46,12 +46,15 @@ public class AttackCommand implements Command {
       target = enviro.getLifeForm(tempRM, c);
     }
     else if(direction == 1) {
-      while(enviro.getLifeForm(r, tempC) == null && tempC <= enviro.getNumCols()) {
+      while(tempC < enviro.getNumCols() && enviro.getLifeForm(r, tempC) == null) {
         tempC++;
         distance = distance + 5;
     
       }
       //tempC--;
+      if(tempC > enviro.getNumCols()) {
+        tempC = enviro.getNumCols() - 1;
+      }
       target = enviro.getLifeForm(r, tempC);
     }
     else if(direction == 2) {
@@ -61,6 +64,9 @@ public class AttackCommand implements Command {
         
       }
       //tempR--;
+      if(tempR > enviro.getNumRows()) {
+        tempR = enviro.getNumRows() - 1;
+      }
       target = enviro.getLifeForm(tempR, c);
     }
     else if(direction == 3) {
@@ -68,6 +74,9 @@ public class AttackCommand implements Command {
         tempCM--;
         distance = distance + 5;
         
+      }
+      if(tempCM < 0) {
+        tempCM = 0;
       }
       target = enviro.getLifeForm(r, tempCM);
     }
