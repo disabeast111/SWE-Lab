@@ -90,6 +90,10 @@ public class GameBoard extends JFrame implements ActionListener {
     setVisible(true);
   }
 
+  /**
+   * getter for the Singleton instance of GameBoard
+   * @return the instance
+   */
   public static GameBoard getInstance() {
     if (singletonInstance == null) {
       singletonInstance = new GameBoard();
@@ -102,20 +106,19 @@ public class GameBoard extends JFrame implements ActionListener {
     legend = new ImageIcon("images/legend.png");
 
     // Load Cell Image
-    cell = new ImageIcon(
-        new ImageIcon("images/cell.png")
-        .getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+    cell = new ImageIcon(new ImageIcon("images/cell.png").getImage().getScaledInstance(cellDim,
+        cellDim, Image.SCALE_SMOOTH));
 
     // Load Focused Cell Graphic
-    focus = new ImageIcon(
-        new ImageIcon("images/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+    focus = new ImageIcon(new ImageIcon("images/focus.png").getImage().getScaledInstance(cellDim,
+        cellDim, Image.SCALE_SMOOTH));
 
     // Load Human Images
     for (int weapon = 0; weapon < 3; weapon++) {
       for (int direction = 0; direction < 4; direction++) {
         String fileName = "images/human" + weapon + direction + ".png";
-        humans[weapon][direction] = new ImageIcon(
-            new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        humans[weapon][direction] = new ImageIcon(new ImageIcon(fileName).getImage()
+            .getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
       }
     }
 
@@ -130,8 +133,8 @@ public class GameBoard extends JFrame implements ActionListener {
     for (int weapon = 0; weapon < 3; weapon++) {
       for (int direction = 0; direction < 2; direction++) {
         String fileName = "images/weapon" + weapon + direction + ".png";
-        weapons[weapon][direction] = new ImageIcon(
-            new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        weapons[weapon][direction] = new ImageIcon(new ImageIcon(fileName).getImage()
+            .getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
       }
     }
   }
@@ -162,6 +165,11 @@ public class GameBoard extends JFrame implements ActionListener {
     legendLabel.setBorder(BorderFactory.createLineBorder(Color.black));
   }
 
+  /**
+   * Update the statistics panel to display the current focused cell statistics
+   * @param r the row of the cell
+   * @param c the column of the cell
+   */
   public void updateStats(int r, int c) {
     Cell currentCell = environment.focusedCell;
     // Coordinates
@@ -171,7 +179,7 @@ public class GameBoard extends JFrame implements ActionListener {
     String text1 = "N/A";
     String text2 = "N/A";
     String text3 = "N/A";
-    String text4 = "N/A"; 
+    String text4 = "N/A";
     String text5 = "N/A";
 
     // LifeForm Type & Name
@@ -224,15 +232,18 @@ public class GameBoard extends JFrame implements ActionListener {
     // Weapon 1
     if (currentCell.getWeapon1() != null) {
       Weapon w = currentCell.getWeapon1();
-      String[] wString = w.toString().split(" ");
-      text0 += wString[0];
-      switch (wString.length) {
-      case 2:
-        text1 = wString[1];
-        break;
-      case 3:
-        text1 = wString[1];
-        text2 = wString[2];
+      String[] weaponString = w.toString().split(" ");
+      text0 += weaponString[0];
+      switch (weaponString.length) {
+        case 2:
+          text1 = weaponString[1];
+          break;
+        case 3:
+          text1 = weaponString[1];
+          text2 = weaponString[2];
+          break;
+        default:
+          break;
       }
     } else {
       text0 += "none";
@@ -241,15 +252,18 @@ public class GameBoard extends JFrame implements ActionListener {
     // Weapon 2
     if (currentCell.getWeapon2() != null) {
       Weapon w = currentCell.getWeapon2();
-      String[] wString = w.toString().split(" ");
-      text3 += wString[0];
-      switch (wString.length) {
-      case 2:
-        text4 = wString[1];
-        break;
-      case 3:
-        text4 = wString[1];
-        text5 = wString[2];
+      String[] weaponString = w.toString().split(" ");
+      text3 += weaponString[0];
+      switch (weaponString.length) {
+        case 2:
+          text4 = weaponString[1];
+          break;
+        case 3:
+          text4 = weaponString[1];
+          text5 = weaponString[2];
+          break;
+        default:
+          break;
       }
     } else {
       text3 += "none";
@@ -274,6 +288,11 @@ public class GameBoard extends JFrame implements ActionListener {
     statsLabels[7][1].setText(text5);
   }
 
+  /**
+   * reconstructs the given cell's icon to reflect the new cell state
+   * @param row the row of the cell
+   * @param col the column of the cell
+   */
   public void updateCell(int row, int col) {
     BufferedImage image = new BufferedImage(cellDim, cellDim, BufferedImage.TYPE_3BYTE_BGR);
     Graphics cellGraphics = image.getGraphics();
@@ -285,16 +304,16 @@ public class GameBoard extends JFrame implements ActionListener {
     for (int position = 0; position < 2; position++) {
       Weapon w = environment.getWeapons(row, col)[position];
       if (w != null) {
-        String wString = w.toString().split(" ")[0];
-        if (wString.equals("Pistol")) {
+        String weaponString = w.toString().split(" ")[0];
+        if (weaponString.equals("Pistol")) {
           weapon = 0;
-        } else if (wString.equals("ChainGun")) {
+        } else if (weaponString.equals("ChainGun")) {
           weapon = 1;
         } else {
           weapon = 2;
         }
-        cellGraphics.drawImage(weapons[weapon][position].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim,
-            null);
+        cellGraphics.drawImage(weapons[weapon][position].getImage(), 0, 0, cellDim, cellDim, 0, 0,
+            cellDim, cellDim, null);
       }
     }
 
@@ -313,17 +332,18 @@ public class GameBoard extends JFrame implements ActionListener {
       } else {
         weapon = 0;
       }
-      cellGraphics.drawImage(humans[weapon][lifeForm.getCurrentDirection()].getImage(), 0, 0, cellDim, cellDim, 0, 0,
-          cellDim, cellDim, null);
+      cellGraphics.drawImage(humans[weapon][lifeForm.getCurrentDirection()].getImage(), 0, 0,
+          cellDim, cellDim, 0, 0, cellDim, cellDim, null);
     } else if (lifeForm instanceof Alien) {
-      cellGraphics.drawImage(aliens[lifeForm.getCurrentDirection()].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim,
-          cellDim, null);
+      cellGraphics.drawImage(aliens[lifeForm.getCurrentDirection()].getImage(), 0, 0, cellDim,
+          cellDim, 0, 0, cellDim, cellDim, null);
     }
 
     // Add Focused Cell Graphic
     try {
       if (environment.getCell(row, col) == environment.focusedCell) {
-        cellGraphics.drawImage(focus.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
+        cellGraphics.drawImage(focus.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim,
+            null);
         prevRow = row;
         prevCol = col;
       }
@@ -343,7 +363,8 @@ public class GameBoard extends JFrame implements ActionListener {
             environment.focusedCell = environment.getCell(row, col);
             updateCell(prevRow, prevCol);
           } catch (EnvironmentException e) {
-            System.out.println("Error occurred; caught environment exception in actionPerformed().");
+            System.out
+                .println("Error occurred; caught environment exception in actionPerformed().");
           }
           updateCell(row, col);
           updateStats(row, col);
