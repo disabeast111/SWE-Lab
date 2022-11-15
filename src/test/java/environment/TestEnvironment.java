@@ -68,6 +68,29 @@ public class TestEnvironment {
   @Test
   public void testMovesPerRound() {
     Human entity = new Human("Bob", 40, 0);
+    e.addLifeForm(entity, 0, 0);
+    assertEquals(0, entity.getRow());
+    assertEquals(0, entity.getCol());
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(0, entity.getCol());
+    assertEquals(3, entity.getMovesLeft());
+    entity.setDirection(3);
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(0, entity.getCol());
+    assertEquals(0, entity.getMovesLeft());
+    entity.setDirection(1);
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(1, entity.getCol());
+    assertEquals(0, entity.getMovesLeft());
+  }
+  
+  //testBoards
+  @Test
+  public void testMoveAtBoard() {
+    Human entity = new Human("Bob", 40, 0);
     entity.setLocation(1, 1);
     assertEquals(1, entity.getRow());
     assertEquals(1, entity.getCol());
@@ -85,8 +108,6 @@ public class TestEnvironment {
     assertEquals(0, entity.getRow());
     assertEquals(1, entity.getCol());
     assertEquals(0, entity.getMovesLeft());
-    
-    
   }
 
   /*
