@@ -25,7 +25,7 @@ public class TestEnvironment {
 
   // test move with boarders
   @Test
-  public void moveTurnWBoarders() {
+  public void moveTurnWBoarders() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
     entity.setLocation(2, 2);
     assertEquals(2, entity.getRow());
@@ -66,7 +66,7 @@ public class TestEnvironment {
 
   //test moveSpeed
   @Test
-  public void testMovesPerRound() {
+  public void testMovesPerRound() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
     e.addLifeForm(entity, 0, 0);
     assertEquals(0, entity.getRow());
@@ -89,7 +89,7 @@ public class TestEnvironment {
   
   //testBoards
   @Test
-  public void testMoveAtBoard() {
+  public void testMoveAtBoard() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
     entity.setLocation(1, 1);
     assertEquals(1, entity.getRow());

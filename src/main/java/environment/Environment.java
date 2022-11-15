@@ -227,7 +227,7 @@ public class Environment {
     return cells[row][col];
   }
   
-  public int move(LifeForm lf) {
+  public int move(LifeForm lf) throws EnvironmentException {
     int i = lf.getMovesLeft();
     int oRow = lf.getRow();
     int oCol = lf.getCol();
@@ -244,6 +244,7 @@ public class Environment {
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
         gb.updateCell(oRow, oCol);
+        focusedCell = getCell(oRow - i, oCol);
         return i;
       }
       
@@ -257,6 +258,7 @@ public class Environment {
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
         gb.updateCell(oRow, oCol);
+        focusedCell = getCell(oRow, oCol + i);
         return i;
       }
       
@@ -270,6 +272,7 @@ public class Environment {
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
         gb.updateCell(oRow, oCol);
+        focusedCell = getCell(oRow + i, oCol);
         return i;
       }
       
@@ -283,6 +286,7 @@ public class Environment {
         removeLifeForm(oRow, oCol);
         lf.setMovesLeft(lf.getMovesLeft()-i);
         gb.updateCell(oRow, oCol);
+        focusedCell = getCell(oRow, oCol - i);
         return i;
       }
     }
