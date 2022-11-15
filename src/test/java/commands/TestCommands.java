@@ -298,5 +298,46 @@ public class TestCommands {
 
   }
   
+  @Test
+  public void testAttackCommandIntoBorder() throws RecoveryRateException, WeaponException {
+    e.clearBoard();
+    Human entity1 = new Human("Jim", 40, 1);
+    Human entity2 = new Human("Tim", 40, 1);
+    Human entity3 = new Human("Bob", 40, 1);
+    Human entity4 = new Human("Rob", 40, 1);
+    MockWeapon mockGun1 = new MockWeapon();
+    MockWeapon mockGun2 = new MockWeapon();
+    MockWeapon mockGun3 = new MockWeapon();
+    MockWeapon mockGun4 = new MockWeapon();
+    entity1.pickUpWeapon(mockGun1);
+    entity2.pickUpWeapon(mockGun2);
+    entity3.pickUpWeapon(mockGun3);
+    entity4.pickUpWeapon(mockGun4);
+   
+    e.addLifeForm(entity1, 0, 2);
+    e.addLifeForm(entity2, 2, 4);
+    entity2.setDirection(1);
+    e.addLifeForm(entity3, 4, 2);
+    entity3.setDirection(2);
+    e.addLifeForm(entity4, 2, 0);
+    entity4.setDirection(3);
+    
+    AttackCommand attackCommand1 = new AttackCommand(entity1, e);
+    AttackCommand attackCommand2 = new AttackCommand(entity2, e);
+    AttackCommand attackCommand3 = new AttackCommand(entity3, e);
+    AttackCommand attackCommand4 = new AttackCommand(entity4, e);
+    
+    attackCommand1.execute();
+    assertEquals(9, mockGun1.getCurrentAmmo());
+    attackCommand2.execute();
+    assertEquals(9, mockGun2.getCurrentAmmo());
+    attackCommand3.execute();
+    assertEquals(9, mockGun3.getCurrentAmmo());
+    attackCommand4.execute();
+    assertEquals(9, mockGun4.getCurrentAmmo());
+    
+    
+  }
+  
   
 }
