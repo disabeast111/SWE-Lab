@@ -5,6 +5,9 @@ import exceptions.WeaponException;
 import lifeform.LifeForm;
 import weapon.Weapon;
 
+/**
+ * @author Ethan J
+ */
 public class AttackCommand implements Command {
   LifeForm attacker;
   Environment enviro;
@@ -13,16 +16,21 @@ public class AttackCommand implements Command {
   int direction;
   int distance;
   LifeForm target = null;
-  
+
+  /**
+   * Constructor takes in LifeForm that is attacking and Environment to attack in
+   * 
+   * @param l is the LifeForm
+   * @param e is the Environment
+   */
   public AttackCommand(LifeForm l, Environment e) {
     this.attacker = l;
     this.enviro = e;
-    //r = attacker.getRow();
-    //c = attacker.getCol();
-    //direction = attacker.getCurrentDirection();
-    //distance = 5;
   }
 
+  /**
+   * Execute command to attack
+   */
   @Override
   public void execute() throws WeaponException {
     distance = 5;
@@ -32,58 +40,55 @@ public class AttackCommand implements Command {
     int tempC = c + 1;
     int tempRM = r - 1;
     int tempCM = c - 1;
-    if (r == 0) {tempRM = -1;}
-    if (c == 0) {tempCM = -1;}
+    if (r == 0) {
+      tempRM = -1;
+    }
+    if (c == 0) {
+      tempCM = -1;
+    }
     direction = attacker.getCurrentDirection();
-    if(direction == 0) {
-      while(tempRM >= 0 && enviro.getLifeForm(tempRM, c) == null) {
+    if (direction == 0) {
+      while (tempRM >= 0 && enviro.getLifeForm(tempRM, c) == null) {
         tempRM--;
         distance = distance + 5;
-        
+
       }
-      //tempRM++;
-      if(tempRM < 0) {
+      if (tempRM < 0) {
         tempRM = 0;
       }
       target = enviro.getLifeForm(tempRM, c);
-    }
-    else if(direction == 1) {
-      while(tempC < enviro.getNumCols() - 1 && enviro.getLifeForm(r, tempC) == null) {
+    } else if (direction == 1) {
+      while (tempC < enviro.getNumCols() - 1 && enviro.getLifeForm(r, tempC) == null) {
         tempC++;
         distance = distance + 5;
-    
+
       }
-      //tempC--;
-      if(tempC > enviro.getNumCols() - 1) {
+      if (tempC > enviro.getNumCols() - 1) {
         tempC = enviro.getNumCols() - 1;
       }
       target = enviro.getLifeForm(r, tempC);
-    }
-    else if(direction == 2) {
-      while(tempR < enviro.getNumRows() - 1 && enviro.getLifeForm(tempR, c) == null) {
+    } else if (direction == 2) {
+      while (tempR < enviro.getNumRows() - 1 && enviro.getLifeForm(tempR, c) == null) {
         tempR++;
         distance = distance + 5;
-        
+
       }
-      //tempR--;
-      if(tempR > enviro.getNumRows() - 1) {
+      if (tempR > enviro.getNumRows() - 1) {
         tempR = enviro.getNumRows() - 1;
       }
       target = enviro.getLifeForm(tempR, c);
-    }
-    else if(direction == 3) {
-      while(tempCM >= 0 && enviro.getLifeForm(r, tempCM) == null) {
+    } else if (direction == 3) {
+      while (tempCM >= 0 && enviro.getLifeForm(r, tempCM) == null) {
         tempCM--;
         distance = distance + 5;
-        
+
       }
-      if(tempCM < 0) {
+      if (tempCM < 0) {
         tempCM = 0;
       }
       target = enviro.getLifeForm(r, tempCM);
     }
-    //tempCM++;
-    if(target != null) {
+    if (target != null) {
       attacker.attack(target, distance);
     } else {
       Weapon w = attacker.getCurrentWeapon();
