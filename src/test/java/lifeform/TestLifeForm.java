@@ -18,6 +18,18 @@ import weapon.Weapon;
 public class TestLifeForm {
 
   @Test
+  public void testDirection() {
+    MockLifeForm entity = new MockLifeForm("Bob", 40);
+    assertEquals(0, entity.getCurrentDirection());
+    entity.setDirection(1);
+    assertEquals(1, entity.getCurrentDirection());
+    entity.setDirection(2);
+    assertEquals(2, entity.getCurrentDirection());
+    entity.setDirection(3);
+    assertEquals(3, entity.getCurrentDirection());
+  }
+  
+  @Test
   public void testStorePoints() {
     MockLifeForm entity = new MockLifeForm("Bob", 40);
     assertEquals(40, entity.getCurrentLifePoints());

@@ -16,6 +16,7 @@ public class TestHuman {
     assertEquals("Bob", entity.getName());
     assertEquals(40, entity.getCurrentLifePoints());
     assertEquals(0, entity.getArmorPoints());
+    assertEquals(3, entity.getMaxSpeed());
   }
   
   @Test

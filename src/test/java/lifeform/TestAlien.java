@@ -15,11 +15,14 @@ import gameplay.SimpleTimer;
  */
 public class TestAlien {
   
+  
+  
   @Test
   public void testInitialization() throws RecoveryRateException {
     Alien entity = new Alien("Bob", 40);
     assertEquals("Bob", entity.getName());
     assertEquals(40, entity.getCurrentLifePoints());
+    assertEquals(2, entity.getMaxSpeed());
   }
 
   @Test

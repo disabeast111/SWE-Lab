@@ -64,7 +64,7 @@ public class TestEnvironment {
     assertEquals(0, entity.getCol());
   }
 
-  //test moveSpeed
+  // test moveSpeed
   @Test
   public void testMovesPerRound() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
@@ -72,25 +72,24 @@ public class TestEnvironment {
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
     e.move(entity);
-    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
     assertEquals(3, entity.getMovesLeft());
     entity.setDirection(3);
     e.move(entity);
-    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
-    assertEquals(0, entity.getMovesLeft());
+    assertEquals(3, entity.getMovesLeft());
     entity.setDirection(1);
     e.move(entity);
-    entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(1, entity.getCol());
+    assertEquals(3, entity.getCol());
     assertEquals(0, entity.getMovesLeft());
+    entity.updateTime(0);
+    assertEquals(3, entity.getMovesLeft());
   }
-  
-  //testBoards
+
+  // testBoards
   @Test
   public void testMoveAtBoard() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
@@ -101,19 +100,54 @@ public class TestEnvironment {
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(1, entity.getCol());
-    assertEquals(2, entity.getMovesLeft());
+    assertEquals(3, entity.getMovesLeft());
     entity.setDirection(3);
     e.move(entity);
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(0, entity.getCol());
-    assertEquals(1, entity.getMovesLeft());
+    assertEquals(1, entity.getCol());
+    assertEquals(3, entity.getMovesLeft());
     entity.setDirection(1);
     e.move(entity);
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(1, entity.getCol());
-    assertEquals(0, entity.getMovesLeft());
+    assertEquals(4, entity.getCol());
+    assertEquals(3, entity.getMovesLeft());
+    e.move(entity);
+    assertEquals(0, entity.getRow());
+    assertEquals(4, entity.getCol());
+    assertEquals(3, entity.getMovesLeft());
+  }
+
+// testObstacles
+  @Test
+  public void testMoveObstacles() throws EnvironmentException {
+    Human e1 = new Human("Bob", 40, 0);
+    Human e2 = new Human("Bob", 40, 0);
+    Human e3 = new Human("Bob", 40, 0);
+    e.addLifeForm(e1, 0, 0);
+    e.addLifeForm(e2, 0, 3);
+    e.addLifeForm(e3, 3, 0);
+    e1.setDirection(1);
+    e.move(e1);
+    e1.updateTime(0);
+    assertEquals(0, e1.getRow());
+    assertEquals(2, e1.getCol());
+    e1.setDirection(3);
+    e.move(e1);
+    e1.updateTime(0);
+    assertEquals(0, e1.getRow());
+    assertEquals(0, e1.getCol());
+    e1.setDirection(2);
+    e.move(e1);
+    e1.updateTime(0);
+    assertEquals(2, e1.getRow());
+    assertEquals(0, e1.getCol());
+    e1.setDirection(0);
+    e.move(e1);
+    e1.updateTime(0);
+    assertEquals(0, e1.getRow());
+    assertEquals(0, e1.getCol());
   }
 
   /*
