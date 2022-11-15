@@ -26,7 +26,7 @@ public class GameBoard extends JFrame implements ActionListener {
   ImageIcon cell, focus;
   ImageIcon[][] humans = new ImageIcon[3][4], weapons = new ImageIcon[3][2];
   ImageIcon[] aliens = new ImageIcon[4];
-  private int cellDim = 70;
+  private int cellDim = 70, prevRow = 0, prevCol = 0;
 
   private GameBoard() {
     setLayout(new BorderLayout());
@@ -45,13 +45,13 @@ public class GameBoard extends JFrame implements ActionListener {
     legendPanel = new JPanel(new GridLayout(1, 0));
     legendPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     add("East", legendPanel);
-    ImageIcon icon = createImage();
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
     grid = new JRadioButton[10][10];
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
-        grid[row][col] = new JRadioButton(cell);
+        grid[row][col] = new JRadioButton();
         grid[row][col].setSize(70, 70);
+        updateCell(row,col);
         grid[row][col].addActionListener(this);
         centerPanel.add(grid[row][col]);
       }
@@ -60,13 +60,6 @@ public class GameBoard extends JFrame implements ActionListener {
     setResizable(false);
     pack();
     setVisible(true);
-    
-    // Intitially Update All Cells in Grid
-    for (int row = 0; row < 10; row++) {
-      for (int col = 0; col < 10; col++) {
-        updateCell(row, col);
-      }
-    }
   }
 
   public static GameBoard getInstance() {
@@ -82,7 +75,7 @@ public class GameBoard extends JFrame implements ActionListener {
         new ImageIcon("bin/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Focused Cell Graphic
-    cell = new ImageIcon(
+    focus = new ImageIcon(
         new ImageIcon("bin/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Human Images
@@ -112,17 +105,20 @@ public class GameBoard extends JFrame implements ActionListener {
   }
 
   public void updateCell(int row, int col) {
-    Graphics cellGraphics = grid[row][col].getGraphics();
-    cellGraphics.clearRect(0, 0, cellDim, cellDim);
+    BufferedImage image = new BufferedImage(cellDim, cellDim, BufferedImage.TYPE_3BYTE_BGR);
+    Graphics cellGraphics = image.getGraphics();
+
+    cellGraphics.drawImage(cell.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
+
     int weapon;
 
     for (int position = 0; position < 2; position++) {
       weapon = -1;
-      if (environment.getWeapons(row, col)[0] instanceof Pistol) {
+      if (environment.getWeapons(row, col)[position] instanceof Pistol) {
         weapon = 0;
-      } else if (environment.getWeapons(row, col)[0] instanceof ChainGun) {
+      } else if (environment.getWeapons(row, col)[position] instanceof ChainGun) {
         weapon = 1;
-      } else if (environment.getWeapons(row, col)[0] instanceof PlasmaCannon) {
+      } else if (environment.getWeapons(row, col)[position] instanceof PlasmaCannon) {
         weapon = 2;
       }
       if (weapon != -1) {
@@ -161,22 +157,25 @@ public class GameBoard extends JFrame implements ActionListener {
     } catch (Exception e) {
       System.out.println("Error occurred; caught environment exception in updateCell().");
     }
+    grid[row][col].setIcon(new ImageIcon(image));
     cellGraphics.dispose();
   }
 
   @Override
   public void actionPerformed(ActionEvent event) {
-
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         if (event.getSource() == grid[row][col]) {
           textLabel.setText("(" + col + "," + row + ")");
           try {
             environment.focusedCell = environment.getCell(row, col);
+            updateCell(prevRow, prevCol);
           } catch (EnvironmentException e) {
             System.out.println("Error occurred; caught environment exception in actionPerformed().");
           }
           updateCell(row, col);
+          prevRow = row;
+          prevCol = col;
         }
       }
     }
@@ -184,38 +183,5 @@ public class GameBoard extends JFrame implements ActionListener {
 
   public static void main(String[] args) {
     new GameBoard();
-  }
-
-  public ImageIcon createImage() {
-    BufferedImage img = new BufferedImage(cellDim, cellDim, BufferedImage.TYPE_3BYTE_BGR);
-    Graphics2D g = (Graphics2D) img.getGraphics();
-    g.drawImage(cell.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
-    g.drawImage(humans[0][0].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
-    g.rotate(Math.PI / 2);
-    ImageIcon icon = new ImageIcon(img);
-    return icon;
-  }
-
-  /**
-   * Converts a given Image into a BufferedImage
-   *
-   * @param img The Image to be converted
-   * @return The converted BufferedImage
-   */
-  private BufferedImage toBufferedImage(Image img) {
-    if (img instanceof BufferedImage) {
-      return (BufferedImage) img;
-    }
-
-    // Create a buffered image with transparency
-    BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-    // Draw the image on to the buffered image
-    Graphics2D bGr = bimage.createGraphics();
-    bGr.drawImage(img, 0, 0, null);
-    bGr.dispose();
-
-    // Return the buffered image
-    return bimage;
   }
 }
