@@ -6,11 +6,11 @@ import weapon.Weapon;
 
 /**
  * Lab 4, 6
- * @author David W 
- * Lab 5
+ * 
+ * @author David W Lab 5
  * @author Ethan J
  */
-public abstract class LifeForm extends java.lang.Object implements TimerObserver{
+public abstract class LifeForm extends java.lang.Object implements TimerObserver {
   private String myName;
   protected int currentLifePoints;
   protected int attackStrength;
@@ -146,7 +146,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public int getRow() {
     return row;
   }
-  
+
   /**
    * Getter for currentDirection
    * 
@@ -155,7 +155,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public int getCurrentDirection() {
     return currentDirection;
   }
-  
+
   /**
    * Getter for maxSpeed
    * 
@@ -164,7 +164,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public int getMaxSpeed() {
     return maxSpeed;
   }
-  
+
   /**
    * Getter for movesLeft
    * 
@@ -173,16 +173,16 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public int getMovesLeft() {
     return movesLeft;
   }
-  
+
   /**
    * Sets movesLeft to input param
    * 
    * @param movesLeft
    */
-  public void setMovesLeft(int mL) {
-    movesLeft = mL;
+  public void setMovesLeft(int movLft) {
+    movesLeft = movLft;
   }
-  
+
   /**
    * Sets direction to input param
    * 
@@ -198,7 +198,8 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public void updateTime(int time) {
     movesLeft = maxSpeed;
   }
-  //Setup this getter to retrieve current weapon in command
+
+  // Setup this getter to retrieve current weapon in command
   public Weapon getCurrentWeapon() {
     return weapon;
   }

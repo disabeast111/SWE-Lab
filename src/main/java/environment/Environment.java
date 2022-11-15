@@ -227,65 +227,66 @@ public class Environment {
     return cells[row][col];
   }
 
+  /**
+   * Moves in current direction farthest possible place within max moves per round
+   * 
+   * @param lf
+   * @return
+   * @throws EnvironmentException
+   */
   public int move(LifeForm lf) throws EnvironmentException {
     int i = lf.getMovesLeft();
-    int oRow = lf.getRow();
-    int oCol = lf.getCol();
+    int orgRow = lf.getRow();
+    int orgCol = lf.getCol();
 
     if (lf.getMovesLeft() > 0) {
       if (lf.getCurrentDirection() == 0) { // N
-        while (addLifeForm(lf, oRow - i, oCol) == false) {
+        while (addLifeForm(lf, orgRow - i, orgCol) == false) {
           i--;
           if (i <= 0) {
             return 0; // out of bounds or no free spot
           }
         }
-        removeLifeForm(oRow, oCol);
+        removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(oRow - i, oCol);
-        //gb.updateCell(oRow, oCol);
+        focusedCell = getCell(orgRow - i, orgCol);
+        // gb.updateCell(orgRow, orgCol);
         return i;
-      }
-
-      else if (lf.getCurrentDirection() == 1) { // E
-        while (addLifeForm(lf, oRow, oCol + i) == false) {
+      } else if (lf.getCurrentDirection() == 1) { // E
+        while (addLifeForm(lf, orgRow, orgCol + i) == false) {
           i--;
           if (i <= 0) {
             return 0; // out of bounds or no free spots
           }
         }
-        removeLifeForm(oRow, oCol);
-        lf.setMovesLeft(lf.getMovesLeft()-i);
-        focusedCell = getCell(oRow, oCol + i);
-        //gb.updateCell(oRow, oCol);
+        removeLifeForm(orgRow, orgCol);
+        lf.setMovesLeft(lf.getMovesLeft() - i);
+        focusedCell = getCell(orgRow, orgCol + i);
+        // gb.updateCell(orgRow, orgCol);
         return i;
-      }
-
-      else if (lf.getCurrentDirection() == 2) { // S
-        while (addLifeForm(lf, oRow + i, oCol) == false) {
+      } else if (lf.getCurrentDirection() == 2) { // S
+        while (addLifeForm(lf, orgRow + i, orgCol) == false) {
           i--;
           if (i <= 0) {
             return 0; // out of bounds or no free spot
           }
         }
-        removeLifeForm(oRow, oCol);
+        removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(oRow + i, oCol);
-        //gb.updateCell(oRow, oCol);
+        focusedCell = getCell(orgRow + i, orgCol);
+        // gb.updateCell(orgRow, orgCol);
         return i;
-      }
-
-      else if (lf.getCurrentDirection() == 3) { // W
-        while (addLifeForm(lf, oRow, oCol - i) == false) {
+      } else if (lf.getCurrentDirection() == 3) { // W
+        while (addLifeForm(lf, orgRow, orgCol - i) == false) {
           i--;
           if (i <= 0) {
             return 0; // out of bounds or no free spot
           }
         }
-        removeLifeForm(oRow, oCol);
+        removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(oRow, oCol - i);
-        //gb.updateCell(oRow, oCol);
+        focusedCell = getCell(orgRow, orgCol - i);
+        // gb.updateCell(orgRow, orgCol);
         return i;
       }
     }
