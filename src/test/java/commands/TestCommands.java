@@ -169,7 +169,6 @@ public class TestCommands {
     acquireCommand.execute();
     assertEquals(pistol, entity1.getCurrentWeapon());
 
-
     e.removeWeapon(pistol, 2, 2);
     entity1.dropWeapon();
     acquireCommand.execute();

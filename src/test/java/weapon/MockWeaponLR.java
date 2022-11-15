@@ -3,7 +3,7 @@ package weapon;
 import exceptions.WeaponException;
 
 /**
- * @author David W
+ * @author Ethan J
  * Made this to have just 5 range for testing commands
  */
 public class MockWeaponLR extends GenericWeapon {

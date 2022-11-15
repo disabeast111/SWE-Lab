@@ -11,9 +11,9 @@ import weapon.Weapon;
 public class DropCommand implements Command {
   LifeForm lifeForm;
   Environment enviro;
-  Weapon t;
-  int c;
-  int r;
+  Weapon tempW;
+  int col;
+  int row;
 
   /**
    * Constructor takes in LifeForm dropping weapon and the Environment it is to be
@@ -25,8 +25,8 @@ public class DropCommand implements Command {
   public DropCommand(LifeForm l, Environment e) {
     this.lifeForm = l;
     this.enviro = e;
-    c = lifeForm.getCol();
-    r = lifeForm.getRow();
+    col = lifeForm.getCol();
+    row = lifeForm.getRow();
   }
 
   /**
@@ -34,11 +34,11 @@ public class DropCommand implements Command {
    */
   @Override
   public void execute() {
-    Weapon[] temp = enviro.getWeapons(r, c);
+    Weapon[] temp = enviro.getWeapons(row, col);
     if (temp[0] == null || temp[1] == null) {
-      t = lifeForm.getCurrentWeapon();
+      tempW = lifeForm.getCurrentWeapon();
       lifeForm.dropWeapon();
-      enviro.addWeapon(t, r, c);
+      enviro.addWeapon(tempW, row, col);
     }
 
   }
