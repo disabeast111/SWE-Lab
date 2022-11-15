@@ -11,6 +11,8 @@ import weapon.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +21,7 @@ import java.io.File;
 
 public class GameBoard extends JFrame implements ActionListener {
   private static GameBoard singletonInstance;
-  Environment environment = Environment.getEnvironment(10, 10);
+  Environment environment;
   JPanel centerPanel, statsPanel;
   JLabel titleLabel, legendLabel;
   JLabel[][] statsLabels = new JLabel[8][2];
@@ -33,7 +35,9 @@ public class GameBoard extends JFrame implements ActionListener {
   private int cellDim = 70, prevRow = 0, prevCol = 0;
 
   private GameBoard() {
+    environment = Environment.getEnvironment(10, 10);
     setLayout(new BorderLayout());
+    
     setupImages();
 
     try {
@@ -50,6 +54,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
     grid = new JRadioButton[10][10];
+    environment = Environment.getEnvironment(10, 10);
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         grid[row][col] = new JRadioButton();
@@ -118,6 +123,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     // Focused Cell Statistics Panel
     statsPanel = new JPanel(new GridLayout(8, 2));
+    statsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     for (int row = 0; row < 8; row++) {
       for (int col = 0; col < 2; col++) {
         statsLabels[row][col] = new JLabel();
