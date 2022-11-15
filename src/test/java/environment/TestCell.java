@@ -85,8 +85,8 @@ public class TestCell {
     //remove one
     assertEquals(p, c.removeWeapon(p));
     assertEquals(null, c.removeWeapon(p));
-    assertEquals(null, c.getWeapon1());
-    assertEquals(pc, c.getWeapon2());
+    assertEquals(pc, c.getWeapon1());
+    assertEquals(null, c.getWeapon2());
     assertEquals(1, c.getWeaponsCount());
     //then add
     assertTrue(c.addWeapon(p));
