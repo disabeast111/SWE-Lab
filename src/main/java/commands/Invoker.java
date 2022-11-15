@@ -104,12 +104,16 @@ public class Invoker extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent event) {
     InvokerBuilder inv = new InvokerBuilder();
-    
+    int prevRow = 0;
+    int prevCol = 0;
+        
     Command command = null;
     if (env.focusedCell != null && env.focusedCell.getLifeForm() != null) {
       if (event.getSource() == moveButton)
       {
         command = new MoveCommand(env.focusedCell.getLifeForm(), env);
+        prevRow = env.focusedCell.getLifeForm().getRow();
+        prevCol = env.focusedCell.getLifeForm().getCol();         
       }  else if (event.getSource() == reloadButton) {           
         command = new ReloadCommand(env.focusedCell.getLifeForm());
       }  else if (event.getSource() == attackButton) {
@@ -138,7 +142,11 @@ public class Invoker extends JFrame implements ActionListener {
       }
       int row = env.focusedCell.getLifeForm().getRow();
       int col = env.focusedCell.getLifeForm().getCol();
-      GameBoard.getInstance().updateCell(row, col);  
+      GameBoard.getInstance().updateCell(row, col);
+      
+      if (event.getSource() == moveButton) {
+        GameBoard.getInstance().updateCell(prevRow, prevCol); 
+      }
 
       
     } else {
