@@ -221,7 +221,7 @@ public class Environment {
    * @throws EnvironmentException
    */
   public Cell getCell(int row, int col) throws EnvironmentException{
-    if (row >= 0 && col >= 0 && row <= getNumRows() - 1 && col <= getNumCols() - 1) {
+    if (row < 0 && col < 0 && row > getNumRows() - 1 && col > getNumCols() - 1) {
       throw new EnvironmentException("Cell not in Environment");
     }
     return cells[row][col];
