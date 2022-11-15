@@ -27,7 +27,7 @@ public class TestEnvironment {
   @Test
   public void moveTurnWBoarders() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
-    entity.setLocation(2, 2);
+    e.addLifeForm(entity, 2, 2);
     assertEquals(2, entity.getRow());
     assertEquals(2, entity.getCol());
     e.move(entity);
@@ -72,16 +72,19 @@ public class TestEnvironment {
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
     e.move(entity);
+    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
     assertEquals(3, entity.getMovesLeft());
     entity.setDirection(3);
     e.move(entity);
+    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
     assertEquals(0, entity.getMovesLeft());
     entity.setDirection(1);
     e.move(entity);
+    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(1, entity.getCol());
     assertEquals(0, entity.getMovesLeft());
@@ -91,20 +94,23 @@ public class TestEnvironment {
   @Test
   public void testMoveAtBoard() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
-    entity.setLocation(1, 1);
+    e.addLifeForm(entity, 1, 1);
     assertEquals(1, entity.getRow());
     assertEquals(1, entity.getCol());
     e.move(entity);
+    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(1, entity.getCol());
     assertEquals(2, entity.getMovesLeft());
     entity.setDirection(3);
     e.move(entity);
+    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(0, entity.getCol());
     assertEquals(1, entity.getMovesLeft());
     entity.setDirection(1);
     e.move(entity);
+    entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(1, entity.getCol());
     assertEquals(0, entity.getMovesLeft());

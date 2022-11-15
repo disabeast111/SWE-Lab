@@ -237,7 +237,7 @@ public class Environment {
       if (lf.getCurrentDirection() == 0) { // N
         while (addLifeForm(lf, oRow - i, oCol) == false) {
           i--;
-          if (i == 0) {
+          if (i <= 0) {
             return 0; // out of bounds or no free spot
           }
         }
@@ -251,7 +251,7 @@ public class Environment {
       else if (lf.getCurrentDirection() == 1) { // E
         while (addLifeForm(lf, oRow, oCol + i) == false) {
          i--;
-          if (i == 0) {
+          if (i <= 0) {
             return 0; // out of bounds or no free spots
           }
         }
@@ -265,7 +265,7 @@ public class Environment {
       else if (lf.getCurrentDirection() == 2) { // S
         while (addLifeForm(lf, oRow + i, oCol) == false) {
           i--;
-          if (i == 0) {
+          if (i <= 0) {
             return 0; // out of bounds or no free spot
           }
         }
@@ -279,7 +279,7 @@ public class Environment {
       else if (lf.getCurrentDirection() == 3) { // W
         while (addLifeForm(lf, oRow, oCol - i) == false) {
           i--;
-          if (i == 0) {
+          if (i <= 0) {
             return 0; // out of bounds or no free spot
           }
         }

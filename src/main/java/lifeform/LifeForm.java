@@ -44,6 +44,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
     if (attack >= 0) {
       attackStrength = attack;
     }
+    movesLeft = maxSpeed;
   }
 
   public String getName() {
