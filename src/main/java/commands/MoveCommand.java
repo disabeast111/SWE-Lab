@@ -35,7 +35,7 @@ public class MoveCommand implements Command {
       e.printStackTrace();
     }
     lifeForm.updateTime(0);
-    if(lifeForm.hasWeapon()) {
+    if (lifeForm.hasWeapon()) {
       lifeForm.getCurrentWeapon().updateTime(0);
     }
   }
