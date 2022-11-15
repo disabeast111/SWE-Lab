@@ -35,13 +35,13 @@ public class GameBoard extends JFrame implements ActionListener {
   private GameBoard() {
     setLayout(new BorderLayout());
     setupImages();
-    
+
     try {
-    environment.focusedCell = environment.getCell(0, 0);
+      environment.focusedCell = environment.getCell(0, 0);
     } catch (EnvironmentException e) {
       System.out.println("You screwed it up somehow...");
     }
-    
+
     setupInfo();
 
     add("North", textLabel);
@@ -121,9 +121,14 @@ public class GameBoard extends JFrame implements ActionListener {
     for (int row = 0; row < 8; row++) {
       for (int col = 0; col < 2; col++) {
         statsLabels[row][col] = new JLabel();
+        statsPanel.add(statsLabels[row][col]);
       }
     }
-    updateStats(0,0);
+    statsLabels[5][0].setText("");
+    statsLabels[0][1].setText("Cell Conatins:");
+    statsLabels[4][1].setText("");
+
+    updateStats(0, 0);
 
     // Legend
     legendLabel = new JLabel(legend);
@@ -171,28 +176,25 @@ public class GameBoard extends JFrame implements ActionListener {
 
     // Attack Strength
     statsLabels[4][0].setText(text3);
-    statsLabels[5][0].setText("---");
 
     // Weapon Held by LifeForm
     statsLabels[6][0].setText(text4);
 
     // Ammo Held by LifeForm
     statsLabels[7][0].setText(text5);
-    
-    statsLabels[0][1].setText("Cell Conatins:");
-    
+
     text0 = "Weapon 1: ";
     text1 = "";
     text2 = "";
     text3 = "Weapon 2: ";
     text4 = "";
     text5 = "";
-    //Weapon 1
+    // Weapon 1
     if (currentCell.getWeapon1() != null) {
       Weapon w = currentCell.getWeapon1();
       String[] wString = w.toString().split(" ");
       text0 += wString[0];
-      switch(wString.length) {
+      switch (wString.length) {
       case 2:
         text1 = wString[1];
         break;
@@ -203,13 +205,13 @@ public class GameBoard extends JFrame implements ActionListener {
     } else {
       text0 += "none";
     }
-    
-  //Weapon 2
+
+    // Weapon 2
     if (currentCell.getWeapon2() != null) {
       Weapon w = currentCell.getWeapon2();
       String[] wString = w.toString().split(" ");
       text3 += wString[0];
-      switch(wString.length) {
+      switch (wString.length) {
       case 2:
         text4 = wString[1];
         break;
@@ -218,25 +220,25 @@ public class GameBoard extends JFrame implements ActionListener {
         text5 = wString[2];
       }
     } else {
-      text0 += "none";
+      text3 += "none";
     }
-    
+
     // Weapon 1 Type
     statsLabels[1][1].setText(text0);
-    
-    //Weapon 1 First Attachment
+
+    // Weapon 1 First Attachment
     statsLabels[2][1].setText(text1);
-    
-    //Weapon 1 Second Attachment
+
+    // Weapon 1 Second Attachment
     statsLabels[3][1].setText(text2);
-    statsLabels[4][1].setText("---");
-    //Weapon 2 Type
+
+    // Weapon 2 Type
     statsLabels[5][1].setText(text3);
-    
-    //Weapon 2 First Attachment
+
+    // Weapon 2 First Attachment
     statsLabels[6][1].setText(text4);
-    
-    //Weapon 2 Second Attachment
+
+    // Weapon 2 Second Attachment
     statsLabels[7][1].setText(text5);
   }
 
@@ -312,6 +314,7 @@ public class GameBoard extends JFrame implements ActionListener {
             System.out.println("Error occurred; caught environment exception in actionPerformed().");
           }
           updateCell(row, col);
+          updateStats(row, col);
           prevRow = row;
           prevCol = col;
         }
