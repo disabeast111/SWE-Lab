@@ -2,6 +2,7 @@ package gameplay;
 
 import commands.*;
 import environment.*;
+import exceptions.EnvironmentException;
 import lifeform.*;
 import weapon.*;
 
@@ -22,8 +23,9 @@ public class GameBoard extends JFrame implements ActionListener {
 
   BufferedImage cellImage, alienImage;
   BufferedImage[] humanImages = new BufferedImage[3];
-  ImageIcon cell, alien;
-  ImageIcon[] humans = new ImageIcon[3];
+  ImageIcon cell, focus;
+  ImageIcon[][] humans = new ImageIcon[3][4], weapons = new ImageIcon[3][2];
+  ImageIcon[] aliens = new ImageIcon[4];
   private int cellDim = 70;
 
   private GameBoard() {
@@ -46,18 +48,15 @@ public class GameBoard extends JFrame implements ActionListener {
     ImageIcon icon = createImage();
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
     grid = new JRadioButton[10][10];
+    add("Center", centerPanel);
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
-        updateCell(row, col);
-        grid[row][col] = new JRadioButton(icon);
+        grid[row][col] = new JRadioButton(cell);
         grid[row][col].setSize(70, 70);
         grid[row][col].addActionListener(this);
         centerPanel.add(grid[row][col]);
-
       }
     }
-    add("Center", centerPanel);
-
     setResizable(false);
     pack();
     setVisible(true);
@@ -71,69 +70,106 @@ public class GameBoard extends JFrame implements ActionListener {
   }
 
   private void setupImages() {
+    // Load Cell Image
     cell = new ImageIcon(
         new ImageIcon("bin/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
-    for (int i = 0; i < 3; i++) {
-      String fileName = "bin/human" + i + ".png";
-      humans[i] = new ImageIcon(
-          new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+
+    // Load Focused Cell Graphic
+    cell = new ImageIcon(
+        new ImageIcon("bin/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+
+    // Load Human Images
+    for (int weapon = 0; weapon < 3; weapon++) {
+      for (int direction = 0; direction < 4; direction++) {
+        String fileName = "bin/human" + weapon + direction + ".png";
+        humans[weapon][direction] = new ImageIcon(
+            new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+      }
+    }
+
+    // Load Alien Images
+    for (int direction = 0; direction < 4; direction++) {
+      String filename = "bin/alien" + 0 + direction + ".png";
+      aliens[direction] = new ImageIcon(
+          new ImageIcon(filename).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+    }
+
+    // Load Weapon Images
+    for (int weapon = 0; weapon < 3; weapon++) {
+      for (int direction = 0; direction < 2; direction++) {
+        String fileName = "bin/weapon" + weapon + direction + ".png";
+        weapons[weapon][direction] = new ImageIcon(
+            new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+      }
     }
   }
 
   public void updateCell(int row, int col) {
-    // Construct Weapons in Cell
-    if (environment.getWeapons(row, col)[0] instanceof Pistol) {
-      // TODO pistol added
-    } else if (environment.getWeapons(row, col)[0] instanceof ChainGun) {
-      // TODO chain gun added
-    } else if (environment.getWeapons(row, col)[0] instanceof PlasmaCannon) {
-      // TODO plasma cannon added
+    Graphics cellGraphics = grid[row][col].getGraphics();
+    cellGraphics.clearRect(0, 0, cellDim, cellDim);
+    int weapon;
+
+    for (int position = 0; position < 2; position++) {
+      weapon = -1;
+      if (environment.getWeapons(row, col)[0] instanceof Pistol) {
+        weapon = 0;
+      } else if (environment.getWeapons(row, col)[0] instanceof ChainGun) {
+        weapon = 1;
+      } else if (environment.getWeapons(row, col)[0] instanceof PlasmaCannon) {
+        weapon = 2;
+      }
+      if (weapon != -1) {
+        cellGraphics.drawImage(weapons[weapon][position].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim,
+            null);
+      }
     }
 
     // Construct LifeForm with Weapon and Direction
     LifeForm lifeForm = environment.getLifeForm(row, col);
     if (lifeForm instanceof Human) {
-      // TODO human added
 
       // Human's weapon
       if (lifeForm.hasWeapon()) {
-        Weapon weapon = lifeForm.getCurrentWeapon();
-        if (weapon instanceof Pistol) {
-          // TODO Human with pistol added
+        Weapon currentWeapon = lifeForm.getCurrentWeapon();
+        if (currentWeapon instanceof Pistol) {
+          weapon = 1;
         } else {
-          // TODO Human with rifle added
+          weapon = 2;
         }
       } else {
-        // TODO Human with NO weapon added
+        weapon = 0;
       }
-
+      cellGraphics.drawImage(humans[weapon][lifeForm.getCurrentDirection()].getImage(), 0, 0, cellDim, cellDim, 0, 0,
+          cellDim, cellDim, null);
     } else if (lifeForm instanceof Alien) {
-      // TODO alien added
-
-      // Alien's weapon
-      if (lifeForm.hasWeapon()) {
-        Weapon weapon = lifeForm.getCurrentWeapon();
-        if (weapon instanceof Pistol) {
-          // TODO Alien with pistol added
-        } else {
-          // TODO Alien with rifle added
-        }
-      } else {
-        // TODO Alien with NO weapon added
-      }
+      cellGraphics.drawImage(aliens[lifeForm.getCurrentDirection()].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim,
+          cellDim, null);
     }
 
-    // TODO LifeForm Rotation
-
+    // TODO Add Focused Cell Graphic
+    try {
+      if (environment.getCell(row, col) == environment.focusedCell) {
+        cellGraphics.drawImage(focus.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
+      }
+    } catch (Exception e) {
+      System.out.println("Error occurred; caught environment exception in updateCell().");
+    }
+    cellGraphics.dispose();
   }
 
   @Override
   public void actionPerformed(ActionEvent event) {
-    // TODO Auto-generated method stub
+
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         if (event.getSource() == grid[row][col]) {
           textLabel.setText("(" + col + "," + row + ")");
+          try {
+            environment.focusedCell = environment.getCell(row, col);
+          } catch (EnvironmentException e) {
+            System.out.println("Error occurred; caught environment exception in actionPerformed().");
+          }
+          updateCell(row, col);
         }
       }
     }
@@ -147,8 +183,8 @@ public class GameBoard extends JFrame implements ActionListener {
     BufferedImage img = new BufferedImage(cellDim, cellDim, BufferedImage.TYPE_3BYTE_BGR);
     Graphics2D g = (Graphics2D) img.getGraphics();
     g.drawImage(cell.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
-    g.drawImage(humans[0].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
-    g.rotate(Math.PI/2);
+    g.drawImage(humans[0][0].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim, null);
+    g.rotate(Math.PI / 2);
     ImageIcon icon = new ImageIcon(img);
     return icon;
   }
