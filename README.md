@@ -1,6 +1,6 @@
-# Lab 5 Description
+# Lab 6 Description
 
-Lab 5 added functionality to LifeForm, Environment, and Cell, allowing us to place LifeForms in specific Cells within the Environment and determine the distance between LifeForms, as well as add up to 2 different weapons to those Cells.
+Lab 6 added the ability to make a game board and invoker gui for our game. To do this we added commands to be used by the invoker when buttons were pressed. The commands we made allow for movement, turning, acquiring and dropping weapons, attacking, and reloading. The Environment class was given new methods to allow some of these commands to interact with it such as move through it. The game board was made to display the environment with the objects on it along with a legend. The invoker has buttons tied to each command where the player can be selected and made to do the different actions.
 
 # Team Contract
 
