@@ -21,7 +21,7 @@ public class GameBoard extends JFrame implements ActionListener {
   private static GameBoard singletonInstance;
   Environment environment = Environment.getEnvironment(10, 10);
   JPanel centerPanel, statsPanel;
-  JLabel textLabel, legendLabel;
+  JLabel titleLabel, legendLabel;
   JLabel[][] statsLabels = new JLabel[8][2];
   JRadioButton[][] grid;
 
@@ -44,7 +44,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     setupInfo();
 
-    add("North", textLabel);
+    add("North", titleLabel);
     add("South", statsPanel);
     add("East", legendLabel);
 
@@ -112,9 +112,9 @@ public class GameBoard extends JFrame implements ActionListener {
 
   private void setupInfo() {
     // Title
-    textLabel = new JLabel("PoS: The Game");
-    textLabel.setFont(new Font(null, Font.BOLD, 20));
-    textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    titleLabel = new JLabel("PoS: The Game");
+    titleLabel.setFont(new Font(null, Font.BOLD, 20));
+    titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
     // Focused Cell Statistics Panel
     statsPanel = new JPanel(new GridLayout(8, 2));
@@ -251,15 +251,16 @@ public class GameBoard extends JFrame implements ActionListener {
     int weapon;
 
     for (int position = 0; position < 2; position++) {
-      weapon = -1;
-      if (environment.getWeapons(row, col)[position] instanceof Pistol) {
+      Weapon w = environment.getWeapons(row, col)[position];
+      if (w != null) {
+        String wString = w.toString().split(" ")[0];
+      if (wString.equals("Pistol")) {
         weapon = 0;
-      } else if (environment.getWeapons(row, col)[position] instanceof ChainGun) {
+      } else if (wString.equals("ChainGun")) {
         weapon = 1;
-      } else if (environment.getWeapons(row, col)[position] instanceof PlasmaCannon) {
+      } else {
         weapon = 2;
       }
-      if (weapon != -1) {
         cellGraphics.drawImage(weapons[weapon][position].getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim,
             null);
       }
@@ -306,7 +307,6 @@ public class GameBoard extends JFrame implements ActionListener {
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         if (event.getSource() == grid[row][col]) {
-          textLabel.setText("(" + col + "," + row + ")");
           try {
             environment.focusedCell = environment.getCell(row, col);
             updateCell(prevRow, prevCol);
