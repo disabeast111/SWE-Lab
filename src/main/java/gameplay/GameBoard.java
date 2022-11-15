@@ -75,16 +75,16 @@ public class GameBoard extends JFrame implements ActionListener {
   private void setupImages() {
     // Load Cell Image
     cell = new ImageIcon(
-        new ImageIcon("bin/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        new ImageIcon("images/cell.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Focused Cell Graphic
     focus = new ImageIcon(
-        new ImageIcon("bin/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
+        new ImageIcon("images/focus.png").getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
 
     // Load Human Images
     for (int weapon = 0; weapon < 3; weapon++) {
       for (int direction = 0; direction < 4; direction++) {
-        String fileName = "bin/human" + weapon + direction + ".png";
+        String fileName = "images/human" + weapon + direction + ".png";
         humans[weapon][direction] = new ImageIcon(
             new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
       }
@@ -92,7 +92,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     // Load Alien Images
     for (int direction = 0; direction < 4; direction++) {
-      String filename = "bin/alien" + 0 + direction + ".png";
+      String filename = "images/alien" + 0 + direction + ".png";
       aliens[direction] = new ImageIcon(
           new ImageIcon(filename).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
     }
@@ -100,7 +100,7 @@ public class GameBoard extends JFrame implements ActionListener {
     // Load Weapon Images
     for (int weapon = 0; weapon < 3; weapon++) {
       for (int direction = 0; direction < 2; direction++) {
-        String fileName = "bin/weapon" + weapon + direction + ".png";
+        String fileName = "images/weapon" + weapon + direction + ".png";
         weapons[weapon][direction] = new ImageIcon(
             new ImageIcon(fileName).getImage().getScaledInstance(cellDim, cellDim, Image.SCALE_SMOOTH));
       }

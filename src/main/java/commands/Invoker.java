@@ -110,14 +110,10 @@ public class Invoker extends JFrame implements ActionListener {
       if (event.getSource() == moveButton)
       {
         command = new MoveCommand(env.focusedCell.getLifeForm(), env);
-//        int oRow = env.focusedCell.getLifeForm().getRow();
-//        int oCol = env.focusedCell.getLifeForm().getRow();
-//        GameBoard.getInstance().updateCell(oRow, oCol);
-        //handled in environment for now
       }  else if (event.getSource() == reloadButton) {           
         command = new ReloadCommand(env.focusedCell.getLifeForm());
       }  else if (event.getSource() == attackButton) {
-        command = new AttackCommand(env.focusedCell.getLifeForm(), null);//null should be env
+        command = new AttackCommand(env.focusedCell.getLifeForm(), env);
       }  else if (event.getSource() == dropButton) {
         command = new DropCommand(env.focusedCell.getLifeForm(), env);
       }   else if (event.getSource() == acquireButton) {
@@ -146,12 +142,10 @@ public class Invoker extends JFrame implements ActionListener {
     } else {
    
       errorLabel = new JLabel("No LifeForm in this Cell");
-      inv.add("North", errorLabel);//doesnt work
-      System.out.println("Error: No lifeform");
-      /*
-       * Still needed: each button should set command and execute, show
-       * an error if there is no lifeform in the cell.
-       */
+      if (env.focusedCell.getLifeForm() == null) {
+        System.out.println("Error: No lifeform");
+      } else { System.out.println("other error");
+      }
     }
   }
 }
