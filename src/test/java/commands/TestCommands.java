@@ -323,14 +323,16 @@ public class TestCommands {
   public void testAttackCommandIntoBorder() throws RecoveryRateException, WeaponException {
     e.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
+    inv.focusedCell = new Cell();
+    inv.focusedCell.addLifeForm(entity1);
     
     MockWeapon mockGun = new MockWeapon();
     AttackCommand attackCommand = new AttackCommand();
     
     entity1.pickUpWeapon(mockGun);
     
-    inv.focusedCell = new Cell();
-    inv.focusedCell.addLifeForm(entity1);
+    //inv.focusedCell = new Cell();
+    //inv.focusedCell.addLifeForm(entity1);
    
     e.addLifeForm(entity1, 0, 2);
     attackCommand.execute();
@@ -352,13 +354,16 @@ public class TestCommands {
     
    
     
-    
-    attackCommand.execute();
-    assertEquals(8, mockGun.getCurrentAmmo());
+    e.addLifeForm(entity1, 4, 2);
+    entity1.setDirection(2);
     attackCommand.execute();
     assertEquals(7, mockGun.getCurrentAmmo());
+    
+    e.addLifeForm(entity1, 2, 0);
+    entity1.setDirection(3);
     attackCommand.execute();
     assertEquals(6, mockGun.getCurrentAmmo());
+
     
     
   }
