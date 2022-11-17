@@ -62,6 +62,8 @@ public class Alien extends LifeForm implements TimerObserver {
     if (getRecoveryRate() != 0 && time % getRecoveryRate() == 0) {
       recover();
     }
+    movesLeft = maxSpeed;
+    
   }
 
   public int getRecoveryRate() {

@@ -8,6 +8,7 @@ import weapon.Weapon;
  * @author Ethan J
  */
 public class AcquireCommand implements Command {
+  Invoker inv;
   LifeForm lifeForm;
   Environment enviro;
   Weapon tempW;
@@ -21,9 +22,11 @@ public class AcquireCommand implements Command {
    * @param l is the LifeForm
    * @param e is the Environment
    */
-  public AcquireCommand(LifeForm l, Environment e) {
-    this.lifeForm = l;
-    this.enviro = e;
+  public AcquireCommand() {
+    inv = Invoker.invoker();
+    lifeForm = inv.focusedCell.getLifeForm();
+    tempW = lifeForm.getCurrentWeapon();
+    enviro = inv.env;
     col = lifeForm.getCol();
     row = lifeForm.getRow();
   }

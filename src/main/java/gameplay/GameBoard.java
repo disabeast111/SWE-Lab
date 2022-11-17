@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
+import commands.Invoker;
 import environment.Cell;
 import environment.Environment;
 import exceptions.EnvironmentException;
@@ -33,6 +34,7 @@ public class GameBoard extends JFrame implements ActionListener {
   private static final long serialVersionUID = 1L;
   private static GameBoard singletonInstance;
   Environment environment;
+  Invoker invoker = Invoker.invoker();
   JPanel centerPanel;
   JPanel statsPanel;
   JLabel titleLabel;
@@ -61,7 +63,7 @@ public class GameBoard extends JFrame implements ActionListener {
     setupImages();
 
     try {
-      environment.focusedCell = environment.getCell(0, 0);
+      invoker.focusedCell = environment.getCell(0, 0);
     } catch (EnvironmentException e) {
       System.out.println("You screwed it up somehow...");
     }
@@ -74,7 +76,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     JPanel centerPanel = new JPanel(new GridLayout(10, 10));
     grid = new JRadioButton[10][10];
-    environment = Environment.getEnvironment(10, 10);
+    
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         grid[row][col] = new JRadioButton();
@@ -171,7 +173,7 @@ public class GameBoard extends JFrame implements ActionListener {
    * @param c the column of the cell
    */
   public void updateStats(int r, int c) {
-    Cell currentCell = environment.focusedCell;
+    Cell currentCell = invoker.focusedCell;
     // Coordinates
     statsLabels[0][0].setText("Cell: (" + r + "," + c + ")");
 
@@ -341,7 +343,7 @@ public class GameBoard extends JFrame implements ActionListener {
 
     // Add Focused Cell Graphic
     try {
-      if (environment.getCell(row, col) == environment.focusedCell) {
+      if (environment.getCell(row, col) == invoker.focusedCell) {
         cellGraphics.drawImage(focus.getImage(), 0, 0, cellDim, cellDim, 0, 0, cellDim, cellDim,
             null);
         prevRow = row;
@@ -360,7 +362,7 @@ public class GameBoard extends JFrame implements ActionListener {
       for (int col = 0; col < 10; col++) {
         if (event.getSource() == grid[row][col]) {
           try {
-            environment.focusedCell = environment.getCell(row, col);
+            invoker.focusedCell = environment.getCell(row, col);
             updateCell(prevRow, prevCol);
           } catch (EnvironmentException e) {
             System.out

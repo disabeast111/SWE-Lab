@@ -8,6 +8,7 @@ import lifeform.LifeForm;
  * @author Ethan J
  */
 public class MoveCommand implements Command {
+  Invoker inv = Invoker.invoker();
   LifeForm lifeForm;
   Environment enviro;
 
@@ -17,9 +18,9 @@ public class MoveCommand implements Command {
    * @param l is the LifeForm
    * @param e is the Environment
    */
-  public MoveCommand(LifeForm l, Environment e) {
-    this.lifeForm = l;
-    this.enviro = e;
+  public MoveCommand() {
+    lifeForm = inv.focusedCell.getLifeForm();
+    enviro = inv.env;
   }
 
   /**
@@ -30,10 +31,12 @@ public class MoveCommand implements Command {
 
     try {
       enviro.move(lifeForm);
+      inv.focusedCell = enviro.getCell(lifeForm.getRow(), lifeForm.getCol());
     } catch (EnvironmentException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+
     lifeForm.updateTime(0);
     if (lifeForm.hasWeapon()) {
       lifeForm.getCurrentWeapon().updateTime(0);

@@ -14,7 +14,7 @@ import exceptions.EnvironmentException;
  */
 public class Environment {
   Cell[][] cells;
-  public Cell focusedCell;
+ 
 
   private static Environment theEnv;
 
@@ -249,8 +249,7 @@ public class Environment {
         }
         removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(orgRow - i, orgCol);
-        // gb.updateCell(orgRow, orgCol);
+      
         return i;
       } else if (lf.getCurrentDirection() == 1) { // E
         while (addLifeForm(lf, orgRow, orgCol + i) == false) {
@@ -261,8 +260,7 @@ public class Environment {
         }
         removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(orgRow, orgCol + i);
-        // gb.updateCell(orgRow, orgCol);
+  
         return i;
       } else if (lf.getCurrentDirection() == 2) { // S
         while (addLifeForm(lf, orgRow + i, orgCol) == false) {
@@ -273,8 +271,7 @@ public class Environment {
         }
         removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(orgRow + i, orgCol);
-        // gb.updateCell(orgRow, orgCol);
+
         return i;
       } else if (lf.getCurrentDirection() == 3) { // W
         while (addLifeForm(lf, orgRow, orgCol - i) == false) {
@@ -285,8 +282,7 @@ public class Environment {
         }
         removeLifeForm(orgRow, orgCol);
         lf.setMovesLeft(lf.getMovesLeft() - i);
-        focusedCell = getCell(orgRow, orgCol - i);
-        // gb.updateCell(orgRow, orgCol);
+
         return i;
       }
     }

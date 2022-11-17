@@ -58,12 +58,22 @@ public class TestAlien {
   
   @Test
   public void testRecoverByRound1() throws RecoveryRateException {
-    Alien entity = new Alien("Bob", 100, new RecoveryLinear(1), 5);
+    LifeForm entity = new Alien("Bob", 100, new RecoveryLinear(1), 5);
     SimpleTimer s = new SimpleTimer(50);
+    entity.movesLeft --;
+    
     s.addTimeObserver(entity);
     entity.takeHit(50);
     s.run();
     assertEquals(60, entity.getCurrentLifePoints());
+    
+    LifeForm human = new Human("Bobbeh", 10, 10);
+    human.movesLeft --;
+    human.updateTime(0);
+    assertEquals(human.getMaxSpeed(), human.getMovesLeft());
+    
+    entity.updateTime(0);
+    assertEquals(entity.getMaxSpeed(), entity.getMovesLeft());
   }
   
   @Test

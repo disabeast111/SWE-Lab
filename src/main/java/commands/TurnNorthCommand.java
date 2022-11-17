@@ -6,6 +6,7 @@ import lifeform.LifeForm;
  * @author Ethan J
  */
 public class TurnNorthCommand implements Command {
+  Invoker inv = Invoker.invoker();;
   LifeForm lifeForm;
 
   /**
@@ -13,8 +14,8 @@ public class TurnNorthCommand implements Command {
    * 
    * @param l is the LifeForm
    */
-  public TurnNorthCommand(LifeForm l) {
-    this.lifeForm = l;
+  public TurnNorthCommand() {
+    lifeForm = inv.focusedCell.getLifeForm();
   }
 
   /**

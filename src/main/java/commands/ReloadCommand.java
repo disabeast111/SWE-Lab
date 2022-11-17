@@ -7,6 +7,7 @@ import weapon.Weapon;
  * @author Ethan J
  */
 public class ReloadCommand implements Command {
+  Invoker inv = Invoker.invoker();;
   Weapon currentWeapon;
   LifeForm lifeForm;
 
@@ -15,10 +16,10 @@ public class ReloadCommand implements Command {
    * 
    * @param l is the LifeForm
    */
-  public ReloadCommand(LifeForm l) {
+  public ReloadCommand() {
 
-    this.lifeForm = l;
-    this.currentWeapon = lifeForm.getCurrentWeapon();
+    lifeForm = inv.focusedCell.getLifeForm();
+    currentWeapon = lifeForm.getCurrentWeapon();
   }
 
   /**

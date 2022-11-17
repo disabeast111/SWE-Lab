@@ -32,19 +32,22 @@ public class InvokerBuilder extends JFrame {
    */
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
     Environment env = Environment.getEnvironment(10, 10);
-    Invoker gui = new Invoker();
+    Invoker gui = Invoker.invoker();
     int x = 500;
     int y = 400;
     gui.setBounds(1000, 200, x, y);
     LifeForm joe = new Human("Joe", 10, 10);
     joe.pickUpWeapon(new Scope(new Pistol()));
     LifeForm jane = new Human("Jane", 10, 10);
+    LifeForm Lrrr = new Alien("Lrrr", 50);
+    env.addLifeForm(Lrrr, 7, 3);
     env.addLifeForm(joe, 0,0);
     env.addLifeForm(jane, 3, 6);
     Weapon weap = new Scope(new PlasmaCannon());
         
     try {
       env.getCell(3, 5).addWeapon(weap);
+      env.getCell(2, 8).addWeapon(weap);
     } catch (EnvironmentException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -58,7 +61,5 @@ public class InvokerBuilder extends JFrame {
     }
   }
   
-  public void setCommand(Command c) {
-    command = c;
-  }
+
 }

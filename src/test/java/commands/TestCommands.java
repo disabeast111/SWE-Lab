@@ -27,10 +27,10 @@ public class TestCommands {
   public void testTurnCommands() {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     assertEquals(0, entity1.getCurrentDirection());
-    TurnEastCommand turnEast = new TurnEastCommand(entity1);
-    TurnNorthCommand turnNorth = new TurnNorthCommand(entity1);
-    TurnSouthCommand turnSouth = new TurnSouthCommand(entity1);
-    TurnWestCommand turnWest = new TurnWestCommand(entity1);
+    TurnEastCommand turnEast = new TurnEastCommand();
+    TurnNorthCommand turnNorth = new TurnNorthCommand();
+    TurnSouthCommand turnSouth = new TurnSouthCommand();
+    TurnWestCommand turnWest = new TurnWestCommand();
     turnEast.execute();
     assertEquals(1, entity1.getCurrentDirection());
     turnNorth.execute();
@@ -58,7 +58,7 @@ public class TestCommands {
       pistol.updateTime(0);
     }
     assertEquals(0, pistol.getCurrentAmmo());
-    ReloadCommand reloadCommand = new ReloadCommand(entity1);
+    ReloadCommand reloadCommand = new ReloadCommand();
     reloadCommand.execute();
     assertEquals(10, pistol.getCurrentAmmo());
     
@@ -80,13 +80,13 @@ public class TestCommands {
     //entity.setLocation(2, 2);
     assertEquals(2, entity.getRow());
     assertEquals(2, entity.getCol());
-    MoveCommand moveCommand = new MoveCommand(entity, e);
+    MoveCommand moveCommand = new MoveCommand();
     moveCommand.execute();
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(2, entity.getCol());
 
-    TurnEastCommand turnEast = new TurnEastCommand(entity);
+    TurnEastCommand turnEast = new TurnEastCommand();
     turnEast.execute();
     moveCommand.execute();
     entity.updateTime(0);
@@ -111,7 +111,7 @@ public class TestCommands {
     e.addLifeForm(entity1, 2, 2);
     //entity1.setLocation(2, 2);
     assertTrue(entity1.hasWeapon());
-    DropCommand dropCommand = new DropCommand(entity1, e);
+    DropCommand dropCommand = new DropCommand();
     dropCommand.execute();
     assertFalse(entity1.hasWeapon());
     Weapon[] temp = e.getWeapons(2, 2);
@@ -144,7 +144,7 @@ public class TestCommands {
     Weapon[] temp = e.getWeapons(2, 2);
     assertEquals(pistol, temp[0]);
     
-    AcquireCommand acquireCommand = new AcquireCommand(entity1, e);
+    AcquireCommand acquireCommand = new AcquireCommand();
     assertFalse(entity1.hasWeapon());
     acquireCommand.execute();
     assertTrue(entity1.hasWeapon());
@@ -199,7 +199,7 @@ public class TestCommands {
     e.addLifeForm(target3, 4, 2);
     e.addLifeForm(target4, 2, 0);
     
-    AttackCommand attackCommand = new AttackCommand(entity1, e);
+    AttackCommand attackCommand = new AttackCommand();
     
     attackCommand.execute();
     assertEquals(30, target1.getCurrentLifePoints());
@@ -243,7 +243,7 @@ public class TestCommands {
     e.addLifeForm(target3, 4, 2);
     e.addLifeForm(target4, 2, 0);
     
-    AttackCommand attackCommand = new AttackCommand(entity1, e);
+    AttackCommand attackCommand = new AttackCommand();
     
     attackCommand.execute();
     assertEquals(40, target1.getCurrentLifePoints());
@@ -278,7 +278,7 @@ public class TestCommands {
     
     e.addLifeForm(entity1, 2, 2);
     
-    AttackCommand attackCommand = new AttackCommand(entity1, e);
+    AttackCommand attackCommand = new AttackCommand();
     
     attackCommand.execute();
     assertEquals(9, mockGun.getCurrentAmmo());
@@ -321,10 +321,10 @@ public class TestCommands {
     e.addLifeForm(entity4, 2, 0);
     entity4.setDirection(3);
     
-    AttackCommand attackCommand1 = new AttackCommand(entity1, e);
-    AttackCommand attackCommand2 = new AttackCommand(entity2, e);
-    AttackCommand attackCommand3 = new AttackCommand(entity3, e);
-    AttackCommand attackCommand4 = new AttackCommand(entity4, e);
+    AttackCommand attackCommand1 = new AttackCommand();
+    AttackCommand attackCommand2 = new AttackCommand();
+    AttackCommand attackCommand3 = new AttackCommand();
+    AttackCommand attackCommand4 = new AttackCommand();
     
     attackCommand1.execute();
     assertEquals(9, mockGun1.getCurrentAmmo());

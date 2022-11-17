@@ -9,6 +9,7 @@ import weapon.Weapon;
  * @author Ethan J
  */
 public class AttackCommand implements Command {
+  Invoker inv = Invoker.invoker();
   LifeForm attacker;
   Environment enviro;
   int row;
@@ -23,9 +24,9 @@ public class AttackCommand implements Command {
    * @param l is the LifeForm
    * @param e is the Environment
    */
-  public AttackCommand(LifeForm l, Environment e) {
-    this.attacker = l;
-    this.enviro = e;
+  public AttackCommand() {
+    attacker = inv.focusedCell.getLifeForm();
+    enviro = inv.env;
   }
 
   /**
