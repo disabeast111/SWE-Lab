@@ -26,12 +26,7 @@ public class Invoker extends JFrame implements ActionListener {
   JButton attackButton;
   static Invoker theInv;
   
-  
-  
-  
-  
-  
-  
+ 
   public Cell focusedCell = new Cell();
   
   Environment env = Environment.getEnvironment(10, 10);
@@ -57,7 +52,7 @@ public class Invoker extends JFrame implements ActionListener {
     weaponPanel.add(attackButton);
 
     dropButton = new JButton("Drop Weapon");
-    dropButton.setActionCommand("DropWeapon");
+    dropButton.setActionCommand("DropCommand");
     dropButton.addActionListener(this);
     weaponPanel.add(dropButton);
 
@@ -81,7 +76,7 @@ public class Invoker extends JFrame implements ActionListener {
     buttonArray[0][2] = new JButton(" ");
 
     buttonArray[1][0] = new JButton("West");
-    buttonArray[1][0].setActionCommand("TrunWestCommand");
+    buttonArray[1][0].setActionCommand("TurnWestCommand");
     buttonArray[1][0].addActionListener(this);
     westButton = buttonArray[1][0];
 
@@ -126,41 +121,21 @@ public class Invoker extends JFrame implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent event) {
+      
     
-//    String commandName = event.getActionCommand();
-//    Class<?> commandC = null;
-//    try {
-//      commandC = Class.forName(commandName);
-//    } catch (ClassNotFoundException e1) {
-//      // TODO Auto-generated catch block
-//      e1.printStackTrace();
-//    }
-//    Command convertedCommand = null;
-//    try {
-//      convertedCommand = (Command) commandC;
-//    } catch (InstantiationException e1) {
-//      // TODO Auto-generated catch block
-//      e1.printStackTrace();
-//    } catch (IllegalAccessException e1) {
-//      // TODO Auto-generated catch block
-//      e1.printStackTrace();
-//    }
-//    setCommand(convertedCommand);
-   
-   
-    
-    Command acquire = new AcquireCommand();
-    Command attack = new AttackCommand();
-    Command drop = new DropCommand();
-    Command move = new MoveCommand();
-    Command reload = new ReloadCommand();
-    Command east = new TurnEastCommand();
-    Command north = new TurnNorthCommand();
-    Command south = new TurnSouthCommand();
-    Command west = new TurnWestCommand();
+//    Command acquire = new AcquireCommand();
+//    Command attack = new AttackCommand();
+//    Command drop = new DropCommand();
+//    Command move = new MoveCommand();
+//    Command reload = new ReloadCommand();
+//    Command east = new TurnEastCommand();
+//    Command north = new TurnNorthCommand();
+//    Command south = new TurnSouthCommand();
+//    Command west = new TurnWestCommand();
     int prevRow = 0;
     int prevCol = 0;
 
+    setCommand(event.getActionCommand());
     
     try {
       if (focusedCell != null && focusedCell.getLifeForm() != null) {
@@ -168,24 +143,10 @@ public class Invoker extends JFrame implements ActionListener {
           
           prevRow = focusedCell.getLifeForm().getRow();
           prevCol = focusedCell.getLifeForm().getCol();
-          move.execute();
-        } else if (event.getSource() == reloadButton) {
-          reload.execute();
-        } else if (event.getSource() == attackButton) {
-          attack.execute();
-        } else if (event.getSource() == dropButton) {
-          drop.execute();
-        } else if (event.getSource() == acquireButton) {
-          acquire.execute();
-        } else if (event.getSource() == northButton) {
-          north.execute();
-        } else if (event.getSource() == eastButton) {
-          east.execute();
-        } else if (event.getSource() == southButton) {
-          south.execute();
-        } else if (event.getSource() == westButton) {
-          west.execute();
+          
         }
+        command.execute();
+        
       }
     } catch (WeaponException e) {
       // TODO Auto-generated catch block
@@ -201,8 +162,28 @@ public class Invoker extends JFrame implements ActionListener {
       
     }
   }
-  
-  public void setCommand(Command c) {
-    command = c;
+    public void setCommand(String s) {
+      InvokerBuilder ib = new InvokerBuilder();
+      if (s.equals(ib.acquire.toString())){
+        command = ib.acquire;
+      } else if (s.equals(ib.attack.toString())){
+        command = ib.attack;
+      } else if (s.equals(ib.drop.toString())){
+        command = ib.drop;
+      } else if (s.equals(ib.move.toString())){
+        command = ib.move;
+      } else if (s.equals(ib.reload.toString())){
+        command = ib.reload;
+      } else if (s.equals(ib.east.toString())){
+        command = ib.east;
+      } else if (s.equals(ib.north.toString())){
+        command = ib.north;
+      } else if (s.equals(ib.south.toString())){
+        command = ib.south;
+      } else if (s.equals(ib.west.toString())){
+        command = ib.west;
+      }
+    
   }
+ 
 }
