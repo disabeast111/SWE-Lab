@@ -32,5 +32,9 @@ public class ReloadCommand implements Command {
     }
 
   }
+  
+  public String toString() {
+    return "ReloadCommand";
+  }
 
 }

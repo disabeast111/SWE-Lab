@@ -43,5 +43,8 @@ public class DropCommand implements Command {
     }
 
   }
+  public String toString() {
+    return "DropCommand";
+  }
 
 }

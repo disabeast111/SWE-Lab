@@ -96,5 +96,9 @@ public class AttackCommand implements Command {
       w.fire(1);
     }
   }
+  
+  public String toString() {
+    return "AttackCommand";
+  }
 
 }

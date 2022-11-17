@@ -42,4 +42,8 @@ public class MoveCommand implements Command {
       lifeForm.getCurrentWeapon().updateTime(0);
     }
   }
+  
+  public String toString() {
+    return "MoveCommand";
+  }
 }

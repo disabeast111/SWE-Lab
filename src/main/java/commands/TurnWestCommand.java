@@ -25,5 +25,7 @@ public class TurnWestCommand implements Command {
   public void execute() {
     lifeForm.setDirection(3);
   }
-
+  public String toString() {
+    return "TurnWestCommand";
+  }
 }

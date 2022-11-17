@@ -47,5 +47,10 @@ public class AcquireCommand implements Command {
     }
 
   }
+  
+  public String toString() {
+    return "AcquireCommand";
+  }
+  
 
 }

@@ -12,5 +12,7 @@ public interface Command {
    * @throws WeaponException
    */
   public void execute() throws WeaponException;
+  
+  
 
 }
