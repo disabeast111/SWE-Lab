@@ -3,6 +3,7 @@ package lifeform;
 import exceptions.WeaponException;
 import gameplay.TimerObserver;
 import weapon.Weapon;
+import state.AIContext;
 
 /**
  * Lab 4, 6
@@ -13,6 +14,7 @@ import weapon.Weapon;
 public abstract class LifeForm extends java.lang.Object implements TimerObserver {
   private String myName;
   protected int currentLifePoints;
+  protected int maxLifePoints;
   protected int attackStrength;
   protected Weapon weapon;
   protected int col = -1;
@@ -20,6 +22,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   private int currentDirection = 0;
   protected int maxSpeed = 0;
   protected int movesLeft = 0;
+  private AIContext context;
 
   /**
    * @param name
@@ -45,6 +48,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
       attackStrength = attack;
     }
     movesLeft = maxSpeed;
+    maxLifePoints = currentLifePoints;
   }
 
   public String getName() {
@@ -62,6 +66,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
     currentLifePoints -= damage;
     if (currentLifePoints < 0) {
       currentLifePoints = 0;
+      context.setCurrentState(context.getDeadState());
     }
   }
 
@@ -202,5 +207,10 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   // Setup this getter to retrieve current weapon in command
   public Weapon getCurrentWeapon() {
     return weapon;
+  }
+  
+  public void revive() {
+    currentLifePoints = maxLifePoints;
+    context.getCurrentState().executeAction();
   }
 }

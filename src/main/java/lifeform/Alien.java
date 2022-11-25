@@ -10,7 +10,6 @@ import gameplay.TimerObserver;
  */
 public class Alien extends LifeForm implements TimerObserver {
   private RecoveryBehavior recoveryBehavior;
-  private int maxLifePoints;
   private int recoveryRate = 0;
 
   public Alien(String name, int life) throws RecoveryRateException {
