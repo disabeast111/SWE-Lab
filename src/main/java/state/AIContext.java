@@ -28,5 +28,15 @@ public class AIContext {
     // TODO Auto-generated method stub
     return null;
   }
+
+  public Environment getEnvironment() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public NoWeaponState getNoWeapon() {
+    // TODO Auto-generated method stub
+    return null;
+  }
   
 }

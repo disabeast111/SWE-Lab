@@ -3,7 +3,6 @@ package environment;
 import lifeform.LifeForm;
 
 import weapon.Weapon;
-import gameplay.GameBoard;
 import exceptions.EnvironmentException;
 
 /**
