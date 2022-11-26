@@ -1,7 +1,5 @@
 package state;
 
-import lifeform.LifeForm;
-
 public class OutOfAmmoState extends ActionState {
 
   public OutOfAmmoState(AIContext c) { super(c); }
