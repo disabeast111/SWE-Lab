@@ -49,10 +49,6 @@ public class Alien extends LifeForm implements TimerObserver {
     }
   }
 
-  public int getMaxLifePoints() {
-    return maxLifePoints;
-  }
-
   /**
    * updateTime
    * @param time (round)

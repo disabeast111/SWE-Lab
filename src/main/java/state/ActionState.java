@@ -10,7 +10,11 @@ public abstract class ActionState {
   protected Environment e;
   protected LifeForm lifeform;
 
-  public ActionState(AIContext c) {context = c;}
+  public ActionState(AIContext c) {
+    context = c;
+    e = context.getEnvironment();
+    lifeform = context.getLifeForm();
+    }
   
   public abstract void executeAction();
 }

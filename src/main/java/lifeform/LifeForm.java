@@ -22,7 +22,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   private int currentDirection = 0;
   protected int maxSpeed = 0;
   protected int movesLeft = 0;
-  private AIContext context;
+  // private AIContext context; don't think needed
 
   /**
    * @param name
@@ -66,7 +66,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
     currentLifePoints -= damage;
     if (currentLifePoints < 0) {
       currentLifePoints = 0;
-      context.setCurrentState(context.getDeadState());
+      // context.setCurrentState(context.getDeadState()); don't think needed
     }
   }
 
@@ -211,6 +211,14 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   
   public void revive() {
     currentLifePoints = maxLifePoints;
-    context.getCurrentState().executeAction();
+    //context.getCurrentState().executeAction(); don't think needed
+  }
+  
+  public void setMaxLifePoints(int mxlp) {
+    maxLifePoints = mxlp;
+  }
+  
+  public int getMaxLifePoints() {
+    return maxLifePoints;
   }
 }

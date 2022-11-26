@@ -48,4 +48,9 @@ public class AIContext {
     // TODO Auto-generated method stub
     return null;
   }
+
+  public ActionState getOutOfAmmoState() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

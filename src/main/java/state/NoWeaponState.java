@@ -47,7 +47,7 @@ public class NoWeaponState extends ActionState {
     }
   }
 
-  public void search() throws EnvironmentException {
+  private void search() throws EnvironmentException {
     Environment env = context.getEnvironment();
     Integer direction = new RandInt(0, 3).choose();
     lifeform.setDirection(direction);
