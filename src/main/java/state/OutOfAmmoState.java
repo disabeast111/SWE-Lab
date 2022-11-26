@@ -8,9 +8,9 @@ public class OutOfAmmoState extends ActionState {
 
   @Override
   public void executeAction() {
-    LifeForm lf = context.getLifeForm();
+    lifeform  = context.getLifeForm();
 
-    if (lf.getCurrentLifePoints() != 0) {
+    if (lifeform.getCurrentLifePoints() != 0) {
       lifeform.getCurrentWeapon().reload();
       context.setCurrentState(context.getHasWeapon());
     } else {

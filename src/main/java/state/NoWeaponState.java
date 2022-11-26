@@ -1,9 +1,7 @@
 package state;
 
 import environment.Cell;
-import environment.Environment;
 import exceptions.EnvironmentException;
-import lifeform.LifeForm;
 import random.RandInt;
 
 public class NoWeaponState extends ActionState {
@@ -14,19 +12,17 @@ public class NoWeaponState extends ActionState {
 
   @Override
   public void executeAction() {
-    Environment env = context.getEnvironment();
-    LifeForm lf = context.getLifeForm();
     int row = lifeform.getRow();
     int col = lifeform.getCol();
     Cell c;
 
     try {
-      c = env.getCell(row, col);
+      c = e.getCell(row, col);
     } catch (EnvironmentException ex) {
       throw new RuntimeException(ex);
     }
 
-    if (lf.getCurrentLifePoints() != 0) {
+    if (lifeform.getCurrentLifePoints() != 0) {
 
       if (c.getWeapon1() == null && c.getWeapon2() == null) {
         try {
@@ -35,10 +31,10 @@ public class NoWeaponState extends ActionState {
           throw new RuntimeException(ex);
         }
       } else if (c.getWeapon1() != null) {
-        lf.pickUpWeapon(c.getWeapon1());
+        lifeform.pickUpWeapon(c.getWeapon1());
         context.setCurrentState(context.getHasWeapon());
       } else if (c.getWeapon2() != null) {
-        lf.pickUpWeapon(c.getWeapon2());
+        lifeform.pickUpWeapon(c.getWeapon2());
         context.setCurrentState(context.getHasWeapon());
       }
 
@@ -47,10 +43,9 @@ public class NoWeaponState extends ActionState {
     }
   }
 
-  private void search() throws EnvironmentException {
-    Environment env = context.getEnvironment();
+  public void search() throws EnvironmentException {
     Integer direction = new RandInt(0, 3).choose();
     lifeform.setDirection(direction);
-    env.move(context.getLifeForm());
+    e.move(context.getLifeForm());
   }
 }
