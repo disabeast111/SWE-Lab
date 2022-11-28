@@ -1,6 +1,8 @@
 package gameplay;
 
+import commands.Invoker;
 import environment.Environment;
+import exceptions.AttachmentException;
 import exceptions.RecoveryRateException;
 import lifeform.Alien;
 import lifeform.Human;
@@ -16,51 +18,26 @@ public class Simulator implements TimerObserver {
   int humans;
   int aliens;
   int totalLifeForms;
-  //String humanNames[] = new String[] { "Bob", "Jim", "Tim", "Emma", "Anna", "Katy", "Juan", "Zach", 
-     // "Bella", "Rob", "Chris", "Mike", "Shelly", "Lena", "Bartholomew the IV" };
-  //String alienNames[] = new String[] { "Zurg", "ET", "Yoda", "Grogu", "Xeno", "Groot", "Chewie", 
-    //  "Predator", "Spock", "Borg" };
-  //RecoveryBehavior recov[] = new RecoveryBehavior[] {new RecoveryNone(), new RecoveryLinear(5), new RecoveryFractional(.5)};
-  //Weapon weapon[] = new Weapon[] {new Pistol(), new ChainGun(), new PlasmaCannon()};
-  
-  // need array of human names
-  // need array of alien names
-  // need array of all recovery rates?
-  // need array of weapons?
-  //String recovRates[] = new String[] {};
-  //String weapons[] = new String[] {};
 
   public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens) throws RecoveryRateException {
     enviro = e;
     time = timer;
     humans = numHumans;
     aliens = numAliens;
-    totalLifeForms =numHumans + numAliens;
+    totalLifeForms = numHumans + numAliens;
 
-    // Row and col to be used in addLifeForm
     int row = enviro.getNumRows();
     int col = enviro.getNumCols();
 
-    // Initialized RandInt constructors
-    //RandInt ranHumName = new RandInt(0, humanNames.length);
-    //RandInt ranAlienRecov = new RandInt(0, recov.length);
-    //RandInt ranArmor = new RandInt(0, 9);
-    //RandInt ranHumLife = new RandInt(10, 50);
-    //RandInt ranAlienLife = new RandInt(10,30);
     RandInt ranRow = new RandInt(0, row);
     RandInt ranCol = new RandInt(0, col);
-    //RandInt ranAlienName = new RandInt(0, alienNames.length);
-    //RandInt ranWeapon = new RandInt(0, weapon.length);
 
     // Loop to add each human requested
     for (int i = 0; i < humans; i++) {
-      // All random stats for human
-    //  int nameNum = ranHumName.choose();
-      //int life = ranHumLife.choose();
-      //int armor = ranArmor.choose();
+
       int humRow = ranRow.choose();
       int humCol = ranCol.choose();
-      
+
       RandHuman alen = new RandHuman();
       Human entity = alen.choose();
 
@@ -69,54 +46,48 @@ public class Simulator implements TimerObserver {
         humRow = ranRow.choose();
         humCol = ranCol.choose();
       }
-      //Creates human to add
-     // LifeForm entity = new Human(humanNames[nameNum], ranHumLife.choose(), ranArmor.choose());
-      //Adds human to environment
+
+      // Adds human to environment
       enviro.addLifeForm(entity, humRow, humCol);
 
     }
 
     // Loop to add each alien requested
     for (int i = 0; i < aliens; i++) {
-      //int nameNum = ranAlienName.choose();
+      // int nameNum = ranAlienName.choose();
       int alienRow = ranRow.choose();
       int alienCol = ranCol.choose();
-     // int recovNum = ranAlienRecov.choose();
+
       RandAlien alen = new RandAlien();
       Alien entity2 = alen.choose();
-      
-      
-      while(enviro.getLifeForm(alienRow, alienCol) != null) {
+
+      while (enviro.getLifeForm(alienRow, alienCol) != null) {
         alienRow = ranRow.choose();
         alienCol = ranCol.choose();
       }
-      
-      //LifeForm entity = new Alien(alienNames[nameNum], ranAlienLife.choose(), recov[recovNum] );
-      
+
       enviro.addLifeForm(entity2, alienRow, alienCol);
-      
+
     }
-    
+
     // Loop to add each weapon requested
-    for(int i = 0; i < totalLifeForms; i++) {
-      //int weaponNum = ranWeapon.choose();
+    for (int i = 0; i < totalLifeForms; i++) {
       int weaponRow = ranRow.choose();
       int weaponCol = ranCol.choose();
       RandWeapon wepa = new RandWeapon();
       Weapon weaponToAdd = wepa.choose();
-      
+
       Weapon[] weap = new Weapon[1];
       weap = enviro.getWeapons(weaponRow, weaponCol);
-      //checks both positions if they are already filled
-      while(weap[0] != null && weap[1] != null) {
+      // checks both positions if they are already filled
+      while (weap[0] != null && weap[1] != null) {
         weaponRow = ranRow.choose();
         weaponCol = ranCol.choose();
         weap = enviro.getWeapons(weaponRow, weaponCol);
       }
-      //adds weapon based on array
-      //Weapon weaponAdd = weapon[weaponNum];
+
       enviro.addWeapon(weaponToAdd, weaponRow, weaponCol);
-      
+
     }
 
   }
@@ -124,5 +95,27 @@ public class Simulator implements TimerObserver {
   public void updateTime(int time) {
 
   }
+  
+  public static void main(String[] args) throws AttachmentException, RecoveryRateException {
+    Environment env = Environment.getEnvironment(10, 10);
+    Invoker gui = Invoker.invoker();
+    int x = 500;
+    int y = 400;
+    gui.setBounds(1000, 200, x, y);
+    SimpleTimer timer = new SimpleTimer(1000);
+    Simulator sim = new Simulator(env, timer, 5, 5);
+
+
+        
+
+    GameBoard gb = GameBoard.getInstance();
+    for (int row = 0; row < 10; row++) {
+      for (int col = 0; col < 10; col++) {
+        gb.updateCell(row, col);
+      }
+    }
+  
+  }
+  
 
 }
