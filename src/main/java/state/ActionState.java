@@ -1,11 +1,9 @@
 package state;
 
-import java.lang.Object;
-
 import environment.Environment;
 import lifeform.LifeForm;
 
-public abstract class ActionState {
+public abstract class ActionState extends java.lang.Object {
   protected AIContext context;
   protected Environment e;
   protected LifeForm lifeform;
