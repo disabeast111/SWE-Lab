@@ -1,3 +1,5 @@
 package random;
 
-public interface Random<A> { A choose();}
+import exceptions.RecoveryRateException;
+
+public interface Random<A> { A choose() throws RecoveryRateException;}
