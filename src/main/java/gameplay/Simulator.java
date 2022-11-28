@@ -24,10 +24,21 @@ public class Simulator implements TimerObserver {
     time = timer;
     humans = numHumans;
     aliens = numAliens;
-    totalLifeForms = numHumans + numAliens;
 
     int row = enviro.getNumRows();
     int col = enviro.getNumCols();
+
+    //Loop that checks if number of lifeForms will fit in evironment
+    while (row * col < humans + aliens) {
+      if (humans > 1) {
+        humans -= 1;
+      }
+      if (aliens > 1) {
+        aliens -= 1;
+      }
+    }
+    //total used for weapons as for each lifeForm there is one weapon
+    totalLifeForms = humans + aliens;
 
     RandInt ranRow = new RandInt(0, row);
     RandInt ranCol = new RandInt(0, col);
@@ -77,8 +88,9 @@ public class Simulator implements TimerObserver {
       RandWeapon wepa = new RandWeapon();
       Weapon weaponToAdd = wepa.choose();
 
-      Weapon[] weap = new Weapon[1];
-      weap = enviro.getWeapons(weaponRow, weaponCol);
+      Weapon[] weap = enviro.getWeapons(weaponRow, weaponCol);  
+      //new Weapon[2];
+      //weap = enviro.getWeapons(weaponRow, weaponCol);
       // checks both positions if they are already filled
       while (weap[0] != null && weap[1] != null) {
         weaponRow = ranRow.choose();
@@ -95,7 +107,7 @@ public class Simulator implements TimerObserver {
   public void updateTime(int time) {
 
   }
-  
+
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
     Environment env = Environment.getEnvironment(10, 10);
     Invoker gui = Invoker.invoker();
@@ -105,17 +117,13 @@ public class Simulator implements TimerObserver {
     SimpleTimer timer = new SimpleTimer(1000);
     Simulator sim = new Simulator(env, timer, 5, 5);
 
-
-        
-
     GameBoard gb = GameBoard.getInstance();
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         gb.updateCell(row, col);
       }
     }
-  
+
   }
-  
 
 }
