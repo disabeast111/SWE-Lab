@@ -7,6 +7,8 @@ public class DeadState extends ActionState {
 
   public DeadState(AIContext c) {
     super(c);
+    e = context.getEnvironment();
+    lifeform = context.getLifeForm();
   }
 
   public void executeAction() { // respawn
@@ -24,6 +26,6 @@ public class DeadState extends ActionState {
       
       e.addWeapon(lifeform.dropWeapon(), r, c);
     }
-    context.setCurrentState(context.getNoWeapon());
+    context.setCurrentState(context.getNoWeaponState());
   }
 }

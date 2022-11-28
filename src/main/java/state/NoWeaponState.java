@@ -32,10 +32,10 @@ public class NoWeaponState extends ActionState {
         }
       } else if (c.getWeapon1() != null) {
         lifeform.pickUpWeapon(c.getWeapon1());
-        context.setCurrentState(context.getHasWeapon());
+        context.setCurrentState(context.getHasWeaponState());
       } else if (c.getWeapon2() != null) {
         lifeform.pickUpWeapon(c.getWeapon2());
-        context.setCurrentState(context.getHasWeapon());
+        context.setCurrentState(context.getHasWeaponState());
       }
 
     } else {

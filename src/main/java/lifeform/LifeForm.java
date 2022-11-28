@@ -221,4 +221,11 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   public int getMaxLifePoints() {
     return maxLifePoints;
   }
+  
+  public int getAttackRange() {
+    if (weapon != null) {
+      return weapon.getMaxRange();
+    }
+    return 5;
+  }
 }
