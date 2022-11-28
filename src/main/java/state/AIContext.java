@@ -5,16 +5,20 @@ import lifeform.LifeForm;
 
 public class AIContext {
   ActionState currentState;
-  DeadState deadState = new DeadState(this);
-  HasWeaponState hasWeaponState = new HasWeaponState(this);
-  NoWeaponState noWeaponState = new NoWeaponState(this);
-  OutOfAmmoState outOfAmmoState = new OutOfAmmoState(this);
+  DeadState deadState;
+  HasWeaponState hasWeaponState;
+  NoWeaponState noWeaponState;
+  OutOfAmmoState outOfAmmoState;
   LifeForm lifeForm;
   Environment environment;
   
   public AIContext(LifeForm l, Environment e) {
     lifeForm = l;
     environment = e;
+    deadState = new DeadState(this);
+    hasWeaponState = new HasWeaponState(this);
+    noWeaponState = new NoWeaponState(this);
+    outOfAmmoState = new OutOfAmmoState(this);
   }
   
   public LifeForm getLifeForm() {

@@ -24,9 +24,13 @@ public class testStates {
     aic.setCurrentState(aic.getDeadState());
     aic.execute();
     assertEquals(40, lf.getCurrentLifePoints());
-    assertEquals(test.getClass(), aic.getCurrentState());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
   
+  private Object instanceOf(ActionState currentState) {
+    return currentState.getClass();
+  }
+
   @Test
   public void testDeadStateWeapon() {
     NoWeaponState test = new NoWeaponState(aic);
@@ -39,6 +43,6 @@ public class testStates {
     aic.execute();
     assertEquals(40, lf.getCurrentLifePoints());
     assertEquals(null, lf.getCurrentWeapon());
-    assertEquals(test.getClass(), aic.getCurrentState());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
 }
