@@ -3,59 +3,53 @@ package state;
 import environment.Environment;
 import lifeform.LifeForm;
 
-
 public class AIContext {
-
-  public AIContext(LifeForm lifeform, Environment e) {
-    
+  ActionState currentState;
+  DeadState deadState = new DeadState(this);
+  HasWeaponState hasWeaponState = new HasWeaponState(this);
+  NoWeaponState noWeaponState = new NoWeaponState(this);
+  OutOfAmmoState outOfAmmoState = new OutOfAmmoState(this);
+  LifeForm lifeForm;
+  Environment environment;
+  
+  public AIContext(LifeForm l, Environment e) {
+    lifeForm = l;
+    environment = e;
   }
-
+  
   public LifeForm getLifeForm() {
-    // TODO Auto-generated method stub
-    return null;
+    return lifeForm;
   }
-
-  public DeadState getDeadState() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void setCurrentState(ActionState state) {
-    // TODO Auto-generated method stub
-  }
-
-  public ActionState getCurrentState() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
+  
   public Environment getEnvironment() {
-    // TODO Auto-generated method stub
-    return null;
+    return environment;
   }
-
-  public NoWeaponState getNoWeapon() {
-    // TODO Auto-generated method stub
-    return null;
+  
+  public void setCurrentState(ActionState state) {
+    currentState = state;
   }
-
-  public HasWeaponState getHasWeapon() {
-    // TODO Auto-generated method stub
-    return null;
+  
+  public ActionState getCurrentState() {
+    return currentState;
   }
-
-  public OutOfAmmoState getOutOfAmmo(){
-    // TODO Auto-generated method stub
-    return null;
+  
+  public DeadState getDeadState() {
+    return deadState;
   }
-
+  
+  public HasWeaponState getHasWeaponState() {
+    return hasWeaponState;
+  }
+  
+  public NoWeaponState getNoWeaponState() {
+    return noWeaponState;
+  }
+  
   public ActionState getOutOfAmmoState() {
-    // TODO Auto-generated method stub
-    return null;
+    return outOfAmmoState;
   }
-
+  
   public void execute() {
-    // TODO Auto-generated method stub
-    
+    currentState.executeAction();
   }
 }
