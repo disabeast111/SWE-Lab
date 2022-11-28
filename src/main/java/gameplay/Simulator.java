@@ -1,7 +1,5 @@
 package gameplay;
 
-import java.util.Random;
-
 import environment.Environment;
 import lifeform.Human;
 import lifeform.LifeForm;
@@ -12,10 +10,10 @@ public class Simulator implements TimerObserver {
   SimpleTimer time;
   int humans;
   int aliens;
-  String humanNames[] = new String[] { "Bob", "Jim", "Tim", "Emma", "Anna", "Katy", "Juan", "Zach", "Bella", "Rob",
-      "Chris", "Mike", "Shelly", "Lena", "Bartholomew" };
-  String alienNames[] = new String[] { "Zurg", "ET", "Yoda", "Grogu", "Xeno", "Groot", "Chewie", "Predator", "Spock",
-      "Borg" };
+  String humanNames[] = new String[] { "Bob", "Jim", "Tim", "Emma", "Anna", "Katy", "Juan", "Zach", 
+      "Bella", "Rob", "Chris", "Mike", "Shelly", "Lena", "Bartholomew the IV" };
+  String alienNames[] = new String[] { "Zurg", "ET", "Yoda", "Grogu", "Xeno", "Groot", "Chewie", 
+      "Predator", "Spock", "Borg" };
   // need array of human names
   // need array of alien names
   // need array of all recovery rates?
