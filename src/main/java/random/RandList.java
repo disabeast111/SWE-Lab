@@ -3,6 +3,8 @@ package random;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.RecoveryRateException;
+
 public class RandList<A> implements Random<List<A>> {
   private Random<A> ra;
   private int n;
@@ -15,7 +17,12 @@ public class RandList<A> implements Random<List<A>> {
   public List<A> choose() {
     List<A> ans = new ArrayList<A>();
     for (int i = 0; i < n; i++)
-      ans.add(ra.choose());
+      try {
+        ans.add(ra.choose());
+      } catch (RecoveryRateException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     return ans;
   }
 }
