@@ -27,10 +27,6 @@ public class testStates {
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
   
-  private Object instanceOf(ActionState currentState) {
-    return currentState.getClass();
-  }
-
   @Test
   public void testDeadStateWeapon() {
     NoWeaponState test = new NoWeaponState(aic);
