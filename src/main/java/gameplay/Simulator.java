@@ -10,6 +10,10 @@ import recovery.RecoveryBehavior;
 import recovery.RecoveryFractional;
 import recovery.RecoveryLinear;
 import recovery.RecoveryNone;
+import weapon.ChainGun;
+import weapon.Pistol;
+import weapon.PlasmaCannon;
+import weapon.Weapon;
 
 public class Simulator implements TimerObserver {
   Environment enviro;
@@ -22,6 +26,7 @@ public class Simulator implements TimerObserver {
   String alienNames[] = new String[] { "Zurg", "ET", "Yoda", "Grogu", "Xeno", "Groot", "Chewie", 
       "Predator", "Spock", "Borg" };
   RecoveryBehavior recov[] = new RecoveryBehavior[] {new RecoveryNone(), new RecoveryLinear(5), new RecoveryFractional(.5)};
+  Weapon weapon[] = new Weapon[] {new Pistol(), new ChainGun(), new PlasmaCannon()};
   
   // need array of human names
   // need array of alien names
@@ -50,6 +55,7 @@ public class Simulator implements TimerObserver {
     RandInt ranRow = new RandInt(0, row);
     RandInt ranCol = new RandInt(0, col);
     RandInt ranAlienName = new RandInt(0, alienNames.length);
+    RandInt ranWeapon = new RandInt(0, weapon.length);
 
     // Loop to add each human requested
     for (int i = 0; i < humans; i++) {
@@ -90,6 +96,20 @@ public class Simulator implements TimerObserver {
     
     // Loop to add each weapon requested
     for(int i = 0; i < totalLifeForms; i++) {
+      int weaponNum = ranWeapon.choose();
+      int weaponRow = ranRow.choose();
+      int weaponCol = ranCol.choose();
+      Weapon[] weap = new Weapon[1];
+      weap = enviro.getWeapons(weaponRow, weaponCol);
+      //checks both positions if they are already filled
+      while(weap[0] != null && weap[1] != null) {
+        weaponRow = ranRow.choose();
+        weaponCol = ranCol.choose();
+        weap = enviro.getWeapons(weaponRow, weaponCol);
+      }
+      //adds weapon based on array
+      Weapon weaponAdd = weapon[weaponNum];
+      enviro.addWeapon(weaponAdd, weaponRow, weaponCol);
       
     }
 
