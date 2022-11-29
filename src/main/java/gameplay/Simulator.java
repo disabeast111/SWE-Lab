@@ -19,12 +19,16 @@ public class Simulator implements TimerObserver {
   int humans;
   int aliens;
   int totalLifeForms;
+  AIContext aiArray[];
+  
+  //private static Simulator theSim;
 
   public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens) throws RecoveryRateException {
     enviro = e;
     time = timer;
     humans = numHumans;
     aliens = numAliens;
+    
 
     int row = enviro.getNumRows();
     int col = enviro.getNumCols();
@@ -40,6 +44,9 @@ public class Simulator implements TimerObserver {
     }
     // total used for weapons as for each lifeForm there is one weapon
     totalLifeForms = humans + aliens;
+    //Setup for an array to hold AIContexts
+    aiArray = new AIContext[totalLifeForms];
+    int aiPosition = 0;
 
     RandInt ranRow = new RandInt(0, row);
     RandInt ranCol = new RandInt(0, col);
@@ -59,8 +66,12 @@ public class Simulator implements TimerObserver {
         humCol = ranCol.choose();
       }
 
-      // Adds human to environment
+      // Adding to array of AIContexts
       AIContext aic = new AIContext(entity, enviro);
+      aiArray[aiPosition] = aic;
+      aiPosition += 1;
+      
+   // Adds human to environment
       enviro.addLifeForm(entity, humRow, humCol);
 
     }
@@ -80,6 +91,9 @@ public class Simulator implements TimerObserver {
       }
 
       AIContext aic = new AIContext(entity2, enviro);
+      aiArray[aiPosition] = aic;
+      aiPosition += 1;
+      
       enviro.addLifeForm(entity2, alienRow, alienCol);
 
     }
@@ -106,9 +120,17 @@ public class Simulator implements TimerObserver {
     }
 
   }
+  /**
+  public static Simulator getSimulator(Environment e, SimpleTimer timer, int numHumans, int numAliens) throws RecoveryRateException {
+    if (theSim == null) {
+      theSim = new Simulator(e, timer, numHumans, numAliens);
+    }
+    return theSim;
+  }
+  */
 
   public void updateTime(int time) {
-
+//array of contexts and add each time then update each here
   }
 
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
@@ -127,6 +149,11 @@ public class Simulator implements TimerObserver {
       }
     }
 
+  }
+  //Getter for AIContext array
+  public AIContext[] getAIContextArray() {
+ 
+    return aiArray;
   }
 
 }

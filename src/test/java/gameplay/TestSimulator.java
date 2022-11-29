@@ -6,14 +6,17 @@ import org.junit.Test;
 
 import environment.Environment;
 import exceptions.RecoveryRateException;
+import state.AIContext;
 import weapon.Weapon;
 
 public class TestSimulator {
+  Environment env = Environment.getEnvironment(5, 5);
+  SimpleTimer timer = new SimpleTimer(1000);
+  
+  //Simulator sim = Simulator.getSimulator(env, timer, 2, 2);
 
   @Test
   public void testSimulatorPopulation() throws RecoveryRateException {
-    Environment env = Environment.getEnvironment(5, 5);
-    SimpleTimer timer = new SimpleTimer(1000);
     Simulator sim = new Simulator(env, timer, 2, 2);
     int lifeFormNum = 0;
     int weaponNum = 0;
@@ -35,7 +38,20 @@ public class TestSimulator {
     
     assertEquals(4, lifeFormNum);
     assertEquals(4, weaponNum);
+    env.clearBoard();
     
+  }
+  
+  @Test
+  public void testAIContextArray() throws RecoveryRateException {
+    
+
+    Simulator sim = new Simulator(env, timer, 2, 2);
+    AIContext[] array = sim.getAIContextArray();
+    for(int i = 0; i < 4; i++) {
+      assertNotNull(array[i]);
+    }
+    env.clearBoard();
   }
   
   @Test
