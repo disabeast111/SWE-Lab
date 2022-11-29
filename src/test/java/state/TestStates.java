@@ -4,9 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import environment.Cell;
+import exceptions.EnvironmentException;
+import exceptions.WeaponException;
 import environment.Environment;
 import exceptions.RecoveryRateException;
-import exceptions.WeaponException;
 import lifeform.*;
 import weapon.Pistol;
 
@@ -15,8 +17,9 @@ public class TestStates {
   Human lf = new Human("Bob", 40, 0);
   Human lf2 = new Human("Bob", 40, 0);
   AIContext aic = new AIContext(lf, e);
-  AIContext aic2 = new AIContext(lf2,e);
   Pistol p = new Pistol();
+  Cell c = new Cell();
+  
   
   @Test
   public void testDeadStateNoWeapon() {
@@ -43,7 +46,7 @@ public class TestStates {
     assertEquals(p, lf.getCurrentWeapon());
     aic.execute();
     assertEquals(40, lf.getCurrentLifePoints());
-    assertEquals(null, lf.getCurrentWeapon());
+    assertNull(lf.getCurrentWeapon());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
   
@@ -59,7 +62,7 @@ public class TestStates {
     aic.setCurrentState(aic.getHasWeaponState());
     int dir = lf.getCurrentDirection();
     aic.execute();
-    assertFalse(dir == lf.getCurrentDirection());
+    assertNotEquals(dir, lf.getCurrentDirection());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
   
@@ -80,7 +83,7 @@ public class TestStates {
     aic.setCurrentState(aic.getHasWeaponState());
     int dir = lf.getCurrentDirection();
     aic.execute();
-    assertFalse(dir == lf.getCurrentDirection());
+    assertNotEquals(dir, lf.getCurrentDirection());
     assertEquals(40, lf2.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
@@ -155,7 +158,7 @@ public class TestStates {
     aic.setCurrentState(aic.getHasWeaponState());
     int dir = lf.getCurrentDirection();
     aic.execute();
-    assertFalse(dir == lf.getCurrentDirection());
+    assertNotEquals(dir, lf.getCurrentDirection());
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
@@ -190,5 +193,102 @@ public class TestStates {
     aic.execute();
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
+  }
+  @Test
+  public void testNWStateNoWeaponInCell() throws EnvironmentException {
+    NoWeaponState test = new NoWeaponState(aic);
+    e.clearBoard();
+    e.addLifeForm(lf, 3, 3);
+    aic.setCurrentState(aic.getNoWeaponState());
+    assertNull(lf.getCurrentWeapon());
+    c = e.getCell(lf.getRow(), lf.getCol());
+    aic.execute();
+    assertNull(lf.getCurrentWeapon());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
+    assertNull(c.getLifeForm());
+  }
+  @Test
+  public void testNWStateWeaponInCell() throws EnvironmentException {
+    HasWeaponState test = new HasWeaponState(aic);
+    e.clearBoard();
+    e.addLifeForm(lf, 3, 3);
+    aic.setCurrentState(aic.getNoWeaponState());
+    assertNull(lf.getCurrentWeapon());
+    c = e.getCell(lf.getRow(), lf.getCol());
+    c.addWeapon(p);
+    aic.execute();
+    assertEquals(p, lf.getCurrentWeapon());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
+  }
+  @Test
+  public void testNWStateDead() throws EnvironmentException {
+    DeadState test = new DeadState(aic);
+    e.clearBoard();
+    e.addLifeForm(lf, 3, 3);
+    aic.setCurrentState(aic.getNoWeaponState());
+    assertNull(lf.getCurrentWeapon());
+    c = e.getCell(lf.getRow(), lf.getCol());
+    lf.takeHit(lf.getCurrentLifePoints());
+    aic.execute();
+    assertEquals(0, lf.getCurrentLifePoints());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
+  }
+  
+  
+  @Test
+  public void testOOAInit() {
+    e.clearBoard();
+    OutOfAmmoState test = new OutOfAmmoState(aic);
+    aic.setCurrentState(aic.getOutOfAmmoState());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
+  }
+  
+  @Test
+  public void testOOAreload() throws WeaponException {
+    e.clearBoard();
+   
+    e.addLifeForm(lf, 3, 3);
+    assertNull(lf.getCurrentWeapon());
+
+    lf.pickUpWeapon(p);
+    aic.setCurrentState(aic.getOutOfAmmoState());
+    for(int i = 0; i < p.getMaxAmmo(); i++){
+      p.fire(0);
+      p.updateTime(0);
+    }
+    assertEquals(0, p.getCurrentAmmo());
+    aic.execute();
+    assertEquals(p, lf.getCurrentWeapon());
+    assertEquals(p.getMaxAmmo(), p.getCurrentAmmo());
+  }
+  
+  @Test
+  public void testOOAMovesToState() throws EnvironmentException {
+    e.clearBoard();
+    HasWeaponState test = new HasWeaponState(aic);
+   
+    e.addLifeForm(lf, 3, 3);
+    assertNull(lf.getCurrentWeapon());
+    c = e.getCell(lf.getRow(), lf.getCol());
+    lf.pickUpWeapon(p);
+    aic.setCurrentState(aic.getOutOfAmmoState());
+
+    aic.execute();
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
+  }
+  
+  @Test
+  public void testOOADead() {
+    e.clearBoard();
+    DeadState test = new DeadState(aic);
+   
+    e.addLifeForm(lf, 3, 3);
+    aic.setCurrentState(aic.getOutOfAmmoState());
+    lf.takeHit(lf.getMaxLifePoints());
+    assertEquals(0, lf.getCurrentLifePoints());
+    aic.execute();
+ 
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
+  
   }
 }
