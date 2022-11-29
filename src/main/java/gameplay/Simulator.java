@@ -60,6 +60,7 @@ public class Simulator implements TimerObserver {
       }
 
       // Adds human to environment
+      AIContext aic = new AIContext(entity, enviro);
       enviro.addLifeForm(entity, humRow, humCol);
 
     }
