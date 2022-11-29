@@ -24,7 +24,7 @@ public class NoWeaponState extends ActionState {
 
     if (lifeform.getCurrentLifePoints() != 0) {
 
-      if (c.getWeapon1() == null && c.getWeapon2() == null) {
+      if (c.getWeaponsCount() == 0) {
         try {
           search();
         } catch (EnvironmentException ex) {

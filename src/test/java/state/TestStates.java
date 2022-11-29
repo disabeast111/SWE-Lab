@@ -8,10 +8,9 @@ import environment.Environment;
 import exceptions.RecoveryRateException;
 import exceptions.WeaponException;
 import lifeform.*;
-import recovery.RecoveryNone;
 import weapon.Pistol;
 
-public class testStates {
+public class TestStates {
   Environment e = Environment.getEnvironment(10,10);
   Human lf = new Human("Bob", 40, 0);
   Human lf2 = new Human("Bob", 40, 0);
