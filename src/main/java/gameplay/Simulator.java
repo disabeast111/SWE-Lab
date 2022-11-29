@@ -29,7 +29,7 @@ public class Simulator implements TimerObserver {
     int row = enviro.getNumRows();
     int col = enviro.getNumCols();
 
-    //Loop that checks if number of lifeForms will fit in evironment
+    // Loop that checks if number of lifeForms will fit in evironment
     while (row * col < humans + aliens) {
       if (humans > 1) {
         humans -= 1;
@@ -38,7 +38,7 @@ public class Simulator implements TimerObserver {
         aliens -= 1;
       }
     }
-    //total used for weapons as for each lifeForm there is one weapon
+    // total used for weapons as for each lifeForm there is one weapon
     totalLifeForms = humans + aliens;
 
     RandInt ranRow = new RandInt(0, row);
@@ -91,9 +91,9 @@ public class Simulator implements TimerObserver {
       RandWeapon wepa = new RandWeapon();
       Weapon weaponToAdd = wepa.choose();
 
-      Weapon[] weap = enviro.getWeapons(weaponRow, weaponCol);  
-      //new Weapon[2];
-      //weap = enviro.getWeapons(weaponRow, weaponCol);
+      Weapon[] weap = enviro.getWeapons(weaponRow, weaponCol);
+      // new Weapon[2];
+      // weap = enviro.getWeapons(weaponRow, weaponCol);
       // checks both positions if they are already filled
       while (weap[0] != null && weap[1] != null) {
         weaponRow = ranRow.choose();
