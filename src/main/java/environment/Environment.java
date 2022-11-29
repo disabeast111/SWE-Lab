@@ -104,8 +104,8 @@ public class Environment {
     for (int r = 0; r < getNumRows(); r++) {
       for (int c = 0; c < getNumCols(); c++) {
         removeLifeForm(r, c);
-        cells[r][c].removeWeapon(cells[r][c].getWeapon1());
         cells[r][c].removeWeapon(cells[r][c].getWeapon2());
+        cells[r][c].removeWeapon(cells[r][c].getWeapon1());
       }
     }
   }
