@@ -51,21 +51,23 @@ public class testStates {
   @Test
   public void testHWNoTarget() {
     e.clearBoard();
-    DeadState test = aic.getDeadState();
+    HasWeaponState test = aic.getHasWeaponState();
     e.addLifeForm(lf, 5, 5);
     lf.pickUpWeapon(p);
     assertEquals(5, lf.getRow());
     assertEquals(5, lf.getCol());
     assertEquals(0, lf.getCurrentDirection());
     aic.setCurrentState(aic.getHasWeaponState());
+    int dir = lf.getCurrentDirection();
     aic.execute();
+    assertFalse(dir == lf.getCurrentDirection());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
   
   @Test
   public void testHWSametype() {
     e.clearBoard();
-    DeadState test = aic.getDeadState();
+    HasWeaponState test = aic.getHasWeaponState();
     e.addLifeForm(lf, 5, 5);
     e.addLifeForm(lf2, 2, 5);
     lf.pickUpWeapon(p);
@@ -77,7 +79,9 @@ public class testStates {
     assertEquals(5, lf2.getCol());
     assertEquals(40, lf2.getCurrentLifePoints());
     aic.setCurrentState(aic.getHasWeaponState());
+    int dir = lf.getCurrentDirection();
     aic.execute();
+    assertFalse(dir == lf.getCurrentDirection());
     assertEquals(40, lf2.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
@@ -138,7 +142,7 @@ public class testStates {
   public void testHWOutOfRange() throws RecoveryRateException {
     e.clearBoard();
     Alien lf3 = new Alien("Bob", 40);
-    DeadState test = aic.getDeadState();
+    HasWeaponState test = aic.getHasWeaponState();
     e.addLifeForm(lf, 9, 5);
     e.addLifeForm(lf3, 0, 5);
     lf.pickUpWeapon(p);
@@ -150,7 +154,9 @@ public class testStates {
     assertEquals(0, lf3.getRow());
     assertEquals(5, lf3.getCol());
     aic.setCurrentState(aic.getHasWeaponState());
+    int dir = lf.getCurrentDirection();
     aic.execute();
+    assertFalse(dir == lf.getCurrentDirection());
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
