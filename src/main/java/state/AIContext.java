@@ -49,7 +49,7 @@ public class AIContext {
     return noWeaponState;
   }
   
-  public ActionState getOutOfAmmoState() {
+  public OutOfAmmoState getOutOfAmmoState() {
     return outOfAmmoState;
   }
   

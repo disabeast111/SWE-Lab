@@ -24,12 +24,9 @@ public class HasWeaponState extends ActionState {
     int tempColM = col - 1;
     LifeForm target = null;
     Weapon w = lifeform.getCurrentWeapon();
-
-    if (row == 0) {
-      tempRowM = -1;
-    }
-    if (col == 0) {
-      tempColM = -1;
+    
+    if (lifeform.getCurrentLifePoints() <= 0) {
+      dead();
     }
     
     if (direction == 0) {
