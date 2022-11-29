@@ -6,9 +6,9 @@ import weapon.Weapon;
 import state.AIContext;
 
 /**
- * Lab 4, 6
- * 
- * @author David W Lab 5
+ * Lab 4, 6, 7
+ * @author David W
+ * Lab 5
  * @author Ethan J
  */
 public abstract class LifeForm extends java.lang.Object implements TimerObserver {
@@ -43,12 +43,12 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
     myName = name;
     if (points > 0) {
       currentLifePoints = points;
+      maxLifePoints = currentLifePoints;
     }
     if (attack >= 0) {
       attackStrength = attack;
     }
     movesLeft = maxSpeed;
-    maxLifePoints = currentLifePoints;
   }
 
   public String getName() {

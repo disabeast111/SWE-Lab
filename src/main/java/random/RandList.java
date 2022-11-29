@@ -16,13 +16,13 @@ public class RandList<A> implements Random<List<A>> {
 
   public List<A> choose() {
     List<A> ans = new ArrayList<A>();
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) {
       try {
         ans.add(ra.choose());
       } catch (RecoveryRateException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
+    }
     return ans;
   }
 }

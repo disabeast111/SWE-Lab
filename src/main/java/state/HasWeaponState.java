@@ -38,42 +38,38 @@ public class HasWeaponState extends ActionState {
         distance = distance + 5;
 
       }
-      if (tempRowM < 0) {
-        tempRowM = 0;
+      if (tempRowM > 0) {
+        target = e.getLifeForm(tempRowM, col);
       }
-      target = e.getLifeForm(tempRowM, col);
     } else if (direction == 1) {
       while (tempC < e.getNumCols() - 1 && e.getLifeForm(row, tempC) == null) {
         tempC++;
         distance = distance + 5;
 
       }
-      if (tempC > e.getNumCols() - 1) {
-        tempC = e.getNumCols() - 1;
+      if (tempC < e.getNumCols() - 1) {
+        target = e.getLifeForm(row, tempC);
       }
-      target = e.getLifeForm(row, tempC);
     } else if (direction == 2) {
       while (tempR < e.getNumRows() - 1 && e.getLifeForm(tempR, col) == null) {
         tempR++;
         distance = distance + 5;
 
       }
-      if (tempR > e.getNumRows() - 1) {
-        tempR = e.getNumRows() - 1;
+      if (tempR < e.getNumRows() - 1) {
+        target = e.getLifeForm(tempR, col);
       }
-      target = e.getLifeForm(tempR, col);
     } else if (direction == 3) {
       while (tempColM >= 0 && e.getLifeForm(row, tempColM) == null) {
         tempColM--;
         distance = distance + 5;
 
       }
-      if (tempColM < 0) {
-        tempColM = 0;
+      if (tempColM > 0) {
+        target = e.getLifeForm(row, tempColM);
       }
-      target = e.getLifeForm(row, tempColM);
     }
-    if (target != null) {
+    if (target != null && lifeform.getClass() != target.getClass()) {
       try {
         lifeform.attack(target, distance);
         if (w.getCurrentAmmo() == 0) {
@@ -103,42 +99,38 @@ public class HasWeaponState extends ActionState {
             distance = distance + 5;
 
           }
-          if (tempRowM < 0) {
-            tempRowM = 0;
+          if (tempRowM > 0) {
+            target = e.getLifeForm(tempRowM, col);
           }
-          target = e.getLifeForm(tempRowM, col);
         } else if (direction == 1) {
           while (tempC < e.getNumCols() - 1 && e.getLifeForm(row, tempC) == null) {
             tempC++;
             distance = distance + 5;
 
           }
-          if (tempC > e.getNumCols() - 1) {
-            tempC = e.getNumCols() - 1;
+          if (tempC < e.getNumCols() - 1) {
+            target = e.getLifeForm(row, tempC);
           }
-          target = e.getLifeForm(row, tempC);
         } else if (direction == 2) {
           while (tempR < e.getNumRows() - 1 && e.getLifeForm(tempR, col) == null) {
             tempR++;
             distance = distance + 5;
 
           }
-          if (tempR > e.getNumRows() - 1) {
-            tempR = e.getNumRows() - 1;
+          if (tempR < e.getNumRows() - 1) {
+            target = e.getLifeForm(tempR, col);
           }
-          target = e.getLifeForm(tempR, col);
         } else if (direction == 3) {
           while (tempColM >= 0 && e.getLifeForm(row, tempColM) == null) {
             tempColM--;
             distance = distance + 5;
 
           }
-          if (tempColM < 0) {
-            tempColM = 0;
+          if (tempColM > 0) {
+            target = e.getLifeForm(row, tempColM);
           }
-          target = e.getLifeForm(row, tempColM);
         }
-        if (target != null) {
+        if (target != null && lifeform.getClass() != target.getClass()) {
           try {
             lifeform.attack(target, distance);
             if (w.getCurrentAmmo() == 0) {
@@ -167,7 +159,7 @@ public class HasWeaponState extends ActionState {
     Integer direction = new RandInt(0, 3).choose();
     lifeform.setDirection(direction);
     if (new RandBool().choose()) {
-      e.move(context.getLifeForm());
+      e.move(lifeform);
     }
   }
 }

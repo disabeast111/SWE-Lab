@@ -54,40 +54,36 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if (tempRowM < 0) {
-        tempRowM = 0;
+      if (tempRowM > 0) {
+        target = enviro.getLifeForm(tempRowM, col);
       }
-      target = enviro.getLifeForm(tempRowM, col);
     } else if (direction == 1) {
       while (tempC < enviro.getNumCols() - 1 && enviro.getLifeForm(row, tempC) == null) {
         tempC++;
         distance = distance + 5;
 
       }
-      if (tempC > enviro.getNumCols() - 1) {
-        tempC = enviro.getNumCols() - 1;
+      if (tempC < enviro.getNumCols() - 1) {
+        target = enviro.getLifeForm(row, tempC);
       }
-      target = enviro.getLifeForm(row, tempC);
     } else if (direction == 2) {
       while (tempR < enviro.getNumRows() - 1 && enviro.getLifeForm(tempR, col) == null) {
         tempR++;
         distance = distance + 5;
 
       }
-      if (tempR > enviro.getNumRows() - 1) {
-        tempR = enviro.getNumRows() - 1;
+      if (tempR < enviro.getNumRows() - 1) {
+        target = enviro.getLifeForm(tempR, col);
       }
-      target = enviro.getLifeForm(tempR, col);
     } else if (direction == 3) {
       while (tempColM >= 0 && enviro.getLifeForm(row, tempColM) == null) {
         tempColM--;
         distance = distance + 5;
 
       }
-      if (tempColM < 0) {
-        tempColM = 0;
+      if (tempColM > 0) {
+        target = enviro.getLifeForm(row, tempColM);
       }
-      target = enviro.getLifeForm(row, tempColM);
     }
     if (target != null) {
       attacker.attack(target, distance);
