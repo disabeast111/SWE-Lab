@@ -10,6 +10,7 @@ import random.RandAlien;
 import random.RandHuman;
 import random.RandInt;
 import random.RandWeapon;
+import state.AIContext;
 import weapon.Weapon;
 
 public class Simulator implements TimerObserver {
@@ -77,6 +78,7 @@ public class Simulator implements TimerObserver {
         alienCol = ranCol.choose();
       }
 
+      AIContext aic = new AIContext(entity2, enviro);
       enviro.addLifeForm(entity2, alienRow, alienCol);
 
     }
