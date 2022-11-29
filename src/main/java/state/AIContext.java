@@ -19,6 +19,7 @@ public class AIContext {
     hasWeaponState = new HasWeaponState(this);
     noWeaponState = new NoWeaponState(this);
     outOfAmmoState = new OutOfAmmoState(this);
+    currentState = noWeaponState;
   }
   
   public LifeForm getLifeForm() {
