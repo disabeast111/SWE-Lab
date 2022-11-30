@@ -19,11 +19,20 @@ public class Simulator implements TimerObserver {
   int humans;
   int aliens;
   int totalLifeForms;
-  AiContext aiArray[];
+  AiContext[] aiArray;
 
   // private static Simulator theSim;
 
-  public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens) throws RecoveryRateException {
+  /**
+   * TODO temp javadoc for check style completion
+   * @param e
+   * @param timer
+   * @param numHumans
+   * @param numAliens
+   * @throws RecoveryRateException
+   */
+  public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens)
+      throws RecoveryRateException {
     enviro = e;
     time = timer;
     humans = numHumans;
@@ -131,7 +140,7 @@ public class Simulator implements TimerObserver {
    */
 
   public void updateTime(int time) {
-//array of contexts and add each time then update each here
+    //array of contexts and add each time then update each here
     /**
      * for(int i = 0; i < aiArray.length; i++) { int tempRow =
      * aiArray[i].getLifeForm().getRow(); int tempCol =
@@ -144,6 +153,12 @@ public class Simulator implements TimerObserver {
 
   }
 
+  /**
+   * TODO temp javadoc for check style completion
+   * @param args
+   * @throws AttachmentException
+   * @throws RecoveryRateException
+   */
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
     Environment env = Environment.getEnvironment(10, 10);
     Invoker gui = Invoker.invoker();
@@ -166,7 +181,7 @@ public class Simulator implements TimerObserver {
   }
 
   // Getter for AiContext array
-  public AiContext[] getAIContextArray() {
+  public AiContext[] getAiContextArray() {
 
     return aiArray;
   }

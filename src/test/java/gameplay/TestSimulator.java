@@ -62,7 +62,7 @@ public class TestSimulator {
     env.addWeapon(p, 0, 1);
     env.addWeapon(p2, 0, 1);
     Simulator sim = new Simulator(env, timer, 2, 2);
-    AiContext[] array = sim.getAIContextArray();
+    AiContext[] array = sim.getAiContextArray();
     for(int i = 0; i < 4; i++) {
       assertNotNull(array[i]);
     }
@@ -92,7 +92,7 @@ public class TestSimulator {
 //    env.addWeapon(p2, 0, 1);
 //    env.addWeapon(p3, 1, 0);
 //    env.addWeapon(p4, 1, 1);
-    AiContext[] array = sim.getAIContextArray();
+    AiContext[] array = sim.getAiContextArray();
     ActionState prevResult = array[0].getCurrentState();
     assertEquals(prevResult, array[0].getCurrentState());
     //timer.start();
