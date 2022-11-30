@@ -1,9 +1,11 @@
 package state;
 
 import environment.Environment;
+import gameplay.GameBoard;
+import gameplay.TimerObserver;
 import lifeform.LifeForm;
 
-public class AiContext {
+public class AiContext implements TimerObserver {
   ActionState currentState;
   DeadState deadState;
   HasWeaponState hasWeaponState;
@@ -61,5 +63,20 @@ public class AiContext {
   
   public void execute() {
     currentState.executeAction();
+  }
+
+  @Override
+  public void updateTime(int time) {
+    int tempRow = lifeForm.getRow();
+    int tempCol = lifeForm.getCol();
+
+    this.execute();
+    int tempRow1 = lifeForm.getRow();
+    int tempCol1 = lifeForm.getCol();
+    GameBoard.getInstance().updateCell(tempRow1, tempCol1);
+    GameBoard.getInstance().updateCell(tempRow, tempCol);
+    GameBoard.getInstance().updateStats(tempRow, tempCol);
+    GameBoard.getInstance().updateStats(tempRow1, tempCol1);
+    
   }
 }

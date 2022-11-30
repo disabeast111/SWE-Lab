@@ -151,7 +151,7 @@ public class HasWeaponState extends ActionState {
   }
   
   private void search() throws EnvironmentException {
-    Integer direction = new RandInt(1, 3).choose();
+    Integer direction = new RandInt(1, 4).choose();
     direction = (lifeform.getCurrentDirection() + direction) % 3;
     lifeform.setDirection(direction);
     if (new RandBool().choose()) {
