@@ -7,7 +7,7 @@ import gameplay.TimerObserver;
 /**
  * @author Spencer H
  */
-public class Stabilizer extends Attachment implements TimerObserver{
+public class Stabilizer extends Attachment implements TimerObserver {
 
   private double damage = 0;
 

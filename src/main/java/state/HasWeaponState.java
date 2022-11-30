@@ -13,6 +13,10 @@ public class HasWeaponState extends ActionState {
     super(c);
   }
 
+  /**
+   * if dead move to dead state
+   * move till find target attack
+   */
   public void executeAction() {
     int direction = lifeform.getCurrentDirection();
     int distance = 5;

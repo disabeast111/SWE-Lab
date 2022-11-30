@@ -7,7 +7,7 @@ import gameplay.TimerObserver;
 /**
  * @author David W
  */
-public abstract class Attachment implements Weapon, TimerObserver{
+public abstract class Attachment implements Weapon, TimerObserver {
   protected Weapon base;
 
   public Attachment() throws AttachmentException {

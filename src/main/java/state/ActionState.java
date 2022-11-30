@@ -16,7 +16,7 @@ public abstract class ActionState extends java.lang.Object {
     context = c;
     env = context.getEnvironment();
     lifeform = context.getLifeForm();
-   }
+  }
   
   public abstract void executeAction();
 }

@@ -1,7 +1,5 @@
 package gameplay;
 
-
-
 import commands.Invoker;
 import environment.Environment;
 import exceptions.AttachmentException;
@@ -22,15 +20,14 @@ public class Simulator implements TimerObserver {
   int aliens;
   int totalLifeForms;
   AiContext aiArray[];
-  
-  //private static Simulator theSim;
+
+  // private static Simulator theSim;
 
   public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens) throws RecoveryRateException {
     enviro = e;
     time = timer;
     humans = numHumans;
     aliens = numAliens;
-    
 
     int row = enviro.getNumRows();
     int col = enviro.getNumCols();
@@ -46,7 +43,7 @@ public class Simulator implements TimerObserver {
     }
     // total used for weapons as for each lifeForm there is one weapon
     totalLifeForms = humans + aliens;
-    //Setup for an array to hold AIContexts
+    // Setup for an array to hold AIContexts
     aiArray = new AiContext[totalLifeForms];
     int aiPosition = 0;
 
@@ -73,8 +70,8 @@ public class Simulator implements TimerObserver {
       time.addTimeObserver(aic);
       aiArray[aiPosition] = aic;
       aiPosition += 1;
-      
-   // Adds human to environment
+
+      // Adds human to environment
       time.addTimeObserver(entity);
       enviro.addLifeForm(entity, humRow, humCol);
 
@@ -98,7 +95,7 @@ public class Simulator implements TimerObserver {
       time.addTimeObserver(aic);
       aiArray[aiPosition] = aic;
       aiPosition += 1;
-      
+
       time.addTimeObserver(entity2);
       enviro.addLifeForm(entity2, alienRow, alienCol);
 
@@ -126,27 +123,25 @@ public class Simulator implements TimerObserver {
     }
 
   }
+
   /**
-  public static Simulator getSimulator(Environment e, SimpleTimer timer, int numHumans, int numAliens) throws RecoveryRateException {
-    if (theSim == null) {
-      theSim = new Simulator(e, timer, numHumans, numAliens);
-    }
-    return theSim;
-  }
-  */
+   * public static Simulator getSimulator(Environment e, SimpleTimer timer, int
+   * numHumans, int numAliens) throws RecoveryRateException { if (theSim == null)
+   * { theSim = new Simulator(e, timer, numHumans, numAliens); } return theSim; }
+   */
 
   public void updateTime(int time) {
 //array of contexts and add each time then update each here
     /**
-    for(int i = 0; i < aiArray.length; i++) {
-      int tempRow = aiArray[i].getLifeForm().getRow();
-      int tempCol = aiArray[i].getLifeForm().getCol();
-      GameBoard.getInstance().updateCell(tempRow, tempCol);
-      GameBoard.getInstance().updateStats(tempRow, tempCol);
-      
-    }
-    */
-    
+     * for(int i = 0; i < aiArray.length; i++) { int tempRow =
+     * aiArray[i].getLifeForm().getRow(); int tempCol =
+     * aiArray[i].getLifeForm().getCol();
+     * GameBoard.getInstance().updateCell(tempRow, tempCol);
+     * GameBoard.getInstance().updateStats(tempRow, tempCol);
+     * 
+     * }
+     */
+
   }
 
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
@@ -156,22 +151,23 @@ public class Simulator implements TimerObserver {
     int y = 400;
     gui.setBounds(1000, 200, x, y);
     SimpleTimer timer = new SimpleTimer(1000);
-    
+
     Simulator sim = new Simulator(env, timer, 5, 0);
-    
+
     GameBoard gb = GameBoard.getInstance();
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         gb.updateCell(row, col);
       }
     }
-    
+
     timer.start();
 
   }
-  //Getter for AiContext array
+
+  // Getter for AiContext array
   public AiContext[] getAIContextArray() {
- 
+
     return aiArray;
   }
 
