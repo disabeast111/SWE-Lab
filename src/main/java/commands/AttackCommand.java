@@ -17,7 +17,7 @@ public class AttackCommand implements Command {
   int direction;
   int distance;
   LifeForm target = null;
-  
+
   /**
    * Constructor gets info from the focused cell
    */
@@ -46,7 +46,7 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if(tempRowM < 0) {
+      if (tempRowM < 0) {
         tempRowM = 0;
       }
       target = enviro.getLifeForm(tempRowM, col);
@@ -60,7 +60,7 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if(tempC >= enviro.getNumCols()) {
+      if (tempC >= enviro.getNumCols()) {
         tempC = enviro.getNumCols() - 1;
       }
       target = enviro.getLifeForm(row, tempC);
@@ -74,7 +74,7 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if(tempR >= enviro.getNumRows()) {
+      if (tempR >= enviro.getNumRows()) {
         tempR = enviro.getNumRows() - 1;
       }
       target = enviro.getLifeForm(tempR, col);
@@ -88,7 +88,7 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if(tempColM < 0) {
+      if (tempColM < 0) {
         tempColM = 0;
       }
       target = enviro.getLifeForm(row, tempColM);
@@ -104,7 +104,7 @@ public class AttackCommand implements Command {
       w.fire(1);
     }
   }
-  
+
   public String toString() {
     return "AttackCommand";
   }

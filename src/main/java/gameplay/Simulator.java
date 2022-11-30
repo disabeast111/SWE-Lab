@@ -1,5 +1,7 @@
 package gameplay;
 
+import java.awt.HeadlessException;
+
 import commands.Invoker;
 import environment.Environment;
 import exceptions.AttachmentException;
@@ -13,10 +15,12 @@ import random.RandWeapon;
 import state.AiContext;
 import weapon.Weapon;
 
-import java.awt.*;
-
 /**
  * @author Ethan J
+ */
+/**
+ * @author dawol
+ *
  */
 public class Simulator implements TimerObserver {
   Environment enviro;
@@ -26,12 +30,12 @@ public class Simulator implements TimerObserver {
   int totalLifeForms;
   AiContext[] aiArray;
 
-
   /**
    * Simulator constructor that actually populates the environment passed to it
-   * @param e is the environment passed to it
-   * @param timer is the timer used to add both lifeforms, weapons, and aiContexts as
-   * time observers
+   * 
+   * @param e         is the environment passed to it
+   * @param timer     is the timer used to add both lifeforms, weapons, and
+   *                  aiContexts as time observers
    * @param numHumans is the amount of humans requested
    * @param numAliens is the amount of aliens requested
    * @throws RecoveryRateException if recov reate is below 0
@@ -135,36 +139,36 @@ public class Simulator implements TimerObserver {
 
   }
 
-
   /**
-   * updateTime() is empty as it is not used by simulator
-   * Simulator only needs to implement TimerObserver for timer
+   * updateTime() is empty as it is not used by simulator Simulator only needs to
+   * implement TimerObserver for timer
    */
   public void updateTime(int time) {
 
-
   }
 
+
   /**
-   * Main method for simulator that creates both Invoker and GameBoard
-   * and uses the simulator constructor to populate it
-   * It also creates the initial timer and starts it
-   * @param args main args
-   * @throws AttachmentException if trying to attach more than two attachments
-   * @throws RecoveryRateException if recovery rate is below 0
+   * Main method for simulator that creates both Invoker and GameBoard and uses
+   * the simulator constructor to populate it It also creates the initial timer
+   * and starts it
+   * 
+   * @param args
+   * @throws RecoveryRateException
+   *     if recovery rate is below 0
    */
   public static void main(String[] args) throws RecoveryRateException {
     try {
-  
+
       Environment env = Environment.getEnvironment(10, 10);
       Invoker gui = Invoker.invoker();
       int x = 500;
       int y = 400;
       gui.setBounds(1000, 200, x, y);
       SimpleTimer timer = new SimpleTimer(5000);
-  
+
       Simulator sim = new Simulator(env, timer, 10, 10);
-  
+
       GameBoard gb = GameBoard.getInstance();
       for (int row = 0; row < 10; row++) {
         for (int col = 0; col < 10; col++) {
@@ -173,7 +177,7 @@ public class Simulator implements TimerObserver {
       }
       timer.start();
     } catch (HeadlessException e) {
-    
+      e.printStackTrace();
     }
   }
 
