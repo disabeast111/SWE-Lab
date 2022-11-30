@@ -13,6 +13,8 @@ import random.RandWeapon;
 import state.AiContext;
 import weapon.Weapon;
 
+import java.awt.*;
+
 /**
  * @author Ethan J
  */
@@ -32,7 +34,7 @@ public class Simulator implements TimerObserver {
    * time observers
    * @param numHumans is the amount of humans requested
    * @param numAliens is the amount of aliens requested
-   * @throws RecoveryRateException
+   * @throws RecoveryRateException if recov reate is below 0
    */
   public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens)
       throws RecoveryRateException {
@@ -147,11 +149,11 @@ public class Simulator implements TimerObserver {
    * Main method for simulator that creates both Invoker and GameBoard
    * and uses the simulator constructor to populate it
    * It also creates the initial timer and starts it
-   * @param args
-   * @throws AttachmentException
-   * @throws RecoveryRateException
+   * @param args main args
+   * @throws AttachmentException if trying to attach more than two attachments
+   * @throws RecoveryRateException if recovery rate is below 0
    */
-  public static void main(String[] args) throws AttachmentException, RecoveryRateException {
+  public static void main(String[] args) throws RecoveryRateException {
     try {
   
       Environment env = Environment.getEnvironment(10, 10);
@@ -171,7 +173,7 @@ public class Simulator implements TimerObserver {
       }
       timer.start();
     } catch (HeadlessException e) {
-    
+      
     }
   }
 
