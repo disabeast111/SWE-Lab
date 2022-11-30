@@ -1,6 +1,6 @@
 package gameplay;
 
-import static org.junit.Assert.assertNotNull;
+
 
 import commands.Invoker;
 import environment.Environment;
@@ -70,10 +70,12 @@ public class Simulator implements TimerObserver {
 
       // Adding to array of AIContexts
       AiContext aic = new AiContext(entity, enviro);
+      time.addTimeObserver(aic);
       aiArray[aiPosition] = aic;
       aiPosition += 1;
       
    // Adds human to environment
+      time.addTimeObserver(entity);
       enviro.addLifeForm(entity, humRow, humCol);
 
     }
@@ -93,9 +95,11 @@ public class Simulator implements TimerObserver {
       }
 
       AiContext aic = new AiContext(entity2, enviro);
+      time.addTimeObserver(aic);
       aiArray[aiPosition] = aic;
       aiPosition += 1;
       
+      time.addTimeObserver(entity2);
       enviro.addLifeForm(entity2, alienRow, alienCol);
 
     }
@@ -133,9 +137,15 @@ public class Simulator implements TimerObserver {
 
   public void updateTime(int time) {
 //array of contexts and add each time then update each here
+    /**
     for(int i = 0; i < aiArray.length; i++) {
-      aiArray[i].execute();
+      int tempRow = aiArray[i].getLifeForm().getRow();
+      int tempCol = aiArray[i].getLifeForm().getCol();
+      GameBoard.getInstance().updateCell(tempRow, tempCol);
+      GameBoard.getInstance().updateStats(tempRow, tempCol);
+      
     }
+    */
     
   }
 
@@ -146,14 +156,17 @@ public class Simulator implements TimerObserver {
     int y = 400;
     gui.setBounds(1000, 200, x, y);
     SimpleTimer timer = new SimpleTimer(1000);
+    
     Simulator sim = new Simulator(env, timer, 5, 5);
-
+    
     GameBoard gb = GameBoard.getInstance();
     for (int row = 0; row < 10; row++) {
       for (int col = 0; col < 10; col++) {
         gb.updateCell(row, col);
       }
     }
+    
+    timer.start();
 
   }
   //Getter for AiContext array
