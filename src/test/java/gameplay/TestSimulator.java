@@ -7,6 +7,7 @@ import org.junit.Test;
 import environment.Environment;
 import exceptions.RecoveryRateException;
 import state.AIContext;
+import weapon.Pistol;
 import weapon.Weapon;
 
 public class TestSimulator {
@@ -17,6 +18,7 @@ public class TestSimulator {
 
   @Test
   public void testSimulatorPopulation() throws RecoveryRateException {
+
     Simulator sim = new Simulator(env, timer, 1, 2);
     int lifeFormNum = 0;
     int weaponNum = 0;
@@ -45,7 +47,10 @@ public class TestSimulator {
   @Test
   public void testAIContextArray() throws RecoveryRateException {
     
-
+    Pistol p = new Pistol();
+    Pistol p2 = new Pistol();
+    env.addWeapon(p, 0, 1);
+    env.addWeapon(p2, 0, 1);
     Simulator sim = new Simulator(env, timer, 2, 2);
     AIContext[] array = sim.getAIContextArray();
     for(int i = 0; i < 4; i++) {
