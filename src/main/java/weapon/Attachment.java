@@ -2,11 +2,12 @@ package weapon;
 
 import exceptions.AttachmentException;
 import exceptions.WeaponException;
+import gameplay.TimerObserver;
 
 /**
  * @author David W
  */
-public abstract class Attachment implements Weapon {
+public abstract class Attachment implements Weapon, TimerObserver{
   protected Weapon base;
 
   public Attachment() throws AttachmentException {

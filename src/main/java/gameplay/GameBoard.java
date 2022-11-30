@@ -53,6 +53,8 @@ public class GameBoard extends JFrame implements ActionListener {
   ImageIcon[][] weapons = new ImageIcon[3][2];
 
   private int cellDim = 70;
+  private int currRow = 0;
+  private int currCol = 0;
   private int prevRow = 0;
   private int prevCol = 0;
 
@@ -160,7 +162,7 @@ public class GameBoard extends JFrame implements ActionListener {
     statsLabels[0][1].setText("Cell Contains:");
     statsLabels[4][1].setText("");
 
-    updateStats(0, 0);
+    updateStats();
 
     // Legend
     legendLabel = new JLabel(legend);
@@ -172,10 +174,10 @@ public class GameBoard extends JFrame implements ActionListener {
    * @param r the row of the cell
    * @param c the column of the cell
    */
-  public void updateStats(int r, int c) {
+  public void updateStats() {
     Cell currentCell = invoker.focusedCell;
     // Coordinates
-    statsLabels[0][0].setText("Cell: (" + r + "," + c + ")");
+    statsLabels[0][0].setText("Cell: (" + currRow + "," + currCol + ")");
 
     String text0 = "No LifeForm";
     String text1 = "N/A";
@@ -368,8 +370,10 @@ public class GameBoard extends JFrame implements ActionListener {
             System.out
                 .println("Error occurred; caught environment exception in actionPerformed().");
           }
+          currRow = row;
+          currCol = col;
           updateCell(row, col);
-          updateStats(row, col);
+          updateStats();
           prevRow = row;
           prevCol = col;
         }

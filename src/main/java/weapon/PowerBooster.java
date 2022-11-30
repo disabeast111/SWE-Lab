@@ -2,11 +2,12 @@ package weapon;
 
 import exceptions.AttachmentException;
 import exceptions.WeaponException;
+import gameplay.TimerObserver;
 
 /**
  * @author Spencer H
  */
-public class PowerBooster extends Attachment {
+public class PowerBooster extends Attachment implements TimerObserver {
 
   private double damage = 0;
   private double currAmmo = 0;

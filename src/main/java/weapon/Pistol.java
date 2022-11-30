@@ -1,11 +1,12 @@
 package weapon;
 
 import exceptions.WeaponException;
+import gameplay.TimerObserver;
 
 /**
  * @author Ethan J
  */
-public class Pistol extends GenericWeapon {
+public class Pistol extends GenericWeapon implements TimerObserver {
   /**
    * Constructor that initializes a Pistol Sets base stats
    */

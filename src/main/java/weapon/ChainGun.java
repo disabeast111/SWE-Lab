@@ -1,11 +1,12 @@
 package weapon;
 
 import exceptions.WeaponException;
+import gameplay.TimerObserver;
 
 /**
  * @author Ethan J
  */
-public class ChainGun extends GenericWeapon {
+public class ChainGun extends GenericWeapon implements TimerObserver {
   /**
    * Constructor that initializes a ChainGun Sets base stats
    */

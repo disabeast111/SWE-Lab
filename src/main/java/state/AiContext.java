@@ -75,8 +75,7 @@ public class AiContext implements TimerObserver {
     int tempCol1 = lifeForm.getCol();
     GameBoard.getInstance().updateCell(tempRow1, tempCol1);
     GameBoard.getInstance().updateCell(tempRow, tempCol);
-    GameBoard.getInstance().updateStats(tempRow, tempCol);
-    GameBoard.getInstance().updateStats(tempRow1, tempCol1);
+    GameBoard.getInstance().updateStats();
     
   }
 }

@@ -120,7 +120,7 @@ public class Simulator implements TimerObserver {
         weaponCol = ranCol.choose();
         weap = enviro.getWeapons(weaponRow, weaponCol);
       }
-
+      time.addTimeObserver(weaponToAdd);
       enviro.addWeapon(weaponToAdd, weaponRow, weaponCol);
 
     }
@@ -157,7 +157,7 @@ public class Simulator implements TimerObserver {
     gui.setBounds(1000, 200, x, y);
     SimpleTimer timer = new SimpleTimer(1000);
     
-    Simulator sim = new Simulator(env, timer, 5, 5);
+    Simulator sim = new Simulator(env, timer, 5, 0);
     
     GameBoard gb = GameBoard.getInstance();
     for (int row = 0; row < 10; row++) {
