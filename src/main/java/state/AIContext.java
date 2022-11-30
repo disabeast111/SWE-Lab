@@ -12,6 +12,11 @@ public class AIContext {
   LifeForm lifeForm;
   Environment environment;
   
+  /**
+   * 
+   * @param l the LifeForm given to the context
+   * @param e the reference to the Singleton Environments
+   */
   public AIContext(LifeForm l, Environment e) {
     lifeForm = l;
     environment = e;
