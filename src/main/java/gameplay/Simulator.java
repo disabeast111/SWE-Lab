@@ -1,5 +1,7 @@
 package gameplay;
 
+import static org.junit.Assert.assertNotNull;
+
 import commands.Invoker;
 import environment.Environment;
 import exceptions.AttachmentException;
@@ -131,6 +133,10 @@ public class Simulator implements TimerObserver {
 
   public void updateTime(int time) {
 //array of contexts and add each time then update each here
+    for(int i = 0; i < aiArray.length; i++) {
+      aiArray[i].execute();
+    }
+    
   }
 
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
