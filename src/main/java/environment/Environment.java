@@ -106,6 +106,8 @@ public class Environment {
         removeLifeForm(r, c);
         cells[r][c].removeWeapon(cells[r][c].getWeapon2());
         cells[r][c].removeWeapon(cells[r][c].getWeapon1());
+        cells[r][c].removeWeapon(cells[r][c].getWeapon2());
+        cells[r][c].removeWeapon(cells[r][c].getWeapon1());
       }
     }
   }
