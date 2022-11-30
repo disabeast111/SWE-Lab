@@ -2,6 +2,7 @@ package state;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
@@ -13,6 +14,7 @@ import environment.Environment;
 import exceptions.RecoveryRateException;
 import lifeform.*;
 import weapon.Pistol;
+import weapon.PlasmaCannon;
 
 public class TestStates {
   Environment env = Environment.getEnvironment(10, 10);
@@ -20,6 +22,7 @@ public class TestStates {
   Human lf2 = new Human("Bob", 40, 0);
   AiContext aic = new AiContext(lf, env);
   Pistol p = new Pistol();
+  PlasmaCannon pc = new PlasmaCannon();
   Cell c = new Cell();
   
   
@@ -58,6 +61,7 @@ public class TestStates {
     HasWeaponState test = aic.getHasWeaponState();
     env.addLifeForm(lf, 5, 5);
     lf.pickUpWeapon(p);
+//  pass locally with but not gradle test
     assertEquals(5, lf.getRow());
     assertEquals(5, lf.getCol());
     assertEquals(0, lf.getCurrentDirection());
@@ -77,6 +81,7 @@ public class TestStates {
     lf.pickUpWeapon(p);
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(40, lf.getCurrentLifePoints());
+//  pass locally with but not gradle test
     assertEquals(5, lf.getRow());
     assertEquals(5, lf.getCol());
     assertEquals(2, lf2.getRow());
@@ -132,6 +137,7 @@ public class TestStates {
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(40, lf.getCurrentLifePoints());
     assertEquals(40, lf3.getCurrentLifePoints());
+//  pass locally with but not gradle test
     assertEquals(5, lf.getRow());
     assertEquals(5, lf.getCol());
     assertEquals(2, lf3.getRow());
@@ -149,10 +155,11 @@ public class TestStates {
     HasWeaponState test = aic.getHasWeaponState();
     env.addLifeForm(lf, 9, 5);
     env.addLifeForm(lf3, 0, 5);
-    lf.pickUpWeapon(p);
+    lf.pickUpWeapon(pc);
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(40, lf.getCurrentLifePoints());
     assertEquals(40, lf3.getCurrentLifePoints());
+//    pass locally with but not gradle test
     assertEquals(9, lf.getRow());
     assertEquals(5, lf.getCol());
     assertEquals(0, lf3.getRow());
@@ -160,6 +167,8 @@ public class TestStates {
     aic.setCurrentState(aic.getHasWeaponState());
     int dir = lf.getCurrentDirection();
     aic.execute();
+    assertEquals(40, lf3.getCurrentLifePoints());
+    assertEquals(test.getClass(), aic.getCurrentState().getClass());
     assertNotEquals(dir, lf.getCurrentDirection());
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
@@ -187,6 +196,7 @@ public class TestStates {
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(0, lf.getCurrentLifePoints());
     assertEquals(40, lf3.getCurrentLifePoints());
+//  pass locally with but not gradle test
     assertEquals(5, lf.getRow());
     assertEquals(5, lf.getCol());
     assertEquals(2, lf3.getRow());

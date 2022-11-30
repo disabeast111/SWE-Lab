@@ -3,7 +3,6 @@ package lifeform;
 import exceptions.WeaponException;
 import gameplay.TimerObserver;
 import weapon.Weapon;
-import state.AiContext;
 
 /**
  * Lab 4, 6, 7

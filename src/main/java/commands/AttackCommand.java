@@ -38,12 +38,7 @@ public class AttackCommand implements Command {
     int tempC = col + 1;
     int tempRowM = row - 1;
     int tempColM = col - 1;
-    if (row == 0) {
-      tempRowM = -1;
-    }
-    if (col == 0) {
-      tempColM = -1;
-    }
+
     direction = attacker.getCurrentDirection();
     if (direction == 0) {
       while (tempRowM >= 0 && enviro.getLifeForm(tempRowM, col) == null) {
@@ -51,8 +46,13 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if (tempRowM > 0) {
-        target = enviro.getLifeForm(tempRowM, col);
+      if(tempRowM < 0) {
+        tempRowM = 0;
+      }
+      target = enviro.getLifeForm(tempRowM, col);
+
+      if (row == 0) {
+        target = null;
       }
     } else if (direction == 1) {
       while (tempC < enviro.getNumCols() - 1 && enviro.getLifeForm(row, tempC) == null) {
@@ -60,8 +60,13 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if (tempC < enviro.getNumCols() - 1) {
-        target = enviro.getLifeForm(row, tempC);
+      if(tempC >= enviro.getNumCols()) {
+        tempC = enviro.getNumCols() - 1;
+      }
+      target = enviro.getLifeForm(row, tempC);
+
+      if (col == enviro.getNumCols()) {
+        target = null;
       }
     } else if (direction == 2) {
       while (tempR < enviro.getNumRows() - 1 && enviro.getLifeForm(tempR, col) == null) {
@@ -69,8 +74,13 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if (tempR < enviro.getNumRows() - 1) {
-        target = enviro.getLifeForm(tempR, col);
+      if(tempR >= enviro.getNumRows()) {
+        tempR = enviro.getNumRows() - 1;
+      }
+      target = enviro.getLifeForm(tempR, col);
+
+      if (row == enviro.getNumRows()) {
+        target = null;
       }
     } else if (direction == 3) {
       while (tempColM >= 0 && enviro.getLifeForm(row, tempColM) == null) {
@@ -78,8 +88,13 @@ public class AttackCommand implements Command {
         distance = distance + 5;
 
       }
-      if (tempColM > 0) {
-        target = enviro.getLifeForm(row, tempColM);
+      if(tempColM < 0) {
+        tempColM = 0;
+      }
+      target = enviro.getLifeForm(row, tempColM);
+
+      if (col == 0) {
+        target = null;
       }
     }
     if (target != null) {
