@@ -222,6 +222,11 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
     return maxLifePoints;
   }
   
+  /**
+   * Gets the attack range w/ or w/o
+   * weapon including melee
+   * @return int attack range
+   */
   public int getAttackRange() {
     if (weapon != null) {
       return weapon.getMaxRange();

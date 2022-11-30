@@ -171,8 +171,6 @@ public class GameBoard extends JFrame implements ActionListener {
 
   /**
    * Update the statistics panel to display the current focused cell statistics
-   * @param r the row of the cell
-   * @param c the column of the cell
    */
   public void updateStats() {
     Cell currentCell = invoker.focusedCell;

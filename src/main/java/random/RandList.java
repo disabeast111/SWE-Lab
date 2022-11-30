@@ -14,6 +14,11 @@ public class RandList<A> implements Random<List<A>> {
     num = m;
   }
 
+  /**
+   * choose 
+   * generates list of random objects
+   * of type selected
+   */
   public List<A> choose() {
     List<A> ans = new ArrayList<A>();
     for (int i = 0; i < num; i++) {

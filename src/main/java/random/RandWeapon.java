@@ -9,6 +9,7 @@ import weapon.Weapon;
 
 public class RandWeapon {
   List<Weapon> weaponChoices = List.of(new Pistol(), new ChainGun(), new PlasmaCannon());
+
   public Weapon choose() {
     return new FromList<Weapon>(weaponChoices).choose();
   }
