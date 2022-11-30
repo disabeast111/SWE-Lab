@@ -18,6 +18,8 @@ import weapon.Weapon;
 
 import static org.junit.Assert.*;
 
+import java.awt.HeadlessException;
+
 
 public class TestCommands {
   Environment env = Environment.getEnvironment(10, 10);
@@ -28,7 +30,7 @@ public class TestCommands {
    */
   @Test
   public void testTurnCommands() {
-    
+    try {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     inv.focusedCell = new Cell();
     inv.focusedCell.addLifeForm(entity1);
@@ -45,7 +47,9 @@ public class TestCommands {
     TurnWestCommand turnWest = new TurnWestCommand();
     turnWest.execute();
     assertEquals(3,entity1.getCurrentDirection());
-    
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   /**
@@ -55,6 +59,7 @@ public class TestCommands {
    */
   @Test
   public void testReloadCommand() throws WeaponException {
+    try {
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     inv.focusedCell = new Cell();
     inv.focusedCell.addLifeForm(entity1);
@@ -73,7 +78,9 @@ public class TestCommands {
     
     entity1.dropWeapon();
     reloadCommand.execute();
-   
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   /**
@@ -81,6 +88,7 @@ public class TestCommands {
    */
   @Test
   public void testMoveCommand() {
+    try {
     env.clearBoard();
     Human entity = new Human("Bob", 40, 0);
     inv.focusedCell = new Cell();
@@ -101,7 +109,9 @@ public class TestCommands {
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
     assertEquals(9, entity.getCol());
-    
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   /**
@@ -110,6 +120,7 @@ public class TestCommands {
    */
   @Test
   public void testDropCommand() {
+    try {
     env.clearBoard();
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     inv.focusedCell = new Cell();
@@ -129,10 +140,14 @@ public class TestCommands {
     entity1.pickUpWeapon(plasma);
     dropCommand.execute();
     assertEquals(plasma, entity1.getCurrentWeapon());
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   @Test
   public void testAcquireCommand() {
+    try {
     env.clearBoard();
     MockLifeForm entity1 = new MockLifeForm("Jim", 40, 1);
     inv.focusedCell = new Cell();
@@ -175,11 +190,14 @@ public class TestCommands {
     entity1.dropWeapon();
     acquireCommand.execute();
     assertNull(entity1.getCurrentWeapon());
-
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   @Test
   public void testAttackCommandInRange() throws RecoveryRateException, WeaponException {
+    try {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
     
@@ -219,10 +237,14 @@ public class TestCommands {
     attackCommand.execute();
     assertEquals(30, target4.getCurrentLifePoints());
     pistol.updateTime(0);
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   @Test
   public void testAttackCommandOutOfRange() throws RecoveryRateException, WeaponException {
+    try {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
    
@@ -261,10 +283,14 @@ public class TestCommands {
     attackCommand.execute();
     assertEquals(40, target4.getCurrentLifePoints());
     mockGun.updateTime(0);
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   @Test
   public void testAttackCommandNoTarget() throws WeaponException {
+    try {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
     inv.focusedCell = new Cell();
@@ -290,11 +316,14 @@ public class TestCommands {
     entity1.setDirection(3);
     attackCommand.execute();
     assertEquals(6, mockGun.getCurrentAmmo());
-
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
   
   @Test
   public void testAttackCommandIntoBorder() throws WeaponException {
+    try {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
     inv.focusedCell = new Cell();
@@ -322,5 +351,8 @@ public class TestCommands {
     entity1.setDirection(3);
     attackCommand.execute();
     assertEquals(6, mockGun.getCurrentAmmo());
+  } catch (HeadlessException e) {
+    e.printStackTrace();
+  }
   }
 }

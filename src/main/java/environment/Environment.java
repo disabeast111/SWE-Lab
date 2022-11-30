@@ -31,16 +31,6 @@ public class Environment {
       }
     }
   }
-  
-  /**
-   * for tests only to remove env completely
-   * @param e
-   */
-  public void clearEnv(Environment e) {
-    if (e == theEnv) {
-      theEnv = null;
-    }
-  }
 
   /**
    * getEnvironment
