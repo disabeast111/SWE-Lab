@@ -244,7 +244,7 @@ public class TestStates {
   }
   
   @Test
-  public void testOOAreload() throws WeaponException {
+  public void testOOAReload() throws WeaponException {
     e.clearBoard();
    
     e.addLifeForm(lf, 3, 3);
