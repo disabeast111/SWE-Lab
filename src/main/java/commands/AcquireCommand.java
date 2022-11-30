@@ -16,11 +16,7 @@ public class AcquireCommand implements Command {
   int row;
 
   /**
-   * Constructor takes in LifeForm that is acquiring and the environment it is
-   * doing so in
-   * 
-   * @param l is the LifeForm
-   * @param e is the Environment
+   * Constructor gets info from the focused cell
    */
   public AcquireCommand() {
     inv = Invoker.invoker();

@@ -6,13 +6,11 @@ import lifeform.LifeForm;
  * @author Ethan J
  */
 public class TurnEastCommand implements Command {
-  Invoker inv = Invoker.invoker();;
+  Invoker inv = Invoker.invoker();
   LifeForm lifeForm;
-
+  
   /**
-   * Constructor takes in LifeForm being turned and sets instance
-   * 
-   * @param l is the LifeForm
+   * Constructor gets info from the focused cell
    */
   public TurnEastCommand() {
     lifeForm = inv.focusedCell.getLifeForm();
