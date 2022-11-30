@@ -16,7 +16,7 @@ public class MoveCommand implements Command {
    * Constructor takes in LifeForm and Environment and sets instance
    * 
    * @param l is the LifeForm
-   * @param e is the Environment
+   * @param env is the Environment
    */
   public MoveCommand() {
     lifeForm = inv.focusedCell.getLifeForm();

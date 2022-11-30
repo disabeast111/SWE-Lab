@@ -17,7 +17,7 @@ public class NoWeaponState extends ActionState {
     Cell c;
 
     try {
-      c = e.getCell(row, col);
+      c = env.getCell(row, col);
     } catch (EnvironmentException ex) {
       throw new RuntimeException(ex);
     }
@@ -46,6 +46,6 @@ public class NoWeaponState extends ActionState {
   public void search() throws EnvironmentException {
     Integer direction = new RandInt(0, 3).choose();
     lifeform.setDirection(direction);
-    e.move(context.getLifeForm());
+    env.move(context.getLifeForm());
   }
 }
