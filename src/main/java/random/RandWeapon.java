@@ -7,6 +7,9 @@ import weapon.Pistol;
 import weapon.PlasmaCannon;
 import weapon.Weapon;
 
+/**
+ * @author Ethan J
+ */
 public class RandWeapon {
   List<Weapon> weaponChoices = List.of(new Pistol(), new ChainGun(), new PlasmaCannon());
 

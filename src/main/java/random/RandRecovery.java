@@ -7,6 +7,9 @@ import recovery.RecoveryFractional;
 import recovery.RecoveryLinear;
 import recovery.RecoveryNone;
 
+/**
+ * @author Ethan J
+ */
 public class RandRecovery {
   List<RecoveryBehavior> choices = List.of(new RecoveryNone(),
       new RecoveryLinear(new RandInt(5, 10).choose()),

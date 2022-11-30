@@ -4,6 +4,9 @@ import java.util.List;
 
 import lifeform.Human;
 
+/**
+ * @author Ethan J
+ */
 public class RandHuman {
   List<String> nameChoices = List.of("Bob", "Jim", "Tim", "Emma", "Anna", "Katy", "Juan", "Zach",
       "Bella", "Rob", "Chris", "Mike", "Shelly", "Lena", "Bartholomew the IV");

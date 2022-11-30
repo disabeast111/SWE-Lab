@@ -13,8 +13,9 @@ import random.RandWeapon;
 import state.AiContext;
 import weapon.Weapon;
 
-import java.awt.*;
-
+/**
+ * @author Ethan J
+ */
 public class Simulator implements TimerObserver {
   Environment enviro;
   SimpleTimer time;
@@ -23,14 +24,14 @@ public class Simulator implements TimerObserver {
   int totalLifeForms;
   AiContext[] aiArray;
 
-  // private static Simulator theSim;
 
   /**
-   * TODO temp javadoc for check style completion
-   * @param e
-   * @param timer
-   * @param numHumans
-   * @param numAliens
+   * Simulator constructor that actually populates the environment passed to it
+   * @param e is the environment passed to it
+   * @param timer is the timer used to add both lifeforms, weapons, and aiContexts as
+   * time observers
+   * @param numHumans is the amount of humans requested
+   * @param numAliens is the amount of aliens requested
    * @throws RecoveryRateException
    */
   public Simulator(Environment e, SimpleTimer timer, int numHumans, int numAliens)
@@ -90,7 +91,6 @@ public class Simulator implements TimerObserver {
 
     // Loop to add each alien requested
     for (int i = 0; i < aliens; i++) {
-      // int nameNum = ranAlienName.choose();
       int alienRow = ranRow.choose();
       int alienCol = ranCol.choose();
 
@@ -120,8 +120,6 @@ public class Simulator implements TimerObserver {
       Weapon weaponToAdd = wepa.choose();
 
       Weapon[] weap = enviro.getWeapons(weaponRow, weaponCol);
-      // new Weapon[2];
-      // weap = enviro.getWeapons(weaponRow, weaponCol);
       // checks both positions if they are already filled
       while (weap[0] != null && weap[1] != null) {
         weaponRow = ranRow.choose();
@@ -135,28 +133,20 @@ public class Simulator implements TimerObserver {
 
   }
 
-  /**
-   * public static Simulator getSimulator(Environment e, SimpleTimer timer, int
-   * numHumans, int numAliens) throws RecoveryRateException { if (theSim == null)
-   * { theSim = new Simulator(e, timer, numHumans, numAliens); } return theSim; }
-   */
 
+  /**
+   * updateTime() is empty as it is not used by simulator
+   * Simulator only needs to implement TimerObserver for timer
+   */
   public void updateTime(int time) {
-    //array of contexts and add each time then update each here
-    /**
-     * for(int i = 0; i < aiArray.length; i++) { int tempRow =
-     * aiArray[i].getLifeForm().getRow(); int tempCol =
-     * aiArray[i].getLifeForm().getCol();
-     * GameBoard.getInstance().updateCell(tempRow, tempCol);
-     * GameBoard.getInstance().updateStats(tempRow, tempCol);
-     * 
-     * }
-     */
+
 
   }
 
   /**
-   * TODO temp javadoc for check style completion
+   * Main method for simulator that creates both Invoker and GameBoard
+   * and uses the simulator constructor to populate it
+   * It also creates the initial timer and starts it
    * @param args
    * @throws AttachmentException
    * @throws RecoveryRateException
