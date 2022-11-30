@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import environment.Environment;
 import exceptions.RecoveryRateException;
-import lifeform.Human;
+import state.ActionState;
 import state.AiContext;
 import weapon.Pistol;
 import weapon.Weapon;
@@ -63,15 +63,23 @@ public class TestSimulator {
   @Test
   public void testSimulatorTimer() throws RecoveryRateException {
     Simulator sim = new Simulator(env, timer, 1, 0);
-    Human life;
-    for(int i = 0; i < 2; i++) {
-      for(int k = 0; k < 2; k++) {
-        if(env.getLifeForm(i, k) != null) {
-          
-        }
 
-        }
-      }
+    Pistol p = new Pistol();
+    Pistol p2 = new Pistol();
+    Pistol p3 = new Pistol();
+    Pistol p4 = new Pistol();
+    env.addWeapon(p, 0, 0);
+    env.addWeapon(p2, 0, 1);
+    env.addWeapon(p3, 1, 0);
+    env.addWeapon(p4, 1, 1);
+    AiContext[] array = sim.getAIContextArray();
+    ActionState prevResult = array[0].getCurrentState();
+    assertEquals(prevResult, array[0].getCurrentState());
+    //timer.start();
+    array[0].updateTime(0);
+    
+
+    assertFalse(prevResult == array[0].getCurrentState());
     }
   
 
