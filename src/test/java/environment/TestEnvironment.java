@@ -17,7 +17,7 @@ import weapon.*;
 public class TestEnvironment {
 
   // Singleton Environment Instance
-  Environment e = Environment.getEnvironment(5, 5);
+  Environment e = Environment.getEnvironment(10, 10);
 
   /*
    * LAB 6
@@ -93,30 +93,30 @@ public class TestEnvironment {
   @Test
   public void testMoveAtBoard() throws EnvironmentException {
     Human entity = new Human("Bob", 40, 0);
-    e.addLifeForm(entity, 1, 1);
+    e.addLifeForm(entity, 1, 6);
     assertEquals(1, entity.getRow());
-    assertEquals(1, entity.getCol());
+    assertEquals(6, entity.getCol());
     e.move(entity);
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(1, entity.getCol());
+    assertEquals(6, entity.getCol());
     assertEquals(3, entity.getMovesLeft());
     entity.setDirection(3);
     e.move(entity);
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(1, entity.getCol());
+    assertEquals(3, entity.getCol());
     assertEquals(3, entity.getMovesLeft());
     entity.setDirection(1);
     e.move(entity);
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(4, entity.getCol());
+    assertEquals(6, entity.getCol());
     assertEquals(3, entity.getMovesLeft());
     e.move(entity);
     assertEquals(0, entity.getRow());
-    assertEquals(4, entity.getCol());
-    assertEquals(3, entity.getMovesLeft());
+    assertEquals(9, entity.getCol());
+    assertEquals(0, entity.getMovesLeft());
   }
 
 // testObstacles
@@ -159,8 +159,8 @@ public class TestEnvironment {
   public void testEnvironmentInit() {
     Environment e2 = Environment.getEnvironment(69, 420);
     assertEquals(e, e2);
-    assertEquals(5, e2.getNumRows());
-    assertEquals(5, e2.getNumCols());
+    assertEquals(10, e2.getNumRows());
+    assertEquals(10, e2.getNumCols());
   }
 
   // Add Weapon to a Location
@@ -171,7 +171,7 @@ public class TestEnvironment {
 
     // Fail to add out of bounds
     assertFalse(e.addWeapon(blaster, -5, -5));
-    assertFalse(e.addWeapon(blaster, 7, 7));
+    assertFalse(e.addWeapon(blaster, 10, 10));
 
     // Add one to empty cell
     assertTrue(e.addWeapon(blaster, 0, 0));
@@ -290,14 +290,14 @@ public class TestEnvironment {
   @Test
   public void testCheckBorder1() {
     MockLifeForm bob = new MockLifeForm("Bob", 40);
-    assertFalse(e.addLifeForm(bob, 5, 1));
+    assertFalse(e.addLifeForm(bob, 10, 1));
   }
 
   @Test
   public void testCheckBorder2() {
     MockLifeForm bob = new MockLifeForm("Bob", 40);
     Environment e = Environment.getEnvironment(3, 2);
-    assertFalse(e.addLifeForm(bob, 1, 5));
+    assertFalse(e.addLifeForm(bob, 1, 10));
   }
 
   @Test

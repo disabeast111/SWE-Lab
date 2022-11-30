@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 
 public class TestCommands {
-  Environment env = Environment.getEnvironment(5, 5);
+  Environment env = Environment.getEnvironment(10, 10);
   Invoker inv = Invoker.invoker();
   
   /**
@@ -85,22 +85,22 @@ public class TestCommands {
     Human entity = new Human("Bob", 40, 0);
     inv.focusedCell = new Cell();
     inv.focusedCell.addLifeForm(entity);
-    env.addLifeForm(entity, 2, 2);
+    env.addLifeForm(entity, 2, 7);
     //entity.setLocation(2, 2);
     assertEquals(2, entity.getRow());
-    assertEquals(2, entity.getCol());
+    assertEquals(7, entity.getCol());
     MoveCommand moveCommand = new MoveCommand();
     moveCommand.execute();
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(2, entity.getCol());
+    assertEquals(7, entity.getCol());
 
     TurnEastCommand turnEast = new TurnEastCommand();
     turnEast.execute();
     moveCommand.execute();
     entity.updateTime(0);
     assertEquals(0, entity.getRow());
-    assertEquals(4, entity.getCol());
+    assertEquals(9, entity.getCol());
     
   }
   

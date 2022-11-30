@@ -165,7 +165,7 @@ public class Simulator implements TimerObserver {
       int x = 500;
       int y = 400;
       gui.setBounds(1000, 200, x, y);
-      SimpleTimer timer = new SimpleTimer(5000);
+      SimpleTimer timer = new SimpleTimer(1000);
 
       Simulator sim = new Simulator(env, timer, 10, 10);
 

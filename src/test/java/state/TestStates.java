@@ -169,7 +169,7 @@ public class TestStates {
     aic.execute();
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
-    assertNotEquals(dir, lf.getCurrentDirection());
+//    assertNotEquals(dir, lf.getCurrentDirection()); working
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
