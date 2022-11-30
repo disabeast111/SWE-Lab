@@ -4,11 +4,11 @@ import environment.Environment;
 import lifeform.LifeForm;
 
 public abstract class ActionState extends java.lang.Object {
-  protected AIContext context;
+  protected AiContext context;
   protected Environment e;
   protected LifeForm lifeform;
 
-  public ActionState(AIContext c) {
+  public ActionState(AiContext c) {
     context = c;
     e = context.getEnvironment();
     lifeform = context.getLifeForm();

@@ -3,7 +3,7 @@ package lifeform;
 import exceptions.WeaponException;
 import gameplay.TimerObserver;
 import weapon.Weapon;
-import state.AIContext;
+import state.AiContext;
 
 /**
  * Lab 4, 6, 7
@@ -22,7 +22,7 @@ public abstract class LifeForm extends java.lang.Object implements TimerObserver
   private int currentDirection = 0;
   protected int maxSpeed = 0;
   protected int movesLeft = 0;
-  // private AIContext context; don't think needed
+  // private AiContext context; don't think needed
 
   /**
    * @param name

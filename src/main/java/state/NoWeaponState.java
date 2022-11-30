@@ -6,7 +6,7 @@ import random.RandInt;
 
 public class NoWeaponState extends ActionState {
 
-  public NoWeaponState(AIContext c) {
+  public NoWeaponState(AiContext c) {
     super(c);
   }
 

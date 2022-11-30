@@ -7,7 +7,7 @@ import org.junit.Test;
 import environment.Environment;
 import exceptions.RecoveryRateException;
 import lifeform.Human;
-import state.AIContext;
+import state.AiContext;
 import weapon.Pistol;
 import weapon.Weapon;
 
@@ -53,7 +53,7 @@ public class TestSimulator {
     env.addWeapon(p, 0, 1);
     env.addWeapon(p2, 0, 1);
     Simulator sim = new Simulator(env, timer, 2, 2);
-    AIContext[] array = sim.getAIContextArray();
+    AiContext[] array = sim.getAIContextArray();
     for(int i = 0; i < 4; i++) {
       assertNotNull(array[i]);
     }

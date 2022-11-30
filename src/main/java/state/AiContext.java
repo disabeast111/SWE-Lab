@@ -3,7 +3,7 @@ package state;
 import environment.Environment;
 import lifeform.LifeForm;
 
-public class AIContext {
+public class AiContext {
   ActionState currentState;
   DeadState deadState;
   HasWeaponState hasWeaponState;
@@ -17,7 +17,7 @@ public class AIContext {
    * @param l the LifeForm given to the context
    * @param e the reference to the Singleton Environments
    */
-  public AIContext(LifeForm l, Environment e) {
+  public AiContext(LifeForm l, Environment e) {
     lifeForm = l;
     environment = e;
     deadState = new DeadState(this);

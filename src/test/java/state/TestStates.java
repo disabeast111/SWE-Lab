@@ -16,7 +16,7 @@ public class TestStates {
   Environment e = Environment.getEnvironment(10,10);
   Human lf = new Human("Bob", 40, 0);
   Human lf2 = new Human("Bob", 40, 0);
-  AIContext aic = new AIContext(lf, e);
+  AiContext aic = new AiContext(lf, e);
   Pistol p = new Pistol();
   Cell c = new Cell();
   
