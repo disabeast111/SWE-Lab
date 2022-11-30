@@ -13,6 +13,9 @@ import random.RandWeapon;
 import state.AiContext;
 import weapon.Weapon;
 
+/**
+ * @author Ethan J
+ */
 public class Simulator implements TimerObserver {
   Environment enviro;
   SimpleTimer time;
