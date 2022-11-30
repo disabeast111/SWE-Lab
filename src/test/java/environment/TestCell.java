@@ -1,6 +1,9 @@
 package environment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 import exceptions.RecoveryRateException;
@@ -32,14 +35,15 @@ public class TestCell {
   }
   
   @Test
-  public void testAddWeapons() throws RecoveryRateException {
+  public void testAddWeapons() {
     Cell c = new Cell();
     Weapon p = new Pistol();
-    Weapon pc = new PlasmaCannon();
     
     assertTrue(c.addWeapon(p));
     assertFalse(c.addWeapon(p));
     assertEquals(1, c.getWeaponsCount());
+  
+    Weapon pc = new PlasmaCannon();
     assertTrue(c.addWeapon(pc));
     assertEquals(2, c.getWeaponsCount());
     assertEquals(p, c.getWeapon1());
@@ -58,7 +62,7 @@ public class TestCell {
     
     assertEquals(p, c.removeWeapon(p));
     assertEquals(pc, c.removeWeapon(pc));
-    assertEquals(null, c.removeWeapon(p));
+    assertNull(c.removeWeapon(p));
     assertEquals(0, c.getWeaponsCount());
   }
    
@@ -84,9 +88,9 @@ public class TestCell {
     assertEquals(2, c.getWeaponsCount());
     //remove one
     assertEquals(p, c.removeWeapon(p));
-    assertEquals(null, c.removeWeapon(p));
+    assertNull(c.removeWeapon(p));
     assertEquals(pc, c.getWeapon1());
-    assertEquals(null, c.getWeapon2());
+    assertNull(c.getWeapon2());
     assertEquals(1, c.getWeaponsCount());
     //then add
     assertTrue(c.addWeapon(p));

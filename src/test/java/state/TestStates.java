@@ -218,7 +218,7 @@ public class TestStates {
     env.addLifeForm(lf, 3, 3);
     aic.setCurrentState(aic.getNoWeaponState());
     assertNull(lf.getCurrentWeapon());
-    c = env.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(3, 3);
     c.addWeapon(p);
     aic.execute();
     assertEquals(p, lf.getCurrentWeapon());
@@ -232,7 +232,7 @@ public class TestStates {
     env.addLifeForm(lf, 3, 3);
     aic.setCurrentState(aic.getNoWeaponState());
     assertNull(lf.getCurrentWeapon());
-    c = env.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(3, 3);
     lf.takeHit(lf.getCurrentLifePoints());
     aic.execute();
     assertEquals(0, lf.getCurrentLifePoints());
@@ -274,7 +274,7 @@ public class TestStates {
     
     env.addLifeForm(lf, 3, 3);
     assertNull(lf.getCurrentWeapon());
-    c = env.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(3, 3);
     lf.pickUpWeapon(p);
     aic.setCurrentState(aic.getOutOfAmmoState());
     

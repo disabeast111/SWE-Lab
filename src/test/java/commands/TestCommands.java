@@ -1,9 +1,5 @@
 package commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import environment.Cell;
@@ -20,7 +16,7 @@ import weapon.Pistol;
 import weapon.PlasmaCannon;
 import weapon.Weapon;
 
-
+import static org.junit.Assert.*;
 
 
 public class TestCommands {
@@ -55,7 +51,7 @@ public class TestCommands {
   /**
    * Tests the getter for the LifeForm's weapon
    * Test that sets the reload command and executes it
-   * @throws WeaponException
+   * @throws WeaponException if no weapon
    */
   @Test
   public void testReloadCommand() throws WeaponException {
@@ -111,7 +107,6 @@ public class TestCommands {
   /**
    * Tests that a LifeForm can drop a weapon in a cell correctly
    * Cannot drop if cell is already full
-   * @throws WeaponException if attempted
    */
   @Test
   public void testDropCommand() {
@@ -155,7 +150,7 @@ public class TestCommands {
     acquireCommand.execute();
     assertTrue(entity1.hasWeapon());
     temp = env.getWeapons(2, 2);
-    assertEquals(null, temp[0]);
+    assertNull(temp[0]);
     
     Weapon chain = new ChainGun();
     env.addWeapon(chain, 2, 2);
@@ -169,8 +164,7 @@ public class TestCommands {
     env.removeWeapon(pistol, 2, 2);
     acquireCommand.execute();
     assertEquals(plasma, entity1.getCurrentWeapon());
-    temp = env.getWeapons(2, 2);
-
+    
     env.addWeapon(pistol, 2, 2);
     env.removeWeapon(chain, 2, 2);
     entity1.dropWeapon();
@@ -180,7 +174,7 @@ public class TestCommands {
     env.removeWeapon(pistol, 2, 2);
     entity1.dropWeapon();
     acquireCommand.execute();
-    assertEquals(null, entity1.getCurrentWeapon());
+    assertNull(entity1.getCurrentWeapon());
 
   }
   
@@ -231,19 +225,20 @@ public class TestCommands {
   public void testAttackCommandOutOfRange() throws RecoveryRateException, WeaponException {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
-    Alien target1 = new Alien("Zurg", 40);
-    Alien target2 = new Alien("ET", 40);
-    Alien target3 = new Alien("Yoda", 40);
-    Alien target4 = new Alien("Grogu", 40);
+   
     inv.focusedCell = new Cell();
     inv.focusedCell.addLifeForm(entity1);
     MockWeaponLR mockGun = new MockWeaponLR();
     entity1.pickUpWeapon(mockGun);
     
     env.addLifeForm(entity1, 2, 2);
+    Alien target1 = new Alien("Zurg", 40);
     env.addLifeForm(target1, 0, 2);
+    Alien target2 = new Alien("ET", 40);
     env.addLifeForm(target2, 2, 4);
+    Alien target3 = new Alien("Yoda", 40);
     env.addLifeForm(target3, 4, 2);
+    Alien target4 = new Alien("Grogu", 40);
     env.addLifeForm(target4, 2, 0);
     
     AttackCommand attackCommand = new AttackCommand();
@@ -269,7 +264,7 @@ public class TestCommands {
   }
   
   @Test
-  public void testAttackCommandNoTarget() throws RecoveryRateException, WeaponException {
+  public void testAttackCommandNoTarget() throws WeaponException {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
     inv.focusedCell = new Cell();
@@ -299,7 +294,7 @@ public class TestCommands {
   }
   
   @Test
-  public void testAttackCommandIntoBorder() throws RecoveryRateException, WeaponException {
+  public void testAttackCommandIntoBorder() throws WeaponException {
     env.clearBoard();
     Human entity1 = new Human("Jim", 40, 1);
     inv.focusedCell = new Cell();
@@ -309,10 +304,6 @@ public class TestCommands {
     AttackCommand attackCommand = new AttackCommand();
     
     entity1.pickUpWeapon(mockGun);
-    
-    //inv.focusedCell = new Cell();
-    //inv.focusedCell.addLifeForm(entity1);
-   
     env.addLifeForm(entity1, 0, 2);
     attackCommand.execute();
     assertEquals(9, mockGun.getCurrentAmmo());
@@ -321,17 +312,6 @@ public class TestCommands {
     entity1.setDirection(1);
     attackCommand.execute();
     assertEquals(8, mockGun.getCurrentAmmo());
-    
-    
-//    entity1.setLocation(2, 4);
-//    entity1.setDirection(1);
-//    
-//    e.addLifeForm(entity1, 4, 2);
-//    entity1.setDirection(2);
-//    e.addLifeForm(entity4, 2, 0);
-//    entity4.setDirection(3);
-    
-   
     
     env.addLifeForm(entity1, 4, 2);
     entity1.setDirection(2);
@@ -342,10 +322,5 @@ public class TestCommands {
     entity1.setDirection(3);
     attackCommand.execute();
     assertEquals(6, mockGun.getCurrentAmmo());
-
-    
-    
   }
-  
-  
 }
