@@ -5,7 +5,7 @@ import weapon.Weapon;
 
 public class DeadState extends ActionState {
 
-  public DeadState(AIContext c) {
+  public DeadState(AiContext c) {
     super(c);
   }
 

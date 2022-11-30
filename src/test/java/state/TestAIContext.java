@@ -13,7 +13,7 @@ public class TestAIContext {
   public void testChangeActiveState() {
     MockLifeForm lifeform = new MockLifeForm("Dummy", 10, 1);
     Environment environment = Environment.getEnvironment(10, 10);
-    AIContext context = new AIContext(lifeform, environment);
+    AiContext context = new AiContext(lifeform, environment);
     
     assertEquals(context.getCurrentState(), context.getNoWeaponState());
     
@@ -25,7 +25,7 @@ public class TestAIContext {
   public void testGetStates() {
     MockLifeForm lifeform = new MockLifeForm("Dummy", 10, 1);
     Environment environment = Environment.getEnvironment(10, 10);
-    AIContext context = new AIContext(lifeform, environment);
+    AiContext context = new AiContext(lifeform, environment);
     
     assertTrue(context.getDeadState() instanceof DeadState);
     assertTrue(context.getHasWeaponState() instanceof HasWeaponState);

@@ -9,7 +9,7 @@ import weapon.Weapon;
 
 public class HasWeaponState extends ActionState {
 
-  public HasWeaponState(AIContext c) {
+  public HasWeaponState(AiContext c) {
     super(c);
   }
 

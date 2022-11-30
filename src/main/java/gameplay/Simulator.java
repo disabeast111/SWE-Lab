@@ -1,5 +1,7 @@
 package gameplay;
 
+import static org.junit.Assert.assertNotNull;
+
 import commands.Invoker;
 import environment.Environment;
 import exceptions.AttachmentException;
@@ -10,7 +12,7 @@ import random.RandAlien;
 import random.RandHuman;
 import random.RandInt;
 import random.RandWeapon;
-import state.AIContext;
+import state.AiContext;
 import weapon.Weapon;
 
 public class Simulator implements TimerObserver {
@@ -19,7 +21,7 @@ public class Simulator implements TimerObserver {
   int humans;
   int aliens;
   int totalLifeForms;
-  AIContext aiArray[];
+  AiContext aiArray[];
   
   //private static Simulator theSim;
 
@@ -45,7 +47,7 @@ public class Simulator implements TimerObserver {
     // total used for weapons as for each lifeForm there is one weapon
     totalLifeForms = humans + aliens;
     //Setup for an array to hold AIContexts
-    aiArray = new AIContext[totalLifeForms];
+    aiArray = new AiContext[totalLifeForms];
     int aiPosition = 0;
 
     RandInt ranRow = new RandInt(0, row);
@@ -67,7 +69,7 @@ public class Simulator implements TimerObserver {
       }
 
       // Adding to array of AIContexts
-      AIContext aic = new AIContext(entity, enviro);
+      AiContext aic = new AiContext(entity, enviro);
       aiArray[aiPosition] = aic;
       aiPosition += 1;
       
@@ -90,7 +92,7 @@ public class Simulator implements TimerObserver {
         alienCol = ranCol.choose();
       }
 
-      AIContext aic = new AIContext(entity2, enviro);
+      AiContext aic = new AiContext(entity2, enviro);
       aiArray[aiPosition] = aic;
       aiPosition += 1;
       
@@ -131,6 +133,10 @@ public class Simulator implements TimerObserver {
 
   public void updateTime(int time) {
 //array of contexts and add each time then update each here
+    for(int i = 0; i < aiArray.length; i++) {
+      aiArray[i].execute();
+    }
+    
   }
 
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
@@ -150,8 +156,8 @@ public class Simulator implements TimerObserver {
     }
 
   }
-  //Getter for AIContext array
-  public AIContext[] getAIContextArray() {
+  //Getter for AiContext array
+  public AiContext[] getAIContextArray() {
  
     return aiArray;
   }

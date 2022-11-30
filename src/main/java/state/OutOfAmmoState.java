@@ -2,7 +2,7 @@ package state;
 
 public class OutOfAmmoState extends ActionState {
 
-  public OutOfAmmoState(AIContext c) { super(c); }
+  public OutOfAmmoState(AiContext c) { super(c); }
 
   @Override
   public void executeAction() {
