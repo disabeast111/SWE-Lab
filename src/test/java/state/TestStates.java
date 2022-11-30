@@ -1,6 +1,8 @@
 package state;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
@@ -13,19 +15,19 @@ import lifeform.*;
 import weapon.Pistol;
 
 public class TestStates {
-  Environment e = Environment.getEnvironment(10,10);
+  Environment env = Environment.getEnvironment(10, 10);
   Human lf = new Human("Bob", 40, 0);
   Human lf2 = new Human("Bob", 40, 0);
-  AiContext aic = new AiContext(lf, e);
+  AiContext aic = new AiContext(lf, env);
   Pistol p = new Pistol();
   Cell c = new Cell();
   
   
   @Test
   public void testDeadStateNoWeapon() {
-    e.clearBoard();
+    env.clearBoard();
     NoWeaponState test = new NoWeaponState(aic);
-    e.addLifeForm(lf, 2, 4);
+    env.addLifeForm(lf, 2, 4);
     lf.takeHit(20);
     assertEquals(20, lf.getCurrentLifePoints());
     aic.setCurrentState(aic.getDeadState());
@@ -36,9 +38,9 @@ public class TestStates {
   
   @Test
   public void testDeadStateWeapon() {
-    e.clearBoard();
+    env.clearBoard();
     NoWeaponState test = new NoWeaponState(aic);
-    e.addLifeForm(lf, 2, 4);
+    env.addLifeForm(lf, 2, 4);
     lf.pickUpWeapon(p);
     lf.takeHit(20);
     assertEquals(20, lf.getCurrentLifePoints());
@@ -52,9 +54,9 @@ public class TestStates {
   
   @Test
   public void testHWNoTarget() {
-    e.clearBoard();
+    env.clearBoard();
     HasWeaponState test = aic.getHasWeaponState();
-    e.addLifeForm(lf, 5, 5);
+    env.addLifeForm(lf, 5, 5);
     lf.pickUpWeapon(p);
     assertEquals(5, lf.getRow());
     assertEquals(5, lf.getCol());
@@ -68,10 +70,10 @@ public class TestStates {
   
   @Test
   public void testHWSametype() {
-    e.clearBoard();
+    env.clearBoard();
     HasWeaponState test = aic.getHasWeaponState();
-    e.addLifeForm(lf, 5, 5);
-    e.addLifeForm(lf2, 2, 5);
+    env.addLifeForm(lf, 5, 5);
+    env.addLifeForm(lf2, 2, 5);
     lf.pickUpWeapon(p);
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(40, lf.getCurrentLifePoints());
@@ -90,11 +92,11 @@ public class TestStates {
   
   @Test
   public void testHWDifferType() throws RecoveryRateException {
-    e.clearBoard();
+    env.clearBoard();
     Alien lf3 = new Alien("Bob", 40);
     HasWeaponState test = aic.getHasWeaponState();
-    e.addLifeForm(lf, 5, 5);
-    e.addLifeForm(lf3, 2, 5);
+    env.addLifeForm(lf, 5, 5);
+    env.addLifeForm(lf3, 2, 5);
     lf.pickUpWeapon(p);
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(40, lf.getCurrentLifePoints());
@@ -111,11 +113,11 @@ public class TestStates {
   
   @Test
   public void testHWLastShot() throws RecoveryRateException {
-    e.clearBoard();
+    env.clearBoard();
     Alien lf3 = new Alien("Bob", 40);
     OutOfAmmoState test = aic.getOutOfAmmoState();
-    e.addLifeForm(lf, 5, 5);
-    e.addLifeForm(lf3, 2, 5);
+    env.addLifeForm(lf, 5, 5);
+    env.addLifeForm(lf3, 2, 5);
     lf.pickUpWeapon(p);
     try {
       for (int i = 0; i < 9; i++) {
@@ -139,14 +141,14 @@ public class TestStates {
     assertEquals(31, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
-
+  
   @Test
   public void testHWOutOfRange() throws RecoveryRateException {
-    e.clearBoard();
+    env.clearBoard();
     Alien lf3 = new Alien("Bob", 40);
     HasWeaponState test = aic.getHasWeaponState();
-    e.addLifeForm(lf, 9, 5);
-    e.addLifeForm(lf3, 0, 5);
+    env.addLifeForm(lf, 9, 5);
+    env.addLifeForm(lf3, 0, 5);
     lf.pickUpWeapon(p);
     assertEquals(0, lf.getCurrentDirection());
     assertEquals(40, lf.getCurrentLifePoints());
@@ -162,15 +164,15 @@ public class TestStates {
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
-
+  
   @Test
   public void testHWIfDead() throws RecoveryRateException {
-    e.clearBoard();
+    env.clearBoard();
     lf.takeHit(40);
     Alien lf3 = new Alien("Bob", 40);
     DeadState test = aic.getDeadState();
-    e.addLifeForm(lf, 5, 5);
-    e.addLifeForm(lf3, 2, 5);
+    env.addLifeForm(lf, 5, 5);
+    env.addLifeForm(lf3, 2, 5);
     lf.pickUpWeapon(p);
     try {
       for (int i = 0; i < 9; i++) {
@@ -194,40 +196,43 @@ public class TestStates {
     assertEquals(40, lf3.getCurrentLifePoints());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
+  
   @Test
   public void testNWStateNoWeaponInCell() throws EnvironmentException {
     NoWeaponState test = new NoWeaponState(aic);
-    e.clearBoard();
-    e.addLifeForm(lf, 3, 3);
+    env.clearBoard();
+    env.addLifeForm(lf, 3, 3);
     aic.setCurrentState(aic.getNoWeaponState());
     assertNull(lf.getCurrentWeapon());
-    c = e.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(lf.getRow(), lf.getCol());
     aic.execute();
     assertNull(lf.getCurrentWeapon());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
     assertNull(c.getLifeForm());
   }
+  
   @Test
   public void testNWStateWeaponInCell() throws EnvironmentException {
     HasWeaponState test = new HasWeaponState(aic);
-    e.clearBoard();
-    e.addLifeForm(lf, 3, 3);
+    env.clearBoard();
+    env.addLifeForm(lf, 3, 3);
     aic.setCurrentState(aic.getNoWeaponState());
     assertNull(lf.getCurrentWeapon());
-    c = e.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(lf.getRow(), lf.getCol());
     c.addWeapon(p);
     aic.execute();
     assertEquals(p, lf.getCurrentWeapon());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
+  
   @Test
   public void testNWStateDead() throws EnvironmentException {
     DeadState test = new DeadState(aic);
-    e.clearBoard();
-    e.addLifeForm(lf, 3, 3);
+    env.clearBoard();
+    env.addLifeForm(lf, 3, 3);
     aic.setCurrentState(aic.getNoWeaponState());
     assertNull(lf.getCurrentWeapon());
-    c = e.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(lf.getRow(), lf.getCol());
     lf.takeHit(lf.getCurrentLifePoints());
     aic.execute();
     assertEquals(0, lf.getCurrentLifePoints());
@@ -237,7 +242,7 @@ public class TestStates {
   
   @Test
   public void testOOAInit() {
-    e.clearBoard();
+    env.clearBoard();
     OutOfAmmoState test = new OutOfAmmoState(aic);
     aic.setCurrentState(aic.getOutOfAmmoState());
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
@@ -245,14 +250,14 @@ public class TestStates {
   
   @Test
   public void testOOAReload() throws WeaponException {
-    e.clearBoard();
-   
-    e.addLifeForm(lf, 3, 3);
+    env.clearBoard();
+    
+    env.addLifeForm(lf, 3, 3);
     assertNull(lf.getCurrentWeapon());
-
+    
     lf.pickUpWeapon(p);
     aic.setCurrentState(aic.getOutOfAmmoState());
-    for(int i = 0; i < p.getMaxAmmo(); i++){
+    for (int i = 0; i < p.getMaxAmmo(); i++) {
       p.fire(0);
       p.updateTime(0);
     }
@@ -264,31 +269,31 @@ public class TestStates {
   
   @Test
   public void testOOAMovesToState() throws EnvironmentException {
-    e.clearBoard();
+    env.clearBoard();
     HasWeaponState test = new HasWeaponState(aic);
-   
-    e.addLifeForm(lf, 3, 3);
+    
+    env.addLifeForm(lf, 3, 3);
     assertNull(lf.getCurrentWeapon());
-    c = e.getCell(lf.getRow(), lf.getCol());
+    c = env.getCell(lf.getRow(), lf.getCol());
     lf.pickUpWeapon(p);
     aic.setCurrentState(aic.getOutOfAmmoState());
-
+    
     aic.execute();
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
   }
   
   @Test
   public void testOOADead() {
-    e.clearBoard();
+    env.clearBoard();
     DeadState test = new DeadState(aic);
-   
-    e.addLifeForm(lf, 3, 3);
+    
+    env.addLifeForm(lf, 3, 3);
     aic.setCurrentState(aic.getOutOfAmmoState());
     lf.takeHit(lf.getMaxLifePoints());
     assertEquals(0, lf.getCurrentLifePoints());
     aic.execute();
- 
+    
     assertEquals(test.getClass(), aic.getCurrentState().getClass());
-  
+    
   }
 }

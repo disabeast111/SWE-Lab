@@ -17,12 +17,9 @@ public class AttackCommand implements Command {
   int direction;
   int distance;
   LifeForm target = null;
-
+  
   /**
-   * Constructor takes in LifeForm that is attacking and Environment to attack in
-   * 
-   * @param l is the LifeForm
-   * @param e is the Environment
+   * Constructor gets info from the focused cell
    */
   public AttackCommand() {
     attacker = inv.focusedCell.getLifeForm();

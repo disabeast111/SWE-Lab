@@ -7,14 +7,12 @@ import weapon.Weapon;
  * @author Ethan J
  */
 public class ReloadCommand implements Command {
-  Invoker inv = Invoker.invoker();;
+  Invoker inv = Invoker.invoker();
   Weapon currentWeapon;
   LifeForm lifeForm;
-
+  
   /**
-   * Constructor takes in LifeForm that will reload and sets instance
-   * 
-   * @param l is the LifeForm
+   * Constructor gets info from the focused cell
    */
   public ReloadCommand() {
 

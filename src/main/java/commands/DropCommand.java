@@ -9,19 +9,15 @@ import weapon.Weapon;
  * @author Ethan J
  */
 public class DropCommand implements Command {
-  Invoker inv = Invoker.invoker();;
+  Invoker inv = Invoker.invoker();
   LifeForm lifeForm;
   Environment enviro;
   Weapon tempW;
   int col;
   int row;
-
+  
   /**
-   * Constructor takes in LifeForm dropping weapon and the Environment it is to be
-   * dropped in
-   * 
-   * @param l is the LifeForm
-   * @param e is the Environment
+   * Constructor gets info from the focused cell
    */
   public DropCommand() {
     lifeForm = inv.focusedCell.getLifeForm();
@@ -43,6 +39,7 @@ public class DropCommand implements Command {
     }
 
   }
+  
   public String toString() {
     return "DropCommand";
   }
