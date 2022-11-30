@@ -13,6 +13,8 @@ import random.RandWeapon;
 import state.AiContext;
 import weapon.Weapon;
 
+import java.awt.*;
+
 public class Simulator implements TimerObserver {
   Environment enviro;
   SimpleTimer time;
@@ -160,24 +162,27 @@ public class Simulator implements TimerObserver {
    * @throws RecoveryRateException
    */
   public static void main(String[] args) throws AttachmentException, RecoveryRateException {
-    Environment env = Environment.getEnvironment(10, 10);
-    Invoker gui = Invoker.invoker();
-    int x = 500;
-    int y = 400;
-    gui.setBounds(1000, 200, x, y);
-    SimpleTimer timer = new SimpleTimer(1000);
-
-    Simulator sim = new Simulator(env, timer, 5, 0);
-
-    GameBoard gb = GameBoard.getInstance();
-    for (int row = 0; row < 10; row++) {
-      for (int col = 0; col < 10; col++) {
-        gb.updateCell(row, col);
+    try {
+  
+      Environment env = Environment.getEnvironment(10, 10);
+      Invoker gui = Invoker.invoker();
+      int x = 500;
+      int y = 400;
+      gui.setBounds(1000, 200, x, y);
+      SimpleTimer timer = new SimpleTimer(1000);
+  
+      Simulator sim = new Simulator(env, timer, 10, 10);
+  
+      GameBoard gb = GameBoard.getInstance();
+      for (int row = 0; row < 10; row++) {
+        for (int col = 0; col < 10; col++) {
+          gb.updateCell(row, col);
+        }
       }
+      timer.start();
+    } catch (HeadlessException e) {
+    
     }
-
-    timer.start();
-
   }
 
   // Getter for AiContext array
