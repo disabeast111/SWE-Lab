@@ -173,7 +173,7 @@ public class Simulator implements TimerObserver {
       }
       timer.start();
     } catch (HeadlessException e) {
-      
+    
     }
   }
 
